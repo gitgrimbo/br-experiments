@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'Varsity-Regular';
+  src: url('../fonts/Varsity-Regular.ttf.woff') format('woff'), url('../fonts/Varsity-Regular.ttf.svg#Varsity-Regular') format('svg'), url('../fonts/Varsity-Regular.ttf.eot'), url('../fonts/Varsity-Regular.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.svg-roster .varsity {
+  font-family: 'Varsity-Regular';
+}

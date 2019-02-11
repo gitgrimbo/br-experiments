@@ -1,0 +1,27 @@
+{
+  "name": "br-experiments",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "predeploy": "rimraf dist && make-dir dist && copyfiles index.html fonts/**/* roster-badge/**/* dist",
+    "deploy": "gh-pages -d dist"
+  },
+  "author": "Paul Grime",
+  "license": "ISC",
+  "devDependencies": {
+    "copyfiles": "^2.1.0",
+    "gh-pages": "^2.0.1",
+    "make-dir-cli": "^1.0.0",
+    "rimraf": "^2.6.3"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gitgrimbo/br-experiments.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gitgrimbo/br-experiments/issues"
+  },
+  "homepage": "https://github.com/gitgrimbo/br-experiments#readme",
+  "description": ""
+}
