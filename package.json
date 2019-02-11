@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "predeploy": "rimraf dist && make-dir dist && copyfiles index.html fonts/**/* roster-badge/**/* dist",
+    "predeploy": "rimraf dist && make-dir dist && copyfiles index.html fonts/**/* roster-badge/**/* banner/**/* dist",
     "deploy": "gh-pages -d dist"
   },
   "author": "Paul Grime",

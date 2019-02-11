@@ -1,0 +1,46 @@
+<!doctype html>
+
+<style>
+h1, h2, h3, h4, h5, h6 {
+  font-family: Tahoma;
+}
+h1 {
+  font-size: 18pt;
+}
+body {
+  counter-reset: h1counter;
+}
+h1:before {
+  content: counter(h1counter) ".\0000a0";
+  counter-increment: h1counter;
+}
+h2 {
+  font-size: 14pt;
+}
+.desktop-banner {
+  background: #023298;
+  text-align: center;
+  color: #e0e0e0;
+  font-family: "brandon-grotesque", sans-serif;
+  font-size: 28pt;
+  font-weight: bold;
+  font-style: italic;
+}
+</style>
+
+<!-- body tag needed for browser-sync -->
+<body>
+
+Banner Experiments
+
+<h1>Using logo for 'B'</h1>
+
+The 'B' 'detaches' from the rest of the text when the window is made smaller (and the text wraps).
+
+<div class="desktop-banner">
+SHEFFIELD
+<img class="bladerunners_logo" src="logo2.jpg" style="margin:0;vertical-align:sub;">LADERUNNERS
+<img class="bladerunners_logo" src="logo2.jpg" style="margin:0;vertical-align:sub;">ASEBALL CLUB
+</div>
+
+</body>
