@@ -5,7 +5,8 @@
   "scripts": {
     "predeploy-clean": "rimraf dist && make-dir dist",
     "predeploy-copy": "copyfiles index.html main.css main.js fonts/**/* roster-badge/**/* banner/**/* dist",
-    "predeploy": "run-s predeploy-clean predeploy-copy",
+    "predeploy-addlog": "node bin/log.js dist/index.html",
+    "predeploy": "run-s predeploy-clean predeploy-copy predeploy-addlog",
     "deploy": "gh-pages -d dist"
   },
   "author": "Paul Grime",
