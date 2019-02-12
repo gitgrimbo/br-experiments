@@ -1,0 +1,29 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Tahoma;
+}
+
+h1 {
+  font-size: 18pt;
+}
+
+body {
+  counter-reset: h1counter;
+}
+
+h1:before {
+  content: counter(h1counter) ".\0000a0";
+  counter-increment: h1counter;
+}
+
+h2 {
+  font-size: 14pt;
+}
+
+.source-container {
+  border: solid 1px lightgray;
+}

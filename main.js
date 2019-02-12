@@ -58,7 +58,11 @@ function appendOuterHTMLOf(element, appendTo) {
   var pre = document.createElement("pre");
   // https://stackoverflow.com/a/44943988/319878
   pre.innerText = new XMLSerializer().serializeToString(element);
-  appendTo.appendChild(pre);
+  var div = document.createElement("div");
+  div.className = "source-container";
+  div.style.overflow = "auto";
+  div.appendChild(pre);
+  appendTo.appendChild(div);
 }
 
 function parentElement(element) {
