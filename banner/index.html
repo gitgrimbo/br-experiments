@@ -16,27 +16,27 @@
 }
 </style>
 
+<script src="https://unpkg.com/react@16.8.1/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.8.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
 <script src="../main.js"></script>
+<script src="./main.js" type="text/babel"></script>
 
 <!-- body tag needed for browser-sync -->
 <body>
 
 Banner Experiments
 
+<div><a href="#" onclick="window.location.reload()">reload</a></div>
+
 <h1>Using logo for 'B'</h1>
 
-Use <code>style="white-space:nowrap"</code> to prevent line-breaks from appearing between 'B' logo and following text.
+<p>Use <code>style="white-space:nowrap"</code> to prevent line-breaks from appearing between 'B' logo and following text.</p>
 
-<div class="desktop-banner">
-SHEFFIELD
-<span style="white-space:nowrap"><img class="bladerunners_logo" src="logo2.jpg" style="margin:0;vertical-align:sub;">LADERUNNERS</span>
-<span style="white-space:nowrap"><img class="bladerunners_logo" src="logo2.jpg" style="margin:0;vertical-align:sub;">ASEBALL CLUB</span>
-</div>
+<div class="banner-container"></div>
 
-<h2>Source</h2>
-
-<script>
-appendOuterHTMLOf(document.getElementsByClassName("desktop-banner")[0]);
+<script type="text/babel">
+ReactDOM.render(React.createElement(BannerApp), document.querySelector(".banner-container"));
 </script>
 
 </body>

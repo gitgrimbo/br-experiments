@@ -29,13 +29,20 @@ function closeTag(t) {
   return "</" + t + ">";
 }
 
+function getElementFromStringOrElement(it) {
+  if (typeof it === "string") {
+    return document.querySelector(it);
+  }
+  return it;
+}
+
 function addToVariableWidthDivs(element, opts) {
   opts = assign({
-    appendTo: null,
     numberOfDivs: 1,
     appendTo: document.body,
     titleElement: "h2",
   }, opts);
+  opts.appendTo = getElementFromStringOrElement(opts.appendTo);
   array(opts.numberOfDivs)
     .map(function(_, i) {
       // e.g. 100 / 1 => 100%
@@ -53,16 +60,28 @@ function addToVariableWidthDivs(element, opts) {
     });
 }
 
-function appendOuterHTMLOf(element, appendTo) {
-  appendTo = appendTo || document.body;
-  var pre = document.createElement("pre");
+function getElementSource(element) {
   // https://stackoverflow.com/a/44943988/319878
-  pre.innerText = new XMLSerializer().serializeToString(element);
+  return new XMLSerializer().serializeToString(element);
+}
+
+function appendOuterHTMLOf(element, opts) {
+  opts = assign({
+    appendTo: document.body,
+    format: false,
+  }, opts);
+  opts.appendTo = getElementFromStringOrElement(opts.appendTo);
+  var pre = document.createElement("pre");
+  var markup = getElementSource(element);
+  if (opts.format) {
+    markup = markup.replace(/>/g, ">\n");
+  }
+  pre.innerText = markup;
   var div = document.createElement("div");
   div.className = "source-container";
   div.style.overflow = "auto";
   div.appendChild(pre);
-  appendTo.appendChild(div);
+  opts.appendTo.appendChild(div);
 }
 
 function parentElement(element) {
