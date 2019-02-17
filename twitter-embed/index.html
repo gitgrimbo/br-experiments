@@ -1,0 +1,55 @@
+<!doctype html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="../main.css" type="text/css" rel="stylesheet">
+
+<script src="../main.js"></script>
+
+<!-- body tag needed for browser-sync -->
+<body>
+
+<div style="float:left;width:50%;">
+<h3>New embed code</h3>
+<p>By default fills available width</p>
+<p>By default shows single vertical scrollbar</p>
+<p>Seems to behave better with respect to varying the width of its container element</p>
+
+<div id="new-embed-code" style="height:400px;overflow:auto;">
+<a class="twitter-timeline" href="https://twitter.com/BladerunnersBC?ref_src=twsrc%5Etfw">
+Tweets by BladerunnersBC</a>
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
+<h4>Source code</h4>
+<script>
+(function(el) { appendOuterHTMLOf(el, { appendTo: el.parentElement }); }(document.getElementById("new-embed-code")));
+</script>
+
+</div>
+
+<div style="float:left;width:50%;">
+<h3>Current embed code</h3>
+<p>By default has max width of 520px</p>
+<p>By default shows two vertical scrollbars</p>
+
+<div id="current-embed-code" style="height:400px;overflow:auto;">
+<a class="twitter-timeline"  href="https://twitter.com/BladerunnersBC"  data-widget-id="435472083338809344">Tweets by @BladerunnersBC</a>
+
+<script>
+!function(d,s,id){
+  var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+  if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}
+}(document,"script","twitter-wjs");
+</script>
+</div>
+
+<h4>Source code</h4>
+<script>
+(function(el) { appendOuterHTMLOf(el, { appendTo: el.parentElement }); }(document.getElementById("current-embed-code")));
+</script>
+
+</div>
+
+</body>
