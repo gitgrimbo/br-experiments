@@ -4,7 +4,7 @@
 
 <link href="../main.css" type="text/css" rel="stylesheet">
 
-<style>
+<style id="banner-styles">
 .desktop-banner {
   background: #023298;
   text-align: center;
@@ -13,6 +13,11 @@
   font-size: 28pt;
   font-weight: bold;
   font-style: italic;
+}
+.desktop-banner .bladerunners-logo {
+  margin: 0;
+  vertical-align: -2px; /* Fine-tune the baseline of the B logo to the baseline of the text */
+  height: 28pt;
 }
 </style>
 
@@ -27,8 +32,6 @@
 
 Banner Experiments
 
-<div><a href="#" onclick="window.location.reload()">reload</a></div>
-
 <h1>Using logo for 'B'</h1>
 
 <p>Use <code>style="white-space:nowrap"</code> to prevent line-breaks from appearing between 'B' logo and following text.</p>
@@ -36,7 +39,10 @@ Banner Experiments
 <div class="banner-container"></div>
 
 <script type="text/babel">
-ReactDOM.render(React.createElement(BannerApp), document.querySelector(".banner-container"));
+ReactDOM.render(
+  React.createElement(BannerApp, {cssElement: document.getElementById("banner-styles")}),
+  document.querySelector(".banner-container")
+);
 </script>
 
 </body>

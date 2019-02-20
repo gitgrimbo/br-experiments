@@ -1,46 +1,74 @@
-class Banner extends React.Component {
-  mainRef = React.createRef()
-
-  getRootElement() {
-    return this.mainRef.current;
-  }
-
-  render() {
-    const { useLogoForBaseball = false } = this.props;
-    return (
-      <div ref={this.mainRef} className="desktop-banner">
-        SHEFFIELD
-        {" "}
-        <span style={{ whiteSpace: "nowrap" }}><img className="bladerunners_logo" src="logo2.jpg" style={{ margin: 0, verticalAlign: "sub" }} />LADERUNNERS</span>
-        {" "}
-        {
-          useLogoForBaseball
-            ? <span style={{ whiteSpace: "nowrap" }}><img className="bladerunners_logo" src="logo2.jpg" style={{ margin: 0, verticalAlign: "sub" }} />ASEBALL CLUB</span>
-            : "BASEBALL CLUB"
-        }
-      </div>
-    );
-  }
+function Logo({ height }) {
+  return <img
+    className="bladerunners-logo"
+    src="logo2.jpg"
+    style={{ height }}
+  />;
 }
 
-function BannerApp() {
+const Banner = React.forwardRef((props, ref) => {
+  const {
+    useLogoForBaseball = false,
+    fontSize = "28pt",
+  } = props;
+  return (
+    <div ref={ref} className="desktop-banner" style={{ fontSize }}>
+      SHEFFIELD
+        {" "}
+      <span style={{ whiteSpace: "nowrap" }}><Logo height={fontSize} />LADERUNNERS</span>
+      {" "}
+      {
+        useLogoForBaseball
+          ? <span style={{ whiteSpace: "nowrap" }}><Logo height={fontSize} />ASEBALL CLUB</span>
+          : "BASEBALL CLUB"
+      }
+    </div>
+  );
+});
+
+function BannerApp({ cssElement }) {
   const [useLogoForBaseball, setUseLogo] = React.useState(false);
-  const onChange = (e) => setUseLogo(e.target.checked);
-  const sourceContainer = React.createRef();
+  const [fontSize, setFontSize] = React.useState(28);
+  const fontSizeRange = [5, 50];
+  const sourceContainerHtml = React.createRef();
+  const sourceContainerCss = React.createRef();
   const banner = React.createRef();
   React.useEffect(() => {
-    sourceContainer.current.innerHTML = "";
-    appendOuterHTMLOf(banner.current.getRootElement(), { appendTo: sourceContainer.current, format: true })
+    sourceContainerHtml.current.innerHTML = "";
+    appendOuterHTMLOf(banner.current, { appendTo: sourceContainerHtml.current, format: true })
+
+    sourceContainerCss.current.innerHTML = "";
+    appendOuterHTMLOf(cssElement, { appendTo: sourceContainerCss.current, format: true })
   });
   return (
     <div>
-      <label>Use logo for 'Baseball' B?<input type="checkbox" checked={useLogoForBaseball} onChange={onChange} /></label>
+      <fieldset>
+        <legend>Options</legend>
+        <label>Use logo for 'Baseball' B?
+        <input type="checkbox"
+            checked={useLogoForBaseball}
+            onChange={(e) => setUseLogo(e.target.checked)}
+          />
+        </label>
+        <label>Text size ({fontSize}pt):
+          {" "}
+          {fontSizeRange[0]}
+          <input type="range"
+            value={fontSize}
+            min={fontSizeRange[0]}
+            max={fontSizeRange[1]}
+            onChange={(e) => setFontSize(e.target.value)} />
+        </label>
+        {fontSizeRange[1]}
+      </fieldset>
+
       <h2>Full Width</h2>
-      <div style={{ width: "100%" }}><Banner ref={banner} useLogoForBaseball={useLogoForBaseball}></Banner></div>
+      <div style={{ width: "100%" }}><Banner ref={banner} useLogoForBaseball={useLogoForBaseball} fontSize={fontSize + "pt"}></Banner></div>
       <h2>50% Width</h2>
-      <div style={{ width: "50%" }}><Banner ref={banner} useLogoForBaseball={useLogoForBaseball}></Banner></div>
+      <div style={{ width: "50%" }}><Banner ref={banner} useLogoForBaseball={useLogoForBaseball} fontSize={fontSize + "pt"}></Banner></div>
       <h2>Source</h2>
-      <pre ref={sourceContainer}></pre>
+      <pre ref={sourceContainerHtml}></pre>
+      <pre ref={sourceContainerCss}></pre>
     </div>
   );
 }
