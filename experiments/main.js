@@ -70,18 +70,25 @@ function appendOuterHTMLOf(element, opts) {
     appendTo: document.body,
     format: false,
   }, opts);
+
   opts.appendTo = getElementFromStringOrElement(opts.appendTo);
-  var pre = document.createElement("pre");
+
   var markup = getElementSource(element);
   if (opts.format) {
     markup = markup.replace(/>/g, ">\n");
   }
-  pre.innerText = markup;
-  var div = document.createElement("div");
-  div.className = "source-container";
-  div.style.overflow = "auto";
-  div.appendChild(pre);
-  opts.appendTo.appendChild(div);
+
+  if (opts.appendTo.tagName === "TEXTAREA") {
+    opts.appendTo.value = markup;
+  } else {
+    var pre = document.createElement("pre");
+    pre.innerText = markup;
+    var div = document.createElement("div");
+    div.className = "source-container";
+    div.style.overflow = "auto";
+    div.appendChild(pre);
+    opts.appendTo.appendChild(div);
+  }
 }
 
 function parentElement(element) {
