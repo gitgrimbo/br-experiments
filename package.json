@@ -4,10 +4,9 @@
   "main": "index.js",
   "scripts": {
     "predeploy-clean": "rimraf dist && make-dir dist",
-    "predeploy-copy": "copyfiles --up 1 experiments/index.html experiments/main.css experiments/main.js experiments/fonts/**/* experiments/roster-badge/**/* experiments/banner/**/* experiments/twitter-embed/**/* dist",
-    "predeploy-addlog": "node bin/log.js dist/index.html",
-    "predeploy": "run-s predeploy-clean predeploy-copy predeploy-addlog",
-    "deploy": "gh-pages -d dist"
+    "predeploy-clone": "git clone --depth 1 https://github.com/gitgrimbo/br-experiments.git dist",
+    "predeploy": "run-s predeploy-clean predeploy-clone",
+    "deploy": "gh-pages -d dist/experiments"
   },
   "author": "Paul Grime",
   "license": "ISC",
