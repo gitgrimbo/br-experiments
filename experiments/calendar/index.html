@@ -1,0 +1,45 @@
+<!doctype html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="../main.css" type="text/css" rel="stylesheet">
+
+<script src="https://unpkg.com/whatwg-fetch@3.0.0/dist/fetch.umd.js"></script>
+<script src="https://unpkg.com/react@16.8.1/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.8.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+<script src="https://unpkg.com/babel-polyfill@6.26.0/dist/polyfill.js"></script>
+<script src="../main.js"></script>
+<script src="../schedule/schedule.js"></script>
+<script src="./google.calendar.js" type="text/babel" data-presets="react,es2015,es2016,es2017"></script>
+<script src="./main.js" type="text/babel" data-presets="react,es2015,es2016,es2017"></script>
+
+<!-- body tag needed for browser-sync -->
+
+<body>
+
+  Calendar Experiments
+
+  <h1>Calendar</h1>
+
+  Interact with a Google Calendar. Some actions are open to everyone (e.g. read events) as this is a public calendar.
+  Some actions are only allowed if you have the requisite permissions on the calendar, e.g. add/edit/delete events.
+
+  <div class="events-container"></div>
+
+  <script type="text/babel">
+      ReactDOM.render(
+      <App
+        calendarId="v7tbd2prfbjaqjpq7ujlughm3s@group.calendar.google.com"
+        clientId="459216665265-rg4ujqcjinpgo3dlgqaori593ufgr8vr.apps.googleusercontent.com"
+        apiKey="AIzaSyBGAE3BClVApBZVA-cXxImJgI2wWO_DStc"
+        discoveryDocs={["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]}
+        scope="https://www.googleapis.com/auth/calendar.events"
+      />,
+      document.querySelector(".events-container")
+      );
+  </script>
+
+  <script async defer src="https://apis.google.com/js/api.js"></script>
+
+</body>

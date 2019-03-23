@@ -9,6 +9,14 @@ h6 {
   font-family: Tahoma;
 }
 
+html,
+body,
+p,
+pre,
+table {
+  font-size: 11pt;
+}
+
 h1 {
   font-size: 18pt;
 }
