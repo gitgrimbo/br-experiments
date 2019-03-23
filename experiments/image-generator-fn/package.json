@@ -1,0 +1,48 @@
+{
+  "name": "image-generator-fn",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": {
+    "name": "Paul Grime",
+    "email": "gitgrimbo@gmail.com",
+    "url": "https://github.com/gitgrimbo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gitgrimbo/br-experiments.git"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "scripts": {
+    "deploy:convertImage": "gcloud functions deploy convertImage --project=bladerunners --runtime nodejs10 --trigger-http",
+    "deploy:screenshot": "gcloud functions deploy screenshot --project=bladerunners --runtime nodejs10 --trigger-http --memory 1024MB",
+    "deploy": "run-s deploy:*",
+    "logs": "functions logs read",
+    "test": "mocha test/*.test.js --timeout=20000",
+    "start:screenshot": "functions-framework --target=screenshot --port=9901",
+    "start:convertImage": "functions-framework --target=convertImage --port=9902"
+  },
+  "dependencies": {
+    "chrome-aws-lambda": "^2.1.1",
+    "cors": "^2.8.5",
+    "del": "^5.1.0",
+    "puppeteer": "^2.1.1",
+    "puppeteer-core": "^2.1.1",
+    "stream-meter": "^1.0.4",
+    "tempy": "^0.4.0"
+  },
+  "devDependencies": {
+    "@google-cloud/functions-framework": "^1.4.0",
+    "@google-cloud/nodejs-repo-tools": "^3.3.0",
+    "mocha": "^7.0.1",
+    "npm-run-all": "^4.1.5",
+    "proxyquire": "^2.1.3",
+    "serverless-offline": "^6.0.0-alpha.66",
+    "sinon": "^8.1.1"
+  },
+  "cloud-repo-tools": {
+    "requiresKeyFile": true,
+    "requiresProjectId": true
+  }
+}

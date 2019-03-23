@@ -1,0 +1,81 @@
+<svg class="player-card" x="0" y="0" width="100%" height="100%" viewBox="0 0 640 500" preserveAspectRatio="xMinYMin slice">
+  <rect x="0" y="0" width="100%" height="100%" fill="lightgrey"></rect>
+  <svg x="0" y="0" width="50%" height="100%" viewBox="0 0 320 500" preserveAspectRatio="none">
+    <rect x="0" y="0" width="100%" height="100%" fill="white"></rect>
+    <svg x="0" y="0" width="320" height="88" preserveAspectRatio="none" fill="#013298">
+      <rect id="id00457299" x="2.5" y="2.5" width="315" height="83" rx="30" ry="30" stroke="black" stroke-width="5" fill="#013298"></rect>
+      <clipPath id="id92464071">
+        <rect x="5" y="5" width="310" height="78" rx="30" ry="30"></rect>
+      </clipPath>
+      <g clip-path="url(#id92464071)">
+        <text class="player-name" x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="white">Rich Green</text>
+      </g>
+    </svg>
+    <svg x="0" y="90" width="320" height="320" preserveAspectRatio="none" fill="#013298">
+      <rect id="id62163586" x="2.5" y="2.5" width="315" height="315" rx="30" ry="30" stroke="black" stroke-width="5" fill="#013298"></rect>
+      <clipPath id="id02801703">
+        <rect x="5" y="5" width="310" height="310" rx="30" ry="30"></rect>
+      </clipPath>
+      <g clip-path="url(#id02801703)">
+        <image width="100%" height="100%" xlink:href="../img/profile-pic.334x334.png"></image>
+      </g>
+    </svg>
+    <svg x="0" y="412" width="320" height="88" preserveAspectRatio="none" fill="#013298">
+      <rect id="id01799857" x="2.5" y="2.5" width="315" height="83" rx="30" ry="30" stroke="black" stroke-width="5" fill="#013298"></rect>
+      <clipPath id="id38751077">
+        <rect x="5" y="5" width="310" height="78" rx="30" ry="30"></rect>
+      </clipPath>
+      <g clip-path="url(#id38751077)">
+        <text class="position-name" x="33.3%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="white">1st Base</text>
+        <svg x="66.6%" y="0" width="33.3%" height="100%" preserveAspectRatio="none" viewBox="0 0 100 100">
+          <circle id="id09148388" cx="50%" cy="50%" r="50" fill="white"></circle>
+          <clipPath id="id02551425">
+            <use xlink:href="#id09148388"></use>
+          </clipPath>
+          <image clip-path="url(#id02551425)" x="5" y="5" width="90" height="90" xlink:href="./diamond.svg" preserveAspectRatio="none"></image>
+          <circle cx="50%" cy="50%" r="48" fill="none" stroke="white" stroke-width="5"></circle>
+        </svg>
+      </g>
+    </svg>
+  </svg>
+  <svg x="50%" y="0" width="50%" height="100%" viewBox="0 0 320 500" preserveAspectRatio="none">
+    <rect x="0" y="0" width="100%" height="100%" fill="lightgreen"></rect>
+    <foreignObject x="0" y="400" width="100%" height="100">
+      <table xmlns="http://www.w3.org/1999/xhtml" class="stats" style="height: 94px;">
+        <tbody>
+          <tr style="background: rgb(1, 50, 152); color: white;">
+            <td colspan="99">2018 PERFORMANCE STATISTICS</td>
+          </tr>
+          <tr>
+            <td>AB</td>
+            <td>R</td>
+            <td>H</td>
+            <td>2B</td>
+            <td>3B</td>
+            <td>HR</td>
+            <td>RBI</td>
+            <td>BB</td>
+            <td>SB</td>
+            <td>SO</td>
+            <td>AVG</td>
+            <td>OBP</td>
+          </tr>
+          <tr>
+            <td>16</td>
+            <td>19</td>
+            <td>16</td>
+            <td>13</td>
+            <td>10</td>
+            <td>10</td>
+            <td>17</td>
+            <td>19</td>
+            <td>13</td>
+            <td>13</td>
+            <td>0.375</td>
+            <td>0.63</td>
+          </tr>
+        </tbody>
+      </table>
+    </foreignObject>
+  </svg>
+</svg>

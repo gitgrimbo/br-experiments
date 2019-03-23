@@ -1,0 +1,147 @@
+<!doctype html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="../favicon.png" />
+<link href="../main.css" type="text/css" rel="stylesheet">
+<link href="dom-roster.css" type="text/css" rel="stylesheet">
+<link href="svg-roster.css" type="text/css" rel="stylesheet">
+
+<script src="../main.js"></script>
+
+<!-- body tag needed for browser-sync -->
+<body>
+
+Experiments to see if the 'roster badge' can be made smaller (file size) and easier to use.
+
+<h1>Original</h1>
+
+The existing 'roster badge' is a JPG image. This example is 95.5 KB.
+
+<h2>Using its 'native' size</h2>
+
+<br><img src="9710843_orig.jpg">
+
+<h2>width=100%</h2>
+
+Fills screen width (and height scales proportionally).
+
+<br><img src="9710843_orig.jpg" width="100%">
+
+<h2>width=50%</h2>
+
+Fills half of screen width (and height scales proportionally).
+
+<br><img src="9710843_orig.jpg" width="50%">
+
+<h2>width=25%</h2>
+
+Fills 1/4 of screen width (and height scales proportionally).
+
+<br><img src="9710843_orig.jpg" width="25%">
+
+<h2>Notes</h2>
+<ul>
+  <li>✔️ entire image scales in correct proportion.
+  <li>❌ if scaling down in width/height is required, at some point the text becomes difficult/impossible to read (as it's a bitmap and not 'real' text).
+  <li>❌ harder to produce than simply editing a name in a HTML file? Need the source image and the image editing software.
+  <li>❌ larger size. I.e. 95.5 KB per player vs ~40 KB for SVG or DOM.
+</ul>
+
+<hr>
+
+<h1>SVG</h1>
+
+IE doesn't seem to increase the height when the width of the parent element increases.
+
+<svg class="svg-roster" id="roster-badge-svg" viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect id="svg_1" height="200" width="660" y="20" x="20" stroke-width="0" stroke="#000000" fill="#023298"></rect>
+    <rect transform="rotate(6 560,120)" id="svg_2" height="200" width="200" y="20" x="460" stroke-width="5" stroke="#999999" fill="#ffffff"></rect>
+    <image transform="rotate(6 560,120)" xlink:href="334x334.jpg" id="svg_4" height="200" width="200" y="20" x="460"></image>
+    <image xlink:href="logo.jpg" id="svg_6" height="160" width="160" y="40" x="40"></image>
+    <text xml:space="preserve" text-anchor="left" font-family="serif" font-size="24" id="txt1" y="60" x="220" stroke-width="0" fill="#ffffff">Rich Green</text>
+    <text xml:space="preserve" text-anchor="left" font-family="serif" font-size="24" id="txt2" y="100" x="220" stroke-width="0" fill="#ffffff"><tspan class="varsity">00</tspan></text>
+    <text xml:space="preserve" text-anchor="left" font-family="serif" font-size="24" id="txt3" y="130" x="220" stroke-width="0" fill="#ffffff">Position: 1B</text>
+    <text xml:space="preserve" text-anchor="left" font-family="serif" font-size="24" id="txt4" y="160" x="220" stroke-width="0" fill="#ffffff">Bats: R</text>
+    <text xml:space="preserve" text-anchor="left" font-family="serif" font-size="24" id="txt4" y="190" x="220" stroke-width="0" fill="#ffffff">Throws: L</text>
+  </g>
+</svg>
+
+<script>
+(function() {
+  var badge = document.getElementById("roster-badge-svg");
+  parentElement(badge).removeChild(badge);
+  addToVariableWidthDivs(badge, { numberOfDivs: 3 });
+}());
+</script>
+
+<h2>Source</h2>
+
+<script>
+appendOuterHTMLOf(document.getElementById("roster-badge-svg"));
+</script>
+
+<h2>Notes</h2>
+<ul>
+  <li>✔️ smaller file size than plain image.
+  <li>✔️ pretty easy to edit as it's just text.
+  <li>✔️ easy to 'template' - just provide the text and generate the SVG element.
+  <li>Supporting Bladerunners logo file <a href="logo.jpg">logo.jpg</a> - 7.2 KB
+  <li>Supporting player picture file <a href="334x334.jpg">334x334.jpg</a> - 31.1 KB
+</ul>
+
+<hr>
+
+<h1>DOM</h1>
+
+Need to improve how scaling works. Reduce the player image size and the font size.
+
+<div class="dom-roster">
+  <div class="inner">
+    <div class="col col1">
+      <div class="logo"><img src="logo.jpg"></div>
+    </div>
+    <div class="col col2">
+      <div class="details-outer">
+        <div class="details-inner">
+          Rich Green<br><br>
+          Number: 00<br>
+          Position: 1B<br>
+          Bats/Throws: R/L
+        </div>
+      </div>
+    </div>
+    <div class="col col3">
+      <div class="pen-pic-outer">
+        <div class="pen-pic">
+          <img src="334x334.jpg">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var badge = document.getElementsByClassName("dom-roster")[0];
+  badge.parentElement.removeChild(badge);
+  addToVariableWidthDivs(badge, { numberOfDivs: 3 });
+}());
+</script>
+
+<h2>Source</h2>
+
+<script>
+appendOuterHTMLOf(document.getElementsByClassName("dom-roster")[0]);
+</script>
+
+<h2>Notes</h2>
+<ul>
+  <li>✔️ smaller file size than plain image.
+  <li>✔️ pretty easy to edit as it's just text.
+  <li>✔️ easy to 'template' - just provide the text and generate the DOM element.
+  <li>Supporting Bladerunners logo file <a href="logo.jpg">logo.jpg</a> - 7.2 KB
+  <li>Supporting player picture file <a href="334x334.jpg">334x334.jpg</a> - 31.1 KB
+</ul>
+
+</body>

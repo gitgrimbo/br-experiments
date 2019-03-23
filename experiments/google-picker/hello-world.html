@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no">
+  <link rel="icon" type="image/png" href="../favicon.png" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Google Picker Example</title>
+
+  <script type="text/javascript">
+
+    // The Browser API key obtained from the Google API Console.
+    var developerKey = 'AIzaSyDfg7q3EAFMU4Z1yNRT_hceC5qLWYob40k';
+
+    // The Client ID obtained from the Google API Console. Replace with your own Client ID.
+    var clientId = '459216665265-rg4ujqcjinpgo3dlgqaori593ufgr8vr.apps.googleusercontent.com';
+
+    // Scope to use to access user's photos.
+    var scope = [
+      'https://www.googleapis.com/auth/photos',
+      'https://www.googleapis.com/auth/drive.file'
+    ].join(" ");
+
+    var pickerApiLoaded = false;
+    var oauthToken;
+
+    // Use the API Loader script to load google.picker and gapi.auth.
+    function onApiLoad() {
+      gapi.load('auth2', onAuthApiLoad);
+      gapi.load('picker', onPickerApiLoad);
+    }
+
+    function setError(str) {
+      const el = document.getElementById("error");
+      const span = el.querySelector("span");
+      if (!str) {
+        span.innerHTML = "";
+        el.style.display = "none";
+      } else {
+        span.innerHTML = str;
+        el.style.display = "";
+      }
+    }
+
+    function onAuthApiLoad() {
+      setError(null);
+      var authBtn = document.getElementById('auth');
+      authBtn.disabled = false;
+      authBtn.addEventListener('click', async function() {
+        try {
+          const googleAuth = await gapi.auth2.init({ client_id: clientId });
+          const result = await googleAuth.signIn({ scope: scope });
+          handleAuthResult(null, result.getAuthResponse());
+        } catch (err) {
+          const msg = (typeof err === "string")
+            ? err
+            : (err.message || err.error || String(err));
+          setError(msg);
+          handleAuthResult(err);
+        }
+      });
+    }
+
+    function onPickerApiLoad() {
+      pickerApiLoaded = true;
+      createPicker();
+    }
+
+    function handleAuthResult(err, authResult) {
+      console.log("handleAuthResult", err, authResult);
+      if (authResult && !authResult.error) {
+        oauthToken = authResult.access_token;
+        createPicker();
+      }
+    }
+
+    // Create and render a Picker object for picking:
+    // - user Photos.
+    // - user Spreadsheets.
+    function createPicker() {
+      if (pickerApiLoaded && oauthToken) {
+        var picker = new google.picker.PickerBuilder().
+          addView(google.picker.ViewId.PHOTOS).
+          addView(google.picker.ViewId.SPREADSHEETS).
+          setOAuthToken(oauthToken).
+          setDeveloperKey(developerKey).
+          setCallback(pickerCallback).
+          build();
+        picker.setVisible(true);
+      }
+    }
+
+    // A simple callback implementation.
+    function pickerCallback(data) {
+      console.log("pickerCallback", data);
+      let url = "";
+      let result = "";
+      if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
+        var doc = data[google.picker.Response.DOCUMENTS][0];
+        url = doc.url || "";
+        result = JSON.stringify(doc, null, 2);
+      }
+      document.getElementById('url').innerHTML = url;
+      document.getElementById('result').innerHTML = result;
+    }
+  </script>
+</head>
+
+<body>
+  <p>Slightly modified version of Google Picker's hello world example (<a href="https://developers.google.com/picker/docs/">docs</a>).</p>
+
+  <button type="button" id="auth" disabled>Authenticate / Pick Document</button>
+
+  <p id="error" style="display:none; border:solid 1px red;">Error: <span></span></p>
+
+  <p>
+    Document URL: <a id="url" href="#"></a>
+  </p>
+
+  <h3>API Result</h3>
+  <pre id="result"></pre>
+
+  <!-- The Google API Loader script. -->
+  <script type="text/javascript" src="https://apis.google.com/js/api.js?onload=onApiLoad"></script>
+</body>
+
+</html>

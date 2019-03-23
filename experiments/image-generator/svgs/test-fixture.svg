@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="640"
+   height="640"
+   viewBox="0 0 640 640"
+   version="1.1"
+   id="svg10275"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="test-fixture.svg">
+  <defs
+     id="defs10269">
+<style>
+@import url('https://fonts.googleapis.com/css?family=Oswald:400,700');
+</style>
+   </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.475"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-maximized="1"
+     inkscape:cx="291.22117"
+     inkscape:cy="317.50283"
+     inkscape:window-width="1920"
+     inkscape:window-height="1147"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:snap-bbox="false"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:snap-nodes="true" />
+  <metadata
+     id="metadata10272">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-127.66665)">
+    <image
+       xlink:href="https://lh3.googleusercontent.com/qMb52DcBM0ifpD2vUxytnOdqMx6UGJOauVYoi5O858zPZ_QhrhB-JFZS0iLUzG508NRBrTakJnTmrtBWL3szD6hKDjps8PoPJJVdxxLPIe2mOfKSP3DG8nivmoGpxCjxyUiT2doixhBkZ_5NlCYIuTYE13cTmN3gVBgIC23qi5wgt_H7v-bJxYOmN8WQfPCVbGgy1xlIrZ6ltR8WdFiuqufKtO2b2UfIfN64Ymhg6LGKa37NrLiT46WunkGNVYLepNpPaeGgrQgx-7aylhfDSKmmQyyZ3QmkGTTGFuwdjazHNhgII_4gINFYaes9yZW37H5d81JYNneKtIWTD_1NlUWPdcv66ZEEX1z1ZoTt0S8xAN-IfXxKmV43lAYiAIRPNUwHiZRzrcGJwa1K9daeneoby1b0NKSLywkUEbZBcnxTNVUu6RiqhLtGZnQ3Y6DgbBtodn4-yjHYEOssvDcrLrPlEU08bs2TeQCnPJ6QubRlOIeApZKQZy7RJHJG6RRkmJz25Ot0MRuXCYGKMFnwERdt7wo1MF0howpv6YoGIESsc-8pkK0xG7YUiSWI2FzZgdL1C8mjQf3hH4kDBgKbp-RSgtzS5dE66cKaZx-N5Mw27wMBOW6EYMx1wl0bXNxQuOgFlhESssOuWkfoBM4S3Dr3DFoNh8ds3Rq1WDr3YW2kWi4qU3ftduXgVcCBVXlB9Bqut5tvvZMerH1H0WgX7oa1=w1423-h1067-no"
+       width="640"
+       height="640"
+       preserveAspectRatio="none"
+       id="data.background"
+       x="0"
+       y="127.66665"
+       image-rendering="" />
+    <image
+       xlink:href="https://lh3.googleusercontent.com/DqmmYOMHDc_Rv4lSy12W6osHhhQDLsj8g2nvo5IU9QOxgPMF1eHbxxU_TfFEbVkrZKLqYES1ypgP78RD5Oc2TK5JDqPNU-u5QjBlBx18KHleGqAubJUs5zdV684U2sW6kQINUcBwGw=s1044-no"
+       width="256"
+       height="256"
+       preserveAspectRatio="none"
+       id="data.logo1"
+       x="50"
+       y="175.66666"
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <image
+       xlink:href="https://lh3.googleusercontent.com/iTzxO4CcIxoO_AmOOHu6xWD63Z12dpd7KRFsWe1A479_mf8cE4y7wJtiSyuic161RJf-WFn5uyuE5jsZTaoAHmU9CGSNtxaRq_ZiVZp-6XAQ9jxk3W98X0BOkLYETpjY5qWkahoykA=s150-no?.png"
+       width="256"
+       height="256"
+       preserveAspectRatio="none"
+       id="data.logo2"
+       x="336"
+       y="175.66666"
+       image-rendering="" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:condensed;font-size:42.66666794px;line-height:1.25;font-family:Oswald;-inkscape-font-specification:'Impact, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="178.03125"
+       y="501.05652"><tspan
+         sodipodi:role="line"
+         id="data.team1.name.line1"
+         x="178.03125"
+         y="501.05652">Sheffield</tspan><tspan
+         sodipodi:role="line"
+         x="178.03125"
+         y="554.38983"
+         id="data.team1.name.line2">Bladerunners I</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:condensed;font-size:32px;line-height:1.25;font-family:Oswald;-inkscape-font-specification:'Impact, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="320.17709"
+       y="632.13818"><tspan
+         sodipodi:role="line"
+         x="320.17709"
+         y="632.13818"
+         id="data.bottom.line1">Sunday 28th April 2019</tspan><tspan
+         sodipodi:role="line"
+         x="320.17709"
+         y="672.13818"
+         id="data.bottom.line2">Forge Valley School</tspan><tspan
+         sodipodi:role="line"
+         x="320.17709"
+         y="712.13818"
+         id="data.bottom.line3">Sheffield</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:condensed;font-size:42.66666794px;line-height:1.25;font-family:Oswald;-inkscape-font-specification:'Impact, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="464.03125"
+       y="501.05652"><tspan
+         sodipodi:role="line"
+         x="464.03125"
+         y="501.05652"
+         id="data.team2.name.line1">Hull</tspan><tspan
+         sodipodi:role="line"
+         x="464.03125"
+         y="554.38983"
+         id="data.team2.name.line2">Scorpions</tspan></text>
+  </g>
+</svg>

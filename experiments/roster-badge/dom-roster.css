@@ -1,0 +1,88 @@
+.dom-roster {
+  margin: 1em;
+  color: white;
+  font-weight: bold;
+}
+
+.dom-roster .inner {
+  background: #023298;
+  height: 300px;
+  position: relative;
+  xborder: solid 1px yellow;
+}
+
+.dom-roster .col {
+  position: absolute;
+  height: 100%;
+}
+
+.dom-roster .col1 {
+  left: 0%;
+  width: 20%;
+}
+
+.dom-roster .col2 {
+  left: 20%;
+  width: 40%;
+}
+
+.dom-roster .col3 {
+  left: 60%;
+  width: 40%;
+}
+
+.dom-roster .logo {
+  height: 100%;
+  float: left;
+  margin-left: 5%;
+  xborder: solid 1px red;
+}
+
+.dom-roster .logo img {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  xborder: solid 1px green;
+}
+
+.dom-roster .pen-pic-outer {
+  float: right;
+  margin-right: 10%;
+}
+
+.dom-roster .pen-pic {
+  transform: rotate(6deg);
+  border: solid 6px #c0c0c0;
+}
+
+.dom-roster .pen-pic img {
+  height: 306px;
+}
+
+.dom-roster .details-outer {
+  display: table;
+  font-size: 32px;
+  height: 100%;
+  xborder: 1px solid orange;
+}
+
+.dom-roster .details-inner {
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: 1em;
+  height: 100%;
+  xborder: 1px solid purple;
+}
+
+@media (max-width: 1024px) {
+  .dom-roster .inner {
+    height: 200px;
+  }
+  .dom-roster .pen-pic img {
+    height: 200px;
+  }
+  .dom-roster .details-outer {
+    font-size: 24px;
+  }
+}

@@ -1,0 +1,30 @@
+<p>This section provides the ability to load data from external sources, such as Google Sheets.</p>
+<p>
+Some SVGs have embedded data (that the author of the SVG has embedded), and that will also appear here.
+Embedded data is set in a <code>&lt;text&gt;</code> element in the SVG with <code>id="sample.data"</code>.
+Embedded data is in JSON format and has the form <code>"data-name": ["list", "of", "items"]</code>,
+where you can have multiple data-names for different data.
+For example:
+<pre style="white-space: pre-wrap;">
+&lt;svg&gt;
+...
+  &lt;text id="sample.data"&gt;{
+    "data.player.position":[
+      "C","P","1B","2B","3B",
+      "SS","LF","CF","RF"
+    ],
+    "data.player.name":[
+      "Rich Green",
+      "Miguel Juárez",
+      "Nestor Martinez"
+    ]
+  }&lt;/text&gt;
+...
+&lt;/svg&gt;
+</pre>
+</p>
+<p>The loaded data can then be used to set values within the SVG image.</p>
+<p>
+Once the data is loaded you will be able to view it all below.
+But you need to use the SET IMAGE DATA tab to actually use the data.
+</p>

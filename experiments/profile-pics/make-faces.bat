@@ -1,0 +1,1 @@
+node cli\export-faces.js photos\info.temp.txt
