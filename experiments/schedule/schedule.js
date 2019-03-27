@@ -1,5 +1,23 @@
 window.schedule = [
   {
+    "teamName": "+",
+    "week": "",
+    "date": "2019-03-24",
+    "vs": "vs",
+    "oppositionTeamName": "Long Eaton Storm",
+    "friendly": true,
+    "start": "2pm",
+  },
+  {
+    "teamName": "+",
+    "week": "",
+    "date": "2019-03-31",
+    "vs": "@",
+    "oppositionTeamName": "Harrogate Tigers",
+    "friendly": true,
+    "start": "12.30pm",
+  },
+  {
     "teamName": "I",
     "week": "1",
     "date": "2019-04-07",
@@ -107,8 +125,10 @@ window.schedule = [
   {
     "teamName": "I",
     "date": "2019-06-02",
-    "week": "6",
-    "bye": "BYE WEEK",
+    "vs": "vs",
+    "oppositionTeamName": "Worcester Sorcerers",
+    "start": "1pm",
+    "friendly": true,
     "line": "(BYE WEEK 2nd JUNE)"
   },
   {
@@ -145,11 +165,13 @@ window.schedule = [
     "line": "(BYE WEEK JUNE 16th  FATHER’S DAY) -poss. Friendly at HULL"
   },
   {
+    "teamName": "+",
     "week": "9",
     "date": "2019-06-23",
     "vs": "@",
     "oppositionTeamName": "Wolverhampton Wolves",
-    "bye": "BYE WEEK - Friendly @ Wolverhampton Wolves",
+    "start": "12pm",
+    "friendly": true,
     "line": "(BYE WEEK JUNE 23rd) – Friendly @ Wolverhampton Wolves"
   },
   {
@@ -240,10 +262,12 @@ window.schedule = [
   },
   {
     "teamName": "II",
-    "week": "14",
     "date": "2019-08-04",
-    "bye": "BYE WEEK",
-    "line": "(BYE WEEK  AUGUST 4th)"
+    "vs": "@",
+    "oppositionTeamName": "Worcester Sorcerers",
+    "start": "12pm",
+    "friendly": true,
+    "line": "(BYE WEEK 2nd JUNE)"
   },
   {
     "teamName": "I",
