@@ -54,6 +54,60 @@ const App = (function() {
     `WEEK 17 : SEPTEMBER 1st  @ Newcastle Nighthawks (12pm start)`,
   ];
 
+  const localLogoRoot = "../img/logos/";
+  const weeblyLogoRoot = "/files/theme/logos/";
+
+  const teamInfos = {
+    "Halton ‘Robots of Doom’": [
+      "../img/logos/logo.halton-robots-of-doom.64x64.resized.png",
+      "https://twitter.com/Robots_Of_Doom",
+    ],
+    "Harrogate Tigers": [
+      "../img/logos/logo.harrogate-tigers.64x64.resized.jpg",
+      "https://twitter.com/HarrogateTigers",
+    ],
+    "Hull Scorpions": [
+      "../img/logos/logo.hull-scorpions.64x64.resized.png",
+      "https://twitter.com/hullscorpions",
+    ],
+    "Liverpool Twojans": [
+      "../img/logos/logo.liverpool-trojans2.64x64.resized.png",
+      "https://twitter.com/LiverpoolTrojan",
+    ],
+    "Long Eaton Storm": [
+      "../img/logos/logo.long-eaton-storm.64x64.resized.png",
+      "https://twitter.com/longeatonstorm",
+    ],
+    "Manchester A’s": [
+      "../img/logos/logo.manchester.64x64.resized.png",
+      "https://twitter.com/MANCBASEBALL",
+    ],
+    "Manchester Bee’s": [
+      "../img/logos/logo.manchester.64x64.resized.png",
+      "https://twitter.com/MANCBASEBALL",
+    ],
+    "Newcastle Nighthawks": [
+      "../img/logos/logo.newcastle-nighthawks.64x64.resized.jpg",
+      "https://twitter.com/NCLNighthawks",
+    ],
+    "Sheffield Bladerunners I": [
+      "../img/logos/logo.bladerunners.64x64.resized.png",
+      "https://twitter.com/BladerunnersBC",
+    ],
+    "Sheffield Bladerunners II": [
+      "../img/logos/logo.bladerunners.64x64.resized.png",
+      "https://twitter.com/BladerunnersBC",
+    ],
+    "Wolverhampton Wolves": [
+      "../img/logos/logo.wolverhampton.64x64.resized.jpg",
+      "https://www.facebook.com/wolvesballclub/",
+    ],
+    "Worcester Sorcerers": [
+      "../img/logos/logo.worcester-sorcerers2.64x64.resized.png",
+      "https://twitter.com/worcssorcerers",
+    ],
+  };
+
   function parse(lines, teamName) {
     const months = [
       "jan",
@@ -127,10 +181,11 @@ const App = (function() {
   // local ref to global schedule.
   const calendar = window.calendar = schedule;
 
-  function App() {
+  function Schedule({ teamInfos }) {
     return (
       <React.Fragment>
-        <style>{`
+        <style>
+          {`
           table.schedule {
             border-collapse: collapse;
             width: 100%;
@@ -141,14 +196,27 @@ const App = (function() {
             padding: 0.2em;
             border: 2px solid #dbe6fe;
           }
-        `}</style>
+          table.schedule tr.bye { 
+            color: white;
+            background: grey;
+          }
+          table.schedule tr.bye td { 
+            border-color: transparent;
+          }
+          @media (max-width: 360px) {
+            table.schedule th span.homeOrAway, table.schedule th span.team { 
+              display: none;
+            }
+          }
+        `}
+        </style>
         <table cellSpacing="0" cellPadding="0" border="0" className="schedule">
           <tbody>
             <tr>
               <th>Date</th>
-              <th>Team</th>
-              <th>H/A</th>
-              <th>Versus</th>
+              <th><span className="team">Team</span></th>
+              <th><span className="homeOrAway">H/A</span></th>
+              <th colSpan="2">Versus</th>
               <th>Start</th>
             </tr>
             {
@@ -162,21 +230,24 @@ const App = (function() {
                     .replace(/,/g, "");
                   if (item.bye) {
                     return (
-                      <tr key={i}>
+                      <tr key={i} className="bye">
                         <td>{dateStr}</td>
                         <td>{item.teamName}</td>
-                        <td></td>
-                        <td>{item.bye}</td>
-                        <td></td>
+                        <td colSpan="99">{item.bye}</td>
                       </tr>
                     );
                   }
+                  const [logoUrl, homePage] = teamInfos[item.oppositionTeamName];
+                  const logoImg = logoUrl ? <img src={logoUrl} width="64" border="0" /> : null;
+                  const logoCell = (logoImg && homePage) ? <a href={homePage}>{logoImg}</a> : logoImg;
+                  const oppositionCell = homePage ? <a href={homePage}>{item.oppositionTeamName}</a> : item.oppositionTeamName;
                   return (
                     <tr key={i}>
                       <td>{dateStr}</td>
                       <td>{item.teamName}</td>
                       <td>{item.vs}</td>
-                      <td>{item.oppositionTeamName}</td>
+                      <td>{logoCell}</td>
+                      <td>{oppositionCell}{item.friendly && " (F)"}</td>
                       <td>{item.start}</td>
                     </tr>
                   );
@@ -184,6 +255,35 @@ const App = (function() {
             }
           </tbody>
         </table>
+      </React.Fragment>
+    );
+  }
+
+  function App({ onRendered }) {
+    const teamInfosCopy = JSON.parse(JSON.stringify(teamInfos));
+    const [weeblyMode, setWeeblyMode] = React.useState(false);
+    if (weeblyMode) {
+      Object.keys(teamInfosCopy).forEach((key) => {
+        const info = teamInfosCopy[key];
+        const logoUrl = info[0];
+        info[0] = logoUrl.replace(localLogoRoot, weeblyLogoRoot);
+      });
+    }
+    React.useEffect(() => {
+      onRendered();
+    });
+    return (
+      <React.Fragment>
+        <fieldset>
+          <legend>Options</legend>
+          Use Weebly mode: <input type="checkbox" checked={weeblyMode} onChange={(e) => setWeeblyMode(e.target.checked)} />
+          <br />
+          (uses img URLs pointing to files in the Weebly theme, rather than local files)
+        </fieldset>
+        <br />
+        <div data-bladerunners-schedule="true">
+          <Schedule teamInfos={teamInfosCopy} />
+        </div>
       </React.Fragment>
     );
   }
