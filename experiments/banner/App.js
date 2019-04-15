@@ -1,3 +1,5 @@
+import React from "react";
+
 function Logo({ height }) {
   return <img
     className="bladerunners-logo"
@@ -26,7 +28,7 @@ const Banner = React.forwardRef((props, ref) => {
   );
 });
 
-function BannerApp({ cssElement }) {
+function App({ cssElement }) {
   const [useLogoForBaseball, setUseLogo] = React.useState(false);
   const [fontSize, setFontSize] = React.useState(28);
   const fontSizeRange = [5, 50];
@@ -72,3 +74,5 @@ function BannerApp({ cssElement }) {
     </div>
   );
 }
+
+export default App;

@@ -1,4 +1,4 @@
-window.schedule = [
+export default [
   {
     "teamName": "+",
     "week": "",

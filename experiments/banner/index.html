@@ -21,12 +21,6 @@
 }
 </style>
 
-<script src="https://unpkg.com/react@16.8.1/umd/react.development.js"></script>
-<script src="https://unpkg.com/react-dom@16.8.1/umd/react-dom.development.js"></script>
-<script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
-<script src="../main.js"></script>
-<script src="./main.js" type="text/babel"></script>
-
 <!-- body tag needed for browser-sync -->
 <body>
 
@@ -38,11 +32,8 @@ Banner Experiments
 
 <div class="banner-container"></div>
 
-<script type="text/babel">
-ReactDOM.render(
-  React.createElement(BannerApp, {cssElement: document.getElementById("banner-styles")}),
-  document.querySelector(".banner-container")
-);
-</script>
-
 </body>
+
+<script src="../main.js"></script>
+<script src="../../dist/vendors.js"></script>
+<script src="../../dist/banner.js"></script>

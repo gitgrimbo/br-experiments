@@ -1,0 +1,42 @@
+{
+  "name": "bladerunners-functions",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": {
+    "name": "Paul Grime",
+    "email": "gitgrimbo@gmail.com",
+    "url": "https://github.com/gitgrimbo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gitgrimbo/br-experiments.git"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "scripts": {
+    "deploy:convertImage": "gcloud functions deploy convertImage --runtime nodejs8 --trigger-http",
+    "deploy:screenshot": "gcloud functions deploy screenshot --runtime nodejs8 --trigger-http --memory 1024MB",
+    "deploy": "run-s deploy:*",
+    "logs": "functions logs read",
+    "test": "mocha test/*.test.js --timeout=20000"
+  },
+  "dependencies": {
+    "busboy": "^0.3.1",
+    "cors": "^2.8.5",
+    "gm": "^1.23.1",
+    "puppeteer": "^1.14.0"
+  },
+  "devDependencies": {
+    "@google-cloud/functions-emulator": "^1.0.0-beta.5",
+    "@google-cloud/nodejs-repo-tools": "^3.0.0",
+    "mocha": "^5.2.0",
+    "npm-run-all": "^4.1.5",
+    "proxyquire": "^2.1.0",
+    "sinon": "^7.0.0"
+  },
+  "cloud-repo-tools": {
+    "requiresKeyFile": true,
+    "requiresProjectId": true
+  }
+}
