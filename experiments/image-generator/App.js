@@ -11,8 +11,11 @@ const screenshotEndpointLocal = "http://localhost:8010/bladerunners/us-central1/
 const screenshotEndpointProd = "https://us-central1-bladerunners.cloudfunctions.net/screenshot";
 
 function updateSVG(svg, data) {
-  data.forEach(({ id, value }, idx) => {
-    SVG.setText(svg, id, value);
+  data.forEach(({ id, value, visible }, idx) => {
+    if (value !== null) {
+      SVG.setValue(svg, id, value);
+    }
+    SVG.setVisible(svg, id, visible);
   });
 }
 
@@ -29,16 +32,17 @@ const reducer = (state, action) => {
     case "setCreatePNGError": return set("createPNGError");
     case "setPNGURL": return set("pngURL");
     case "setData": return set("data");
+    case "setSampleData": return set("sampleData");
     case "initialiseData": {
       const data = action.value.ids.map((id) => ({ id, value: "" }));
       return set("data", data);
     }
     case "setDataValue": {
       const data2 = state.data.slice();
-      const { dataIdx, value } = action.value;
+      const { dataIdx, name, value } = action.value;
       data2[dataIdx] = {
         ...data2[dataIdx],
-        value,
+        [name]: value,
       };
       return set("data", data2);
     }
@@ -53,6 +57,7 @@ const initialState = {
   pngURL: null,
   createPNGError: null,
   data: null,
+  sampleData: null,
 };
 
 function App({ }) {
@@ -68,29 +73,48 @@ function App({ }) {
     }
   };
 
-  const onChangeData = (dataIdx, value) => {
-    dispatch({ type: "setDataValue", value: { dataIdx, value } });
+  const onChangeData = (dataIdx, name, value) => {
+    dispatch({ type: "setDataValue", value: { dataIdx, name, value } });
   };
 
   const updateIFrameWithSVGSource = (iframe, svgSource) => {
     const doc = iframe.contentDocument;
     doc.firstElementChild.innerHTML = `<style>html, body { padding: 0; margin: 0; }</style>\n` + svgSource;
     const svg = doc.querySelector("svg");
-    const { width, height, dataIds } = SVG.parseSVG(svg);
+    const { width, height, dataIds, sampleData } = SVG.parseSVG(svg);
     iframe.width = width;
     iframe.height = height;
-    const data = dataIds.map((id) => ({
-      id,
-      value: svg.getElementById(id).textContent,
-    }));
+
+    const svgElementValue = (el) => {
+      switch (el.tagName.toLowerCase()) {
+        case "image": {
+          const href = el.getAttribute("xlink:href");
+          const isDataUrl = href.startsWith("data:image/");
+          return isDataUrl ? null : href;
+        }
+        default: return el.textContent;
+      }
+    };
+
+    const data = dataIds.map((id) => {
+      const el = svg.getElementById(id);
+      const value = svgElementValue(el);
+      return {
+        id,
+        value,
+        visible: true,
+      };
+    });
+
     dispatch({ type: "setData", value: data });
+    dispatch({ type: "setSampleData", value: sampleData });
   }
 
   React.useEffect(() => {
     if (iframeRef.current && state.svgSource) {
       updateIFrameWithSVGSource(iframeRef.current, state.svgSource);
     }
-  }, [iframeRef.current, state.svgSource]);
+  }, [state.svgSource]);
 
   const onClickUpdateImage = (e) => {
     const svg = iframeRef.current.contentDocument.querySelector("svg");
@@ -139,7 +163,8 @@ function App({ }) {
         URL: <input type="text" value={state.url} onChange={(e) => dispatch({ type: "setUrl", value: e.target.value })} /> <button onClick={onClickLoad}>Load</button>
       </ClickableFieldset>
       <ClickableFieldset legend="2: Set data">
-        {state.data && <DataInput data={state.data} onChange={onChangeData} />}
+        {state.data && <DataInput data={state.data} sampleData={state.sampleData} onChange={onChangeData} />}
+        <br />
         <div>
           <button onClick={onClickUpdateImage}>Update image</button>
         </div>
