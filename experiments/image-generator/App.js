@@ -147,6 +147,8 @@ function App({ }) {
   };
 
   const onClickCreatePNG = async (e) => {
+    // clear error
+    dispatch({ type: "setCreatePNGError", value: null });
     try {
       if (!iframeRef.current) {
         throw new Error("Can't convert image. No source image loaded.");
