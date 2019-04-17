@@ -57,6 +57,27 @@ const initialState = {
   sampleData: null,
 };
 
+const svgUrls = [
+  "./starting-lineup.svg",
+  "./box-score.svg"
+];
+
+function LoadImage({ url, onChange, onClickLoad }) {
+  return (
+    <>
+      URL:
+      {" "}
+      <select onChange={onChange}>
+        {svgUrls.map((url, i) => <option key={i} value={url}>{url}</option>)}
+      </select>
+      {" "}
+      <input type="text" value={url} onChange={onChange} />
+      {" "}
+      <AsyncButton onClick={onClickLoad}>Load</AsyncButton>
+    </>
+  );
+}
+
 function App({ }) {
   const [state, dispatch] = React.useReducer(reducer, initialState);
   const iframeRef = React.useRef();
@@ -150,7 +171,11 @@ function App({ }) {
     <React.Fragment>
       <h1>Image Generator</h1>
       <ClickableFieldset legend="1: Load image">
-        URL: <input type="text" value={state.url} onChange={(e) => dispatch({ type: "setUrl", value: e.target.value })} /> <AsyncButton onClick={onClickLoad}>Load</AsyncButton>
+        <LoadImage
+          url={state.url}
+          onChange={(e) => dispatch({ type: "setUrl", value: e.target.value })}
+          onClickLoad={onClickLoad}
+        />
       </ClickableFieldset>
       <ClickableFieldset legend="2: Set data">
         {state.data && <DataInput data={state.data} sampleData={state.sampleData} onChange={onChangeData} />}
