@@ -1,14 +1,12 @@
 import React from "react";
 
+import AsyncButton from "../common/AsyncButton";
 import ClickableFieldset from "../common/ClickableFieldset";
 import ErrorBox from "../common/ErrorBox";
 import DataInput from "./DataInput";
+import createPNG from "./createPNG";
 import SVG from "./svg";
-
-const convertImageEndpointLocal = "http://localhost:8010/bladerunners/us-central1/convertImage";
-const convertImageEndpointProd = "https://us-central1-bladerunners.cloudfunctions.net/convertImage";
-const screenshotEndpointLocal = "http://localhost:8010/bladerunners/us-central1/screenshot";
-const screenshotEndpointProd = "https://us-central1-bladerunners.cloudfunctions.net/screenshot";
+import { moveData, setDataValue } from "./array-reducer";
 
 function updateSVG(svg, data) {
   data.forEach(({ id, value, visible }, idx) => {
@@ -38,13 +36,12 @@ const reducer = (state, action) => {
       return set("data", data);
     }
     case "setDataValue": {
-      const data2 = state.data.slice();
       const { dataIdx, name, value } = action.value;
-      data2[dataIdx] = {
-        ...data2[dataIdx],
-        [name]: value,
-      };
-      return set("data", data2);
+      return set("data", setDataValue(state.data, dataIdx, name, value));
+    }
+    case "moveData": {
+      const { oldIndex, newIndex } = action.value;
+      return set("data", moveData(state.data, oldIndex, newIndex));
     }
     default:
       return state;
@@ -73,8 +70,15 @@ function App({ }) {
     }
   };
 
-  const onChangeData = (dataIdx, name, value) => {
-    dispatch({ type: "setDataValue", value: { dataIdx, name, value } });
+  const onChangeData = (e) => {
+    if (e.type === "item") {
+      const { idx, name, value } = e;
+      return dispatch({ type: "setDataValue", value: { dataIdx: idx, name, value } });
+    }
+    if (e.type === "move") {
+      const { oldIndex, newIndex } = e;
+      return dispatch({ type: "moveData", value: { oldIndex, newIndex } });
+    }
   };
 
   const updateIFrameWithSVGSource = (iframe, svgSource) => {
@@ -116,13 +120,12 @@ function App({ }) {
     }
   }, [state.svgSource]);
 
-  const onClickUpdateImage = (e) => {
+  const onClickUpdateImage = async (e) => {
     const svg = iframeRef.current.contentDocument.querySelector("svg");
     updateSVG(svg, state.data);
   };
 
   const onClickCreatePNG = async (e) => {
-    const convertImageEndpoint = screenshotEndpointProd;
     try {
       if (!iframeRef.current) {
         throw new Error("Can't convert image. No source image loaded.");
@@ -132,26 +135,13 @@ function App({ }) {
         throw new Error("Can't convert image. No source SVG.");
       }
       const svgSource = svg.outerHTML.trim();
-
-      const formData = new FormData();
-      formData.append("image.name", "image.svg");
-      formData.append("image.type", "svg");
-      formData.append("image.data", svgSource);
-
-      const resp = await fetch(convertImageEndpoint, {
-        method: "POST",
-        body: formData,
-      });
-      if (!resp.ok) {
-        return dispatch({ type: "setCreatePNGError", value: await resp.text() });
-      }
-      const blob = await resp.blob();
-      const pngURL = URL.createObjectURL(blob);
+      const pngURL = await createPNG(svgSource);
       console.log(pngURL);
       dispatch({ type: "setPNGURL", value: pngURL });
     } catch (err) {
-      const msg = `Tried to convert image using "${convertImageEndpoint}"`;
-      const value = err.message ? err.message + ": " + msg : msg;
+      const { createPNG } = err;
+      const msg = "Create PNG failed";
+      const value = (err.message ? err.message + ": " + msg : msg) + (createPNG ? "\n" + JSON.stringify(createPNG) : "");
       dispatch({ type: "setCreatePNGError", value });
     }
   };
@@ -160,20 +150,20 @@ function App({ }) {
     <React.Fragment>
       <h1>Image Generator</h1>
       <ClickableFieldset legend="1: Load image">
-        URL: <input type="text" value={state.url} onChange={(e) => dispatch({ type: "setUrl", value: e.target.value })} /> <button onClick={onClickLoad}>Load</button>
+        URL: <input type="text" value={state.url} onChange={(e) => dispatch({ type: "setUrl", value: e.target.value })} /> <AsyncButton onClick={onClickLoad}>Load</AsyncButton>
       </ClickableFieldset>
       <ClickableFieldset legend="2: Set data">
         {state.data && <DataInput data={state.data} sampleData={state.sampleData} onChange={onChangeData} />}
         <br />
         <div>
-          <button onClick={onClickUpdateImage}>Update image</button>
+          <AsyncButton onClick={onClickUpdateImage}>Update image</AsyncButton>
         </div>
       </ClickableFieldset>
       {
         state.svgSource && (
           <div>
             <br />
-            <button onClick={onClickCreatePNG}>Create PNG</button>
+            <AsyncButton onClick={onClickCreatePNG}>Create PNG</AsyncButton>
             {state.createPNGError && <div><ErrorBox title="Error creating PNG" error={state.createPNGError} inline={true} /></div>}
           </div>
         )

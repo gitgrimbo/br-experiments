@@ -1,4 +1,20 @@
 import React from "react";
+import Sortable from "sortablejs";
+
+import isListItem from "./isListItem";
+import minMax from "../common/minMax";
+
+const cssNoSelect = `
+.draghandle {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+  cursor: move;
+  cursor: -webkit-grabbing;
+}`;
 
 function EditableText({ initialValue, isEditing, sampleData, onEdit, onSave, onCancel }) {
   const [value, setValue] = React.useState(initialValue);
@@ -51,6 +67,29 @@ function EditableText({ initialValue, isEditing, sampleData, onEdit, onSave, onC
   );
 }
 
+function useLastMoved(len, initialValue) {
+  const now = initialValue || Date.now();
+
+  const initialValues = [];
+  for (let i = 0; i < len; i++) {
+    initialValues.push(now);
+  }
+  const [lastMoved, setLastMoved] = React.useState(initialValues);
+
+  return [
+    lastMoved,
+    (oldIndex, newIndex) => {
+      const now = Date.now();
+      const [min, max] = minMax(oldIndex, newIndex);
+      const lastMoved2 = lastMoved.slice();
+      for (let i = min; i <= max; i++) {
+        lastMoved2[i] = now;
+      }
+      setLastMoved(lastMoved2);
+    },
+  ];
+}
+
 /**
  * Displays an editable grid of data.
  *
@@ -62,6 +101,33 @@ function EditableText({ initialValue, isEditing, sampleData, onEdit, onSave, onC
  */
 export default function DataInput({ data, sampleData, onChange }) {
   const [editing, setEditing] = React.useState();
+  const [lastMoved, updateLastMoved] = useLastMoved(data.length, Date.now());
+
+  const [sortableGroup, setSortableGroup] = React.useState(null);
+  const sortableRef = React.useRef();
+  const onClickSortHandle = (group) => (e) => {
+    if (sortableRef.current && data) {
+      const sortable = Sortable.create(sortableRef.current, {
+        group,
+        draggable: `[data-group='${group}']`,
+        handle: '.draghandle',
+        animation: 150,
+        onSort(e) {
+          sortable.destroy();
+          const { oldIndex, newIndex } = e;
+          onChange({
+            type: "move",
+            oldIndex,
+            newIndex,
+          });
+          // for some reason the id cells don't get re-rendered properly without changing the React key
+          updateLastMoved(oldIndex, newIndex);
+          setSortableGroup(null);
+        },
+      });
+      setSortableGroup(group);
+    }
+  };
 
   const _onChange = (e) => {
     e.preventDefault();
@@ -71,11 +137,21 @@ export default function DataInput({ data, sampleData, onChange }) {
       ? target.checked
       : target.value;
     const name = target.name;
-    onChange(idx, name, value);
+    onChange({
+      type: "item",
+      idx,
+      name,
+      value,
+    });
   };
 
   const onSave = (idx, name) => (value) => {
-    onChange(idx, name, value);
+    onChange({
+      type: "item",
+      idx,
+      name,
+      value,
+    });
     setEditing(null);
   };
 
@@ -95,12 +171,9 @@ export default function DataInput({ data, sampleData, onChange }) {
         if (id === sampleDataKey) {
           return true;
         }
-        if (id.startsWith(sampleDataKey)) {
-          const remaining = id.substring(sampleDataKey.length);
-          if (/^\.\d+$/.exec(remaining)) {
-            // only a dot and digits left
-            return true;
-          }
+        const listItem = isListItem(id);
+        if (listItem && listItem.name === sampleDataKey) {
+          return true;
         }
         return false;
       });
@@ -115,14 +188,25 @@ export default function DataInput({ data, sampleData, onChange }) {
       return null;
     }
     const keysWithoutId = Object.keys(data[0]).filter((key) => key !== "id");
-    return ["id"].concat(keysWithoutId).map((name, i) => <th key={i}>{name}</th>);
+    // first cell is for dragging row
+    return ["", "id"].concat(keysWithoutId).map((name, i) => <th key={i}>{name}</th>);
   };
 
   const dataCells = (item, idx) => {
     const { id, ...fields } = item;
     const isEditing = (editing === idx);
+    const listItem = isListItem(id);
     return (
       <>
+        {
+          listItem
+            ? <td
+              className="draghandle"
+              onClick={onClickSortHandle(listItem.name)}
+              style={{ color: sortableGroup === listItem.name ? "red" : "" }}
+            >&#x21c5;</td>
+            : <td></td>
+        }
         <td>{id}</td>
         {
           Object.keys(fields).map((name, i) => {
@@ -159,17 +243,25 @@ export default function DataInput({ data, sampleData, onChange }) {
   };
 
   return (
-    <table>
-      <tbody>
-        <tr>
-          {headingCells()}
-        </tr>
-        {data && data.map((item, idx) => (
-          <tr key={idx}>
-            {dataCells(item, idx)}
+    <>
+      <style>{cssNoSelect}</style>
+      <table>
+        <thead>
+          <tr>
+            {headingCells()}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody ref={sortableRef}>
+          {data && data.map((item, idx) => {
+            const listItem = isListItem(item.id);
+            return (
+              <tr key={idx + "." + lastMoved[idx]} data-idx={idx} data-id={item.id} data-group={listItem && listItem.name} data-group-idx={listItem && listItem.idx}>
+                {dataCells(item, idx)}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </>
   );
 }

@@ -8,7 +8,8 @@
     "predeploy-webpack": "npx webpack -p --config .clone/webpack.config.js",
     "predeploy-make-dist": "copyfiles --verbose --up 1 .clone/dist/**/* .clone/experiments/**/* dist",
     "predeploy": "run-s predeploy-clean predeploy-clone predeploy-webpack predeploy-make-dist",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "start": "webpack-dev-server"
   },
   "author": "Paul Grime",
   "license": "ISC",
@@ -33,7 +34,8 @@
   },
   "dependencies": {
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "sortablejs": "^1.8.4"
   },
   "repository": {
     "type": "git",
