@@ -3,6 +3,7 @@ import Sortable from "sortablejs";
 
 import isListItem from "./isListItem";
 import minMax from "../common/minMax";
+import preventDefault from "../common/preventDefault";
 
 const cssNoSelect = `
 .draghandle {
@@ -19,32 +20,58 @@ const cssNoSelect = `
 function EditableText({ initialValue, isEditing, sampleData, onEdit, onSave, onCancel }) {
   const [value, setValue] = React.useState(initialValue);
 
-  const onChangeValue = (e) => {
-    e.preventDefault();
-    setValue(e.target.value);
+  const doSave = () => {
+    console.log("doSave");
+    onSave && onSave(value);
+  };
+
+  const doCancel = () => {
+    console.log("doCancel");
+    setValue(initialValue);
+    onCancel && onCancel();
+  };
+
+  const inputRef = React.useRef();
+  React.useEffect(() => {
+    if (isEditing) {
+      inputRef.current.focus();
+    }
+  }, [isEditing]);
+
+  const onChangeValue = preventDefault((e) => setValue(e.target.value));
+  const onClickSave = preventDefault(doSave);
+  const onClickCancel = preventDefault(doCancel);
+
+  const onKeyDownValue = (...args) => {
+    const [e] = args;
+    const handlers = {
+      Enter: doSave,
+      Escape: doCancel,
+    };
+    const handler = handlers[e.key];
+    if (handler) {
+      e.preventDefault();
+      handler(...args);
+    }
   };
 
   const onClickText = (e) => {
-    console.log(e);
     if (!isEditing) {
       e.preventDefault();
       onEdit();
     }
   };
 
-  const onClickSave = (e) => {
-    e.preventDefault();
-    onSave && onSave(value);
-  };
-
-  const onClickCancel = (e) => {
-    e.preventDefault();
-    onCancel && onCancel();
-  };
-
   return (
     <>
-      <input type="text" value={value || ""} onClick={onClickText} onChange={onChangeValue} readOnly={!isEditing} />
+      <input
+        ref={inputRef}
+        type="text"
+        value={value || ""}
+        onClick={onClickText}
+        onChange={onChangeValue}
+        onKeyDown={onKeyDownValue}
+      />
       {
         isEditing && sampleData && (
           <div>
@@ -239,7 +266,7 @@ export default function DataInput({ data, sampleData, onChange }) {
           })
         }
       </>
-    )
+    );
   };
 
   return (
