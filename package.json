@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "predeploy-clean": "rimraf dist .clone",
-    "predeploy-clone": "git clone --depth 1 https://github.com/gitgrimbo/br-experiments.git .clone",
-    "predeploy-webpack": "npx webpack -p --config .clone/webpack.config.js",
-    "predeploy-make-dist": "copyfiles --verbose --up 1 .clone/dist/**/* .clone/experiments/**/* dist",
-    "predeploy": "run-s predeploy-clean predeploy-clone predeploy-webpack predeploy-make-dist",
+    "predeploy:clean": "rimraf dist .clone",
+    "predeploy:clone": "git clone --depth 1 https://github.com/gitgrimbo/br-experiments.git .clone",
+    "predeploy:webpack": "npx webpack -p --config .clone/webpack.config.js",
+    "predeploy:copy-dist": "copyfiles --verbose --up 1 .clone/dist/**/* dist",
+    "predeploy:copy-experiments": "copyfiles --verbose --up 1 .clone/experiments/**/* dist",
+    "predeploy:copy-parent-html": "node bin/move-file-cli.js .clone/experiments/index.parent.html dist/index.html",
+    "predeploy:dist": "run-s predeploy:webpack predeploy:copy-dist predeploy:copy-experiments predeploy:copy-parent-html",
+    "predeploy": "run-s predeploy:clean predeploy:clone predeploy:webpack predeploy:copy-dist predeploy:copy-experiments predeploy:copy-parent-html",
     "deploy": "gh-pages -d dist",
     "start": "webpack-dev-server"
   },
@@ -33,6 +36,7 @@
     "webpack-dev-server": "^3.3.1"
   },
   "dependencies": {
+    "move-file": "^1.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "sortablejs": "^1.8.4"
