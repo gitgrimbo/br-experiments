@@ -65,7 +65,7 @@ const svgUrls = [
   "./box-score.svg"
 ];
 
-function LoadImage({ url, onChange, onClickLoad }) {
+function ImageLoader({ url, onChange, onClickLoad }) {
   return (
     <>
       URL:
@@ -81,41 +81,99 @@ function LoadImage({ url, onChange, onClickLoad }) {
   );
 }
 
-async function loadSpreadsheet(spreadsheetId) {
-  const response = await gapi.client.sheets.spreadsheets.get({
-    spreadsheetId,
-  });
-  return response.result;
-};
-
-function App(props) {
-  const {
-    apiKey,
-    clientId,
-  } = props;
-  const inititialSpreadsheetId = props.spreadsheetId;
-  const [state, dispatch] = React.useReducer(reducer, initialState);
-  const [spreadsheet, setSpreadsheet] = React.useState(null);
-  const [spreadsheetId, setSpreadsheetId] = React.useState(inititialSpreadsheetId);
+function useSheets(apiKey, clientId) {
+  console.log("useSheets");
   const [gapiError, setGAPIError] = React.useState(null);
-  const iframeRef = React.useRef();
-
   React.useEffect(() => {
+    console.log("useSheets.useEffect");
     (async () => {
       setGAPIError(null);
-      const onSignInChanged = (...args) => console.log(...args);
+      const onSignInChanged = (...args) => console.log(...["useSheets", ...args]);
       try {
         await Sheets.initGoogleSheets({
           apiKey,
           clientId,
           onSignInChanged,
         });
+        console.log("useSheets.useEffect ok");
       } catch (err) {
+        console.error("useSheets.useEffect error");
         console.error(err);
         setGAPIError(err);
       }
     })();
   }, []);
+  return gapiError;
+}
+
+function ensureProperty(ob, property) {
+  const parts = property.split(".");
+  let curProp = "";
+  for (const p of parts) {
+    if (typeof ob[p] === "undefined") {
+      throw new Error(`${curProp} not loaded`);
+    }
+    curProp += (curProp ? "." : "") + p;
+    ob = ob[p];
+  }
+  return true;
+}
+
+async function loadSpreadsheet(spreadsheetId) {
+  ensureProperty(window, "gapi.client.sheets.spreadsheets");
+  const response = await gapi.client.sheets.spreadsheets.get({
+    spreadsheetId,
+  });
+  return response.result;
+};
+
+function DataLoader({
+  inititialSpreadsheetId,
+  onSpreadsheetLoaded,
+}) {
+  const [spreadsheetId, setSpreadsheetId] = React.useState(inititialSpreadsheetId);
+  const [spreadsheet, setSpreadsheet] = React.useState(null);
+
+  const onClickLoadData = async (e) => {
+    setSpreadsheet(null);
+    if (spreadsheetId) {
+      try {
+        const spreadsheet = await loadSpreadsheet(spreadsheetId);
+        setSpreadsheet({
+          spreadsheet,
+        });
+        onSpreadsheetLoaded && onSpreadsheetLoaded(spreadsheet);
+      } catch (err) {
+        console.error("onClickLoadData");
+        console.error(err);
+        setSpreadsheet({
+          error: err,
+        })
+      }
+    }
+  };
+
+  return (
+    <>
+      <button onClick={onClickLoadData}>Load</button>
+      {" "}
+      Sheet id: <input size="24" value={spreadsheetId} onChange={(e) => setSpreadsheetId(e.target.value)} />
+      {spreadsheet && spreadsheet.spreadsheet && <SheetsExplorer spreadsheetId={spreadsheetId} sheets={spreadsheet.spreadsheet.sheets} />}
+      {spreadsheet && spreadsheet.error && String(spreadsheet.error)}
+    </>
+  );
+}
+
+function App(props) {
+  const {
+    apiKey,
+    clientId,
+    spreadsheetId,
+  } = props;
+  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [signInError, setSignInError] = React.useState(null);
+  const iframeRef = React.useRef();
+  const gapiError = useSheets(apiKey, clientId);
 
   const onClickLoad = async (e) => {
     const resp = await fetch(state.url);
@@ -202,21 +260,6 @@ ${svgSource}
     }
   };
 
-  const onClickLoadData = async (e) => {
-    setSpreadsheet(null);
-    if (spreadsheetId) {
-      try {
-        setSpreadsheet({
-          spreadsheet: await loadSpreadsheet(spreadsheetId),
-        });
-      } catch (err) {
-        setSpreadsheet({
-          error: err,
-        })
-      }
-    }
-  };
-
   const removeDataPrefixFromId = (id) => id.replace(/^data\./, "");
 
   return (
@@ -225,17 +268,14 @@ ${svgSource}
       <h1>Image Generator</h1>
       {gapiError && JSON.stringify(gapiError)}
       <ClickableFieldset legend="1: Load image">
-        <LoadImage
+        <ImageLoader
           url={state.url}
           onChange={(e) => dispatch({ type: "setUrl", value: e.target.value })}
           onClickLoad={onClickLoad}
         />
       </ClickableFieldset>
-      <ClickableFieldset legend="2: Load data">
-        <button onClick={onClickLoadData}>Load</button>
-        {" "}
-        <input size="42" value={spreadsheetId} onChange={(e) => setSpreadsheetId(e.target.value)} />
-        {spreadsheet && spreadsheet.spreadsheet && <SheetsExplorer spreadsheetId={spreadsheetId} sheets={spreadsheet.spreadsheet.sheets} />}
+      <ClickableFieldset legend="2: Load data (optional)">
+        <DataLoader inititialSpreadsheetId={spreadsheetId} />
       </ClickableFieldset>
       <ClickableFieldset legend="3: Set data">
         {state.data && <DataInput data={state.data} sampleData={state.sampleData} onChange={onChangeData} idFormatter={removeDataPrefixFromId} />}
