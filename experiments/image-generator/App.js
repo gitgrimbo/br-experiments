@@ -3,10 +3,13 @@ import React from "react";
 import AsyncButton from "../common/AsyncButton";
 import ClickableFieldset from "../common/ClickableFieldset";
 import ErrorBox from "../common/ErrorBox";
+import Sheets from "../google/sheets";
+import SheetsExplorer from "../sheets/SheetsExplorer";
 import DataInput from "./DataInput";
 import createPNG from "./createPNG";
 import SVG from "./svg";
 import { moveData, setDataValue } from "./array-reducer";
+import { GoogleSignInButton } from "../sheets/GoogleSignInButton";
 
 function updateSVG(svg, data) {
   data.forEach(({ id, value, visible }, idx) => {
@@ -78,9 +81,41 @@ function LoadImage({ url, onChange, onClickLoad }) {
   );
 }
 
-function App({ }) {
+async function loadSpreadsheet(spreadsheetId) {
+  const response = await gapi.client.sheets.spreadsheets.get({
+    spreadsheetId,
+  });
+  return response.result;
+};
+
+function App(props) {
+  const {
+    apiKey,
+    clientId,
+  } = props;
+  const inititialSpreadsheetId = props.spreadsheetId;
   const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [spreadsheet, setSpreadsheet] = React.useState(null);
+  const [spreadsheetId, setSpreadsheetId] = React.useState(inititialSpreadsheetId);
+  const [gapiError, setGAPIError] = React.useState(null);
   const iframeRef = React.useRef();
+
+  React.useEffect(() => {
+    (async () => {
+      setGAPIError(null);
+      const onSignInChanged = (...args) => console.log(...args);
+      try {
+        await Sheets.initGoogleSheets({
+          apiKey,
+          clientId,
+          onSignInChanged,
+        });
+      } catch (err) {
+        console.error(err);
+        setGAPIError(err);
+      }
+    })();
+  }, []);
 
   const onClickLoad = async (e) => {
     const resp = await fetch(state.url);
@@ -104,26 +139,24 @@ function App({ }) {
 
   const updateIFrameWithSVGSource = (iframe, svgSource) => {
     const doc = iframe.contentDocument;
-    doc.firstElementChild.innerHTML = `<style>html, body { padding: 0; margin: 0; }</style>\n` + svgSource;
+    console.log(doc.firstElementChild.tagName);
+    doc.firstElementChild.innerHTML = `
+<style>html, body {
+  padding: 0;
+  margin: 0;
+}</style>
+<body>
+${svgSource}
+</body>
+`;
     const svg = doc.querySelector("svg");
     const { width, height, dataIds, sampleData } = SVG.parseSVG(svg);
     iframe.width = width;
     iframe.height = height;
 
-    const svgElementValue = (el) => {
-      switch (el.tagName.toLowerCase()) {
-        case "image": {
-          const href = el.getAttribute("xlink:href");
-          const isDataUrl = href.startsWith("data:image/");
-          return isDataUrl ? null : href;
-        }
-        default: return el.textContent;
-      }
-    };
-
     const data = dataIds.map((id) => {
       const el = svg.getElementById(id);
-      const value = svgElementValue(el);
+      const value = SVG.getElementValue(el);
       return {
         id,
         value,
@@ -169,9 +202,28 @@ function App({ }) {
     }
   };
 
+  const onClickLoadData = async (e) => {
+    setSpreadsheet(null);
+    if (spreadsheetId) {
+      try {
+        setSpreadsheet({
+          spreadsheet: await loadSpreadsheet(spreadsheetId),
+        });
+      } catch (err) {
+        setSpreadsheet({
+          error: err,
+        })
+      }
+    }
+  };
+
+  const removeDataPrefixFromId = (id) => id.replace(/^data\./, "");
+
   return (
     <React.Fragment>
+      If you cannot load images/spreadsheets, try <GoogleSignInButton /> to Google.
       <h1>Image Generator</h1>
+      {gapiError && JSON.stringify(gapiError)}
       <ClickableFieldset legend="1: Load image">
         <LoadImage
           url={state.url}
@@ -179,8 +231,14 @@ function App({ }) {
           onClickLoad={onClickLoad}
         />
       </ClickableFieldset>
-      <ClickableFieldset legend="2: Set data">
-        {state.data && <DataInput data={state.data} sampleData={state.sampleData} onChange={onChangeData} />}
+      <ClickableFieldset legend="2: Load data">
+        <button onClick={onClickLoadData}>Load</button>
+        {" "}
+        <input size="42" value={spreadsheetId} onChange={(e) => setSpreadsheetId(e.target.value)} />
+        {spreadsheet && spreadsheet.spreadsheet && <SheetsExplorer spreadsheetId={spreadsheetId} sheets={spreadsheet.spreadsheet.sheets} />}
+      </ClickableFieldset>
+      <ClickableFieldset legend="3: Set data">
+        {state.data && <DataInput data={state.data} sampleData={state.sampleData} onChange={onChangeData} idFormatter={removeDataPrefixFromId} />}
         <br />
         <div>
           <AsyncButton onClick={onClickUpdateImage}>Update image</AsyncButton>
@@ -198,7 +256,9 @@ function App({ }) {
       {state.svgSource && (
         <div>
           <h2>Source Image</h2>
-          <iframe ref={iframeRef}></iframe>
+          <div style={{ width: "100%", overflow: "auto" }}>
+            <iframe ref={iframeRef}></iframe>
+          </div>
         </div>
       )}
       {state.pngURL && (

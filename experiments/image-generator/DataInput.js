@@ -17,7 +17,14 @@ const cssNoSelect = `
   cursor: -webkit-grabbing;
 }`;
 
-function EditableText({ initialValue, isEditing, sampleData, onEdit, onSave, onCancel }) {
+function EditableText({
+  initialValue,
+  isEditing,
+  sampleData,
+  onEdit,
+  onSave,
+  onCancel,
+}) {
   const [value, setValue] = React.useState(initialValue);
 
   const doSave = () => {
@@ -71,6 +78,7 @@ function EditableText({ initialValue, isEditing, sampleData, onEdit, onSave, onC
         onClick={onClickText}
         onChange={onChangeValue}
         onKeyDown={onKeyDownValue}
+        size="16"
       />
       {
         isEditing && sampleData && (
@@ -126,7 +134,12 @@ function useLastMoved(len, initialValue) {
  * @param {Function} props.onChange
  *   Callback for any data changes.
  */
-export default function DataInput({ data, sampleData, onChange }) {
+export default function DataInput({
+  data,
+  sampleData,
+  onChange,
+  idFormatter,
+}) {
   const [editing, setEditing] = React.useState();
   const [lastMoved, updateLastMoved] = useLastMoved(data.length, Date.now());
 
@@ -234,7 +247,7 @@ export default function DataInput({ data, sampleData, onChange }) {
             >&#x21c5;</td>
             : <td></td>
         }
-        <td>{id}</td>
+        <td>{idFormatter ? idFormatter(id) : id}</td>
         {
           Object.keys(fields).map((name, i) => {
             const value = fields[name];

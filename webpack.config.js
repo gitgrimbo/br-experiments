@@ -42,7 +42,10 @@ module.exports = {
     // use all hosts so that local DNS works with webpack dev server
     host: "0.0.0.0",
     port: 443,
-    allowedHosts: ["local.sheffieldbladerunners.co.uk"],
+    allowedHosts: [
+      "local.sheffieldbladerunners.co.uk",
+      "local.paulgri.me",
+    ],
     publicPath: "http://localhost:3000/dist/",
     hotOnly: true,
     https: true,

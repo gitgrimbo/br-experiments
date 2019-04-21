@@ -33,6 +33,17 @@ function parseSVG(svg) {
   };
 }
 
+function getElementValue(el) {
+  switch (el.tagName.toLowerCase()) {
+    case "image": {
+      const href = el.getAttribute("xlink:href");
+      const isDataUrl = href.startsWith("data:image/");
+      return isDataUrl ? null : href;
+    }
+    default: return el.textContent;
+  }
+};
+
 function setValue(doc, id, value) {
   const el = doc.getElementById(id);
   const tagName = el.tagName.toLowerCase();
@@ -58,6 +69,7 @@ function setVisible(doc, id, value) {
 export default {
   parseSampleData,
   parseSVG,
+  getElementValue,
   setText,
   setValue,
   setVisible,
