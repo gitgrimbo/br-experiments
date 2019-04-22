@@ -157,6 +157,32 @@ function DataLoader({
   );
 }
 
+function LoadImageHelp() {
+  return (
+    <>
+      This section provides the ability to load an SVG image from a pre-defined source (this website), from any public URL, or from Google Photos.
+    </>
+  );
+}
+
+function LoadDataHelp() {
+  return (
+    <>
+      <p>This section provides the ability to load data from external sources, such as Google Sheets.</p>
+      <p>The loaded data can then be used to set values within the SVG image, see below.</p>
+    </>
+  );
+}
+
+function SetDataHelp() {
+  return (
+    <>
+      <p>This section provides the ability to set image data.</p>
+      <p>The data can be input manually, or chosen from compatible data loaded above.</p>
+    </>
+  );
+}
+
 function App(props) {
   const {
     apiKey,
@@ -253,17 +279,17 @@ ${svgSource}
       If you cannot load images/spreadsheets, try <GoogleSignInButton /> to Google.
       <h1>Image Generator</h1>
       {gapiError && JSON.stringify(gapiError)}
-      <ClickableFieldset legend="1: Load image">
+      <ClickableFieldset legend="1: Load image" help={<LoadImageHelp />}>
         <ImageLoader
           initialUrl={state.url}
           urls={svgUrls}
           onChangeImgSource={onChangeSVGSource}
         />
       </ClickableFieldset>
-      <ClickableFieldset legend="2: Load data (optional)">
+      <ClickableFieldset legend="2: Load data" extraLegend={<span> (optional)</span>} help={<LoadDataHelp />}>
         <DataLoader inititialSpreadsheetId={spreadsheetId} onSpreadsheetLoaded={() => console.log("TODO")} />
       </ClickableFieldset>
-      <ClickableFieldset legend="3: Set data">
+      <ClickableFieldset legend="3: Set data" help={<SetDataHelp />}>
         {state.data && <DataInput data={state.data} sampleData={state.sampleData} onChange={onChangeData} idFormatter={removeDataPrefixFromId} />}
         <br />
         <div>
