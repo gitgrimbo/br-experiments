@@ -10,7 +10,7 @@ function Table({ values }) {
 table.${className} {
   padding: 0;
   margin: 0;
-  border-collapse: collapsed;
+  border-collapse: collapse;
   empty-cells: show;
 }
 table.${className} tr, table.${className} td {
