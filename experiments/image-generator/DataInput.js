@@ -267,7 +267,7 @@ export default function DataInput({
                     : <EditableText
                       key={isEditing + idx}
                       initialValue={value}
-                      sampleData={sampleDataForFields[idx]}
+                      sampleData={sampleDataForFields && sampleDataForFields[idx]}
                       isEditing={isEditing}
                       onEdit={() => setEditing(idx)}
                       onSave={onSave(idx, name)}
