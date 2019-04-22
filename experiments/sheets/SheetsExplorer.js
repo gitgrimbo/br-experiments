@@ -36,10 +36,13 @@ table.${className} tr, table.${className} td {
 
 export default function SheetsExplorer({
   spreadsheetId,
+  title,
   sheets,
 }) {
   console.log("SheetsExplorer", spreadsheetId, sheets);
+
   const [values, setValues] = React.useState(null);
+
   const onClickSheetTitle = async (e) => {
     e.preventDefault();
     const title = e.target.getAttribute("data-title");
@@ -52,8 +55,10 @@ export default function SheetsExplorer({
     console.log(response);
     setValues(response.result.values);
   };
+
   return (
     <>
+      {title && <h3>{title}</h3>}
       <div>{
         sheets.map((sheet, i) => (
           <React.Fragment key={i}>

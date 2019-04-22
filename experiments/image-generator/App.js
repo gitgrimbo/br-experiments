@@ -119,22 +119,20 @@ function DataLoader({
 }) {
   const [spreadsheetId, setSpreadsheetId] = React.useState(inititialSpreadsheetId);
   const [spreadsheet, setSpreadsheet] = React.useState(null);
+  const [loadError, setLoadError] = React.useState(null);
 
   const onClickLoadData = async (e) => {
     setSpreadsheet(null);
+    setLoadError(null);
     if (spreadsheetId) {
       try {
         const spreadsheet = await loadSpreadsheet(spreadsheetId);
-        setSpreadsheet({
-          spreadsheet,
-        });
+        setSpreadsheet(spreadsheet);
         onSpreadsheetLoaded && onSpreadsheetLoaded(spreadsheet);
       } catch (err) {
         console.error("onClickLoadData");
         console.error(err);
-        setSpreadsheet({
-          error: err,
-        })
+        setLoadError(err);
       }
     }
   };
@@ -144,8 +142,17 @@ function DataLoader({
       <button onClick={onClickLoadData}>Load</button>
       {" "}
       Sheet id: <input size="24" value={spreadsheetId} onChange={(e) => setSpreadsheetId(e.target.value)} />
-      {spreadsheet && spreadsheet.spreadsheet && <SheetsExplorer spreadsheetId={spreadsheetId} sheets={spreadsheet.spreadsheet.sheets} />}
-      {spreadsheet && spreadsheet.error && String(spreadsheet.error)}
+      {spreadsheet && (
+        <ClickableFieldset legend={spreadsheet.properties.title}>
+          <SheetsExplorer
+            spreadsheetId={spreadsheetId}
+            sheets={spreadsheet.sheets}
+          />
+        </ClickableFieldset>
+      )}
+      {loadError && (
+        String(loadError)
+      )}
     </>
   );
 }
@@ -254,7 +261,7 @@ ${svgSource}
         />
       </ClickableFieldset>
       <ClickableFieldset legend="2: Load data (optional)">
-        <DataLoader inititialSpreadsheetId={spreadsheetId} />
+        <DataLoader inititialSpreadsheetId={spreadsheetId} onSpreadsheetLoaded={() => console.log("TODO")} />
       </ClickableFieldset>
       <ClickableFieldset legend="3: Set data">
         {state.data && <DataInput data={state.data} sampleData={state.sampleData} onChange={onChangeData} idFormatter={removeDataPrefixFromId} />}
