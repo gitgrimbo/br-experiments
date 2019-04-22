@@ -10,6 +10,7 @@ import createPNG from "./createPNG";
 import SVG from "./svg";
 import { moveData, setDataValue } from "./array-reducer";
 import { GoogleSignInButton } from "../sheets/GoogleSignInButton";
+import ImageLoader from "./ImageLoader";
 
 function updateSVG(svg, data) {
   data.forEach(({ id, value, visible }, idx) => {
@@ -62,24 +63,9 @@ const initialState = {
 
 const svgUrls = [
   "./starting-lineup.svg",
-  "./box-score.svg"
+  "./box-score.svg",
+  "./test-fixture.svg",
 ];
-
-function ImageLoader({ url, onChange, onClickLoad }) {
-  return (
-    <>
-      URL:
-      {" "}
-      <select onChange={onChange}>
-        {svgUrls.map((url, i) => <option key={i} value={url}>{url}</option>)}
-      </select>
-      {" "}
-      <input type="text" value={url} onChange={onChange} />
-      {" "}
-      <AsyncButton onClick={onClickLoad}>Load</AsyncButton>
-    </>
-  );
-}
 
 function useSheets(apiKey, clientId) {
   console.log("useSheets");
@@ -175,14 +161,7 @@ function App(props) {
   const iframeRef = React.useRef();
   const gapiError = useSheets(apiKey, clientId);
 
-  const onClickLoad = async (e) => {
-    const resp = await fetch(state.url);
-    const text = await resp.text();
-    const i = text.indexOf("<svg");
-    if (i >= 0) {
-      dispatch({ type: "setSVGSource", value: text.substring(i) });
-    }
-  };
+  const onChangeSVGSource = (svgSource) => dispatch({ type: "setSVGSource", value: svgSource });
 
   const onChangeData = (e) => {
     if (e.type === "item") {
@@ -269,9 +248,9 @@ ${svgSource}
       {gapiError && JSON.stringify(gapiError)}
       <ClickableFieldset legend="1: Load image">
         <ImageLoader
-          url={state.url}
-          onChange={(e) => dispatch({ type: "setUrl", value: e.target.value })}
-          onClickLoad={onClickLoad}
+          initialUrl={state.url}
+          urls={svgUrls}
+          onChangeImgSource={onChangeSVGSource}
         />
       </ClickableFieldset>
       <ClickableFieldset legend="2: Load data (optional)">
