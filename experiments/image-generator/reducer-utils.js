@@ -1,7 +1,7 @@
 import minMax from "../common/minMax";
 import isListItem from "./isListItem";
 
-export function moveData(data, oldIndex, newIndex) {
+export function arrayMoveValue(data, oldIndex, newIndex) {
   const replaceId = (item, newId) => {
     const { id, ...rest } = item;
     return {
@@ -49,7 +49,7 @@ export function moveData(data, oldIndex, newIndex) {
   ];
 }
 
-export function setDataValue(data, dataIdx, name, value) {
+export function arraySetValue(data, dataIdx, name, value) {
   const data2 = data.slice();
   data2[dataIdx] = {
     ...data2[dataIdx],
@@ -57,3 +57,10 @@ export function setDataValue(data, dataIdx, name, value) {
   };
   return data2;
 }
+
+export const setValue = (state) => (name, value) => {
+  return {
+    ...state,
+    [name]: value,
+  };
+};

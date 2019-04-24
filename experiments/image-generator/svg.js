@@ -3,19 +3,11 @@ function parseSampleData(svg) {
   if (!el) {
     return null;
   }
-  const text = el.textContent;
-  let currentCategory = null;
-  return text.split(/[\n\r]/)
-    .filter((line) => !!line)
-    .reduce((data, line, i) => {
-      if (line.startsWith("#")) {
-        currentCategory = line.substring(1);
-        data[currentCategory] = data[currentCategory] || [];
-      } else {
-        data[currentCategory].push(line);
-      }
-      return data;
-    }, {});
+  try {
+    return JSON.parse(el.textContent);
+  } catch (err) {
+    return null;
+  }
 }
 
 function parseSVG(svg) {

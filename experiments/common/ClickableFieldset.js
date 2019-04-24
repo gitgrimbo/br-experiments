@@ -3,6 +3,7 @@ import React from "react";
 export default function ClickableFieldset({
   legend,
   extraLegend,
+  extraLegendSpace = true,
   children,
   help,
 }) {
@@ -16,6 +17,7 @@ export default function ClickableFieldset({
 
   const onClickHelp = (e) => {
     e.preventDefault();
+    setVisible(true);
     setHelpMode(!helpMode);
   };
 
@@ -23,7 +25,9 @@ export default function ClickableFieldset({
     <fieldset>
       <legend>
         <a href="#" onClick={onClick}>{legend}</a>
-        {extraLegend}
+        {extraLegend && (
+          extraLegendSpace ? <>{" "}{extraLegend}</> : extraLegend
+        )}
         {help && (
           <>
             {" "}

@@ -2,48 +2,151 @@ import React from "react";
 
 import AsyncButton from "../common/AsyncButton";
 
-export default function ImageLoader({
-  initialUrl,
+import { setValue } from "./reducer-utils";
+
+// All URL-selecting components must have a url property in their state.
+
+export function ListSource({
+  initialState,
   urls,
+  onUrlSelected,
+  onChangeState,
+}) {
+  const url = initialState && initialState.url;
+
+  console.log("ListSource", url);
+
+  const setUrl = (url) => {
+    const state2 = {
+      ...initialState,
+      url,
+    };
+    onChangeState && onChangeState(state2);
+    onUrlSelected && onUrlSelected(url);
+  };
+
+  React.useEffect(() => {
+    if (!url) {
+      setUrl(urls[0]);
+    }
+  }, [url]);
+
+  const onChange = (e) => {
+    e.preventDefault();
+    const url = e.target.value;
+    setUrl(url);
+  };
+
+  return (
+    <div>
+      Local URL:{" "}
+      <select value={url || ""} onChange={onChange}>
+        {
+          urls && (
+            urls.map((url, i) => <option key={i} value={url}>{url}</option>)
+          )
+        }
+      </select>
+    </div>
+  );
+}
+
+export function GooglePhotosSource() {
+  return (
+    <div>
+      Google Photos URL:{" "}
+      <button>TODO</button>
+    </div>
+  );
+}
+
+export function TextBoxSource({
+  initialState,
+  onUrlSelected,
+  onChangeState,
+}) {
+  const url = initialState && initialState.url;
+
+  console.log("TextBoxSource", url);
+
+  const onChange = (e) => {
+    e.preventDefault();
+    const url = e.target.value;
+    const state2 = {
+      ...initialState,
+      url,
+    };
+    onChangeState && onChangeState(state2);
+    onUrlSelected && onUrlSelected(url);
+  };
+
+  return (
+    <div style={{ display: "flex" }}>
+      URL:{"\u00A0"}
+      <input type="text" value={url || ""} onChange={onChange} style={{ flex: "1" }} />
+    </div>
+  );
+}
+
+export default function ImageLoader({
+  sources,
+  state,
+  setState,
   onChangeImgSource,
 }) {
-  const [url, setUrl] = React.useState(initialUrl);
-  const [imgSource, setImgSource] = React.useState(null);
+  const { mode, url } = state || {};
+
+  const setMode = (mode) => setState((state) => ({
+    ...state,
+    mode,
+  }));
+
+  if (!mode) {
+    setMode(Object.keys(sources)[0]);
+    return "No loader source selected";
+  }
 
   const onClickLoad = async (e) => {
+    e.preventDefault();
     const resp = await fetch(url);
     const text = await resp.text();
     const i = text.indexOf("<svg");
     if (i >= 0) {
       const imgSource = text.substring(i);
-      setImgSource(imgSource);
       onChangeImgSource && onChangeImgSource(imgSource);
     }
   };
 
-  const onChange = (e) => {
+  const _onChangeMode = (e) => {
     e.preventDefault();
-    setUrl(e.target.value);
-    onChangeImgSource && onChangeImgSource();
+    setMode(e.target.value);
   };
+
+  let component;
+  const source = sources[mode];
+  if (source) {
+    component = source.component();
+  }
+  console.log(mode, source, component);
 
   return (
     <>
       <div>
-        Any URL:{" "}
-        <input type="text" value={url} onChange={onChange} />
+        Image source: <select onChange={_onChangeMode}>{
+          Object.entries(sources)
+            .map(
+              ([key, { title }]) => <option key={key} value={key}>{title()}</option>
+            )
+        }</select>
       </div>
-      <div>
-        Local URL:{" "}
-        <select onChange={onChange}>
-          {urls.map((url, i) => <option key={i} value={url}>{url}</option>)}
-        </select>
+      <br />
+      {component}
+      <div style={{ marginTop: "1em" }}>
+        Current URL: {url}
+        <br />
+        <br />
+        <AsyncButton onClick={onClickLoad}>Load current URL</AsyncButton>
       </div>
-      <div>
-        Google Photos URL:{" "}
-        <button>TODO</button>
-      </div>
-      <AsyncButton onClick={onClickLoad}>Load</AsyncButton>
     </>
   );
 }

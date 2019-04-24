@@ -140,6 +140,7 @@ export default function DataInput({
   onChange,
   idFormatter,
 }) {
+  console.log("DataInput.render", JSON.stringify(data, 2, null));
   const [editing, setEditing] = React.useState();
   const [lastMoved, updateLastMoved] = useLastMoved(data.length, Date.now());
 
@@ -265,7 +266,6 @@ export default function DataInput({
                       disabled={!isEditing}
                     />
                     : <EditableText
-                      key={isEditing + idx}
                       initialValue={value}
                       sampleData={sampleDataForFields && sampleDataForFields[idx]}
                       isEditing={isEditing}

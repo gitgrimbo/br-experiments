@@ -13,7 +13,9 @@ export default function AsyncButton({
         e.preventDefault();
         try {
           setProcessing(true);
-          await onClick(e);
+          if (onClick) {
+            await onClick(e);
+          }
         } finally {
           setProcessing(false);
         }
