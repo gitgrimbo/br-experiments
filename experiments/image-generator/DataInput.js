@@ -1,9 +1,17 @@
 import React from "react";
+import Modal from "react-modal";
 import Sortable from "sortablejs";
 
-import isListItem from "./isListItem";
+import {
+  CROSS_MARK,
+  FILE_CABINET,
+  HEAVY_CHECK_MARK,
+} from "../common/emoji";
 import minMax from "../common/minMax";
 import preventDefault from "../common/preventDefault";
+
+import isListItem from "./isListItem";
+import SheetsExplorer from "../sheets/SheetsExplorer";
 
 const cssNoSelect = `
 .draghandle {
@@ -26,10 +34,12 @@ function EditableText({
   onCancel,
 }) {
   const [value, setValue] = React.useState(initialValue);
+  const [sheet, setSheet] = React.useState(null);
+  const [showModal, setShowModal] = React.useState(false);
 
-  const doSave = () => {
+  const doSave = (val) => {
     console.log("doSave");
-    onSave && onSave(value);
+    onSave && onSave(typeof val !== "undefined" ? val : value);
   };
 
   const doCancel = () => {
@@ -65,8 +75,12 @@ function EditableText({
   const onClickText = (e) => {
     if (!isEditing) {
       e.preventDefault();
-      onEdit();
+      onEdit && onEdit();
     }
+  };
+
+  const emojiButtonStyle = {
+    padding: "0.5em",
   };
 
   return (
@@ -81,23 +95,50 @@ function EditableText({
         size="16"
       />
       {
-        isEditing && sampleData && (
-          <div>
-            <select onChange={onChangeValue}>
-              {sampleData.map((item, i) => <option key={i} value={item}>{item}</option>)}
-            </select>
-          </div>
-        )
-      }
-      {
         isEditing && (
-          <div>
-            <button onClick={onClickSave}>Save</button>
+          <div style={{ marginTop: "1em" }}>
+            <button style={emojiButtonStyle} onClick={onClickSave}>{HEAVY_CHECK_MARK}</button>
             {" "}
-            <button onClick={onClickCancel}>Cancel</button>
+            <button style={emojiButtonStyle} onClick={onClickCancel}>{CROSS_MARK}</button>
+            {" "}
+            <button style={emojiButtonStyle} onClick={() => {
+              if (!sheet) {
+                setSheet(sampleData[0]);
+              }
+              setShowModal(true);
+            }}>{FILE_CABINET}</button>
           </div>
         )
       }
+      <Modal
+        isOpen={showModal}
+        onRequestClose={() => setShowModal(false)}
+      >
+        <h2>Pick Data</h2>
+        <select onChange={(e) => {
+          const i = Number(e.target.value);
+          setSheet(sampleData[i]);
+        }}>
+          {
+            isEditing && sampleData && sampleData.map(({ title, sheets }, i) => (
+              <option key={i} value={i}>{title}</option>
+            ))
+          }
+        </select>
+        {sheet && <SheetsExplorer
+          sheets={sheet.sheets}
+          title={sheet.title}
+          onClickCell={(value) => {
+            setShowModal(false);
+            setValue(value);
+            doSave(value);
+          }}
+        />}
+        <div>
+          <br />
+          <button onClick={() => setShowModal(false)}>Close</button>
+        </div>
+      </Modal>
     </>
   );
 }
@@ -200,30 +241,6 @@ export default function DataInput({
     setEditing(null);
   };
 
-  const makeSampleDataForFields = () => {
-    if (!sampleData) {
-      return null;
-    }
-    if (!data) {
-      return null;
-    }
-    return data.map(({ id }) => {
-      const found = Object.keys(sampleData).find((sampleDataKey) => {
-        if (id === sampleDataKey) {
-          return true;
-        }
-        const listItem = isListItem(id);
-        if (listItem && listItem.name === sampleDataKey) {
-          return true;
-        }
-        return false;
-      });
-      return found ? sampleData[found] : null;
-    });
-  };
-
-  const sampleDataForFields = makeSampleDataForFields();
-
   const headingCells = () => {
     if (!data || !data[0]) {
       return null;
@@ -267,7 +284,7 @@ export default function DataInput({
                     />
                     : <EditableText
                       initialValue={value}
-                      sampleData={sampleDataForFields && sampleDataForFields[idx]}
+                      sampleData={sampleData}
                       isEditing={isEditing}
                       onEdit={() => setEditing(idx)}
                       onSave={onSave(idx, name)}

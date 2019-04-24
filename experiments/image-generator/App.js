@@ -105,6 +105,7 @@ function App(props) {
   const iframeRef = React.useRef();
 
   const onChangeData = (e) => {
+    console.log("onChangeData", e);
     if (e.type === "item") {
       const { idx, name, value } = e;
       return dispatch({ type: "setDataValue", value: { dataIdx: idx, name, value } });
@@ -168,7 +169,7 @@ function App(props) {
     }),
   ];
 
-  let dataForDataFieldset = [];
+  let combinedSampleData = [];
   if (state.embeddedSampleData) {
     const spreadsheet = {
       title: "Embedded Sample Data",
@@ -182,10 +183,10 @@ function App(props) {
         };
       }),
     };
-    dataForDataFieldset.push(spreadsheet);
+    combinedSampleData.push(spreadsheet);
   }
   if (state.sampleData) {
-    dataForDataFieldset = dataForDataFieldset.concat(state.sampleData);
+    combinedSampleData = combinedSampleData.concat(state.sampleData);
   }
 
   return (
@@ -201,7 +202,7 @@ function App(props) {
       <br />
       <DataFieldset
         dataSources={dataSources}
-        data={dataForDataFieldset}
+        data={combinedSampleData}
         setState={makePropReducer("sampleData")}
       />
       <br />
@@ -211,7 +212,7 @@ function App(props) {
             <DataInput
               key={state.dataTimestamp}
               data={state.data}
-              sampleData={state.embeddedSampleData}
+              sampleData={combinedSampleData}
               onChange={onChangeData}
               idFormatter={removeDataPrefixFromId}
             />
