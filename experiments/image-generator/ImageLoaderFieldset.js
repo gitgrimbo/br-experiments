@@ -41,15 +41,6 @@ export default function ImageLoaderFieldset({
   };
 
   const imageLoaderSources = {
-    anyUrl: {
-      title: () => "Any Url",
-      component() {
-        return <TextBoxSource initialState={state && state.any}
-          onChangeState={setComponentState("any")}
-          onUrlSelected={onLoadImageUrlSelected}
-        />;
-      },
-    },
     urlList: {
       title: () => "Local Url",
       component() {
@@ -67,6 +58,15 @@ export default function ImageLoaderFieldset({
         return <GooglePhotosSource
           initialState={state && state.googlePhotos}
           onChangeState={setComponentState("googlePhotos")}
+          onUrlSelected={onLoadImageUrlSelected}
+        />;
+      },
+    },
+    anyUrl: {
+      title: () => "Any Url",
+      component() {
+        return <TextBoxSource initialState={state && state.any}
+          onChangeState={setComponentState("any")}
           onUrlSelected={onLoadImageUrlSelected}
         />;
       },

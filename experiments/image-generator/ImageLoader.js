@@ -142,10 +142,7 @@ export default function ImageLoader({
       <br />
       {component}
       <div style={{ marginTop: "1em" }}>
-        Current URL: {url}
-        <br />
-        <br />
-        <AsyncButton onClick={onClickLoad}>Load current URL</AsyncButton>
+        <AsyncButton onClick={onClickLoad}>Load</AsyncButton>
       </div>
     </>
   );

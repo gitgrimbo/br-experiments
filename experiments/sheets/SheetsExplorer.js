@@ -4,6 +4,7 @@ import uuid from "../common/uuid";
 
 function Table({
   values,
+  cellPadding = "0",
   onClickCell,
 }) {
   const onClick = (e) => {
@@ -25,6 +26,7 @@ table.${className} {
 }
 table.${className} tr, table.${className} td {
   border: 1px solid lightgrey;
+  padding: ${cellPadding};
 }
       `}</style>
       <table className={className} cellSpacing="0" cellPadding="0" onClick={onClick}>
@@ -47,6 +49,7 @@ table.${className} tr, table.${className} td {
 export default function SheetsExplorer({
   title,
   sheets,
+  cellPadding,
   onClickCell,
 }) {
   console.log("SheetsExplorer", title, sheets);
@@ -71,12 +74,15 @@ export default function SheetsExplorer({
           </React.Fragment>
         ))
       }</div>
-      <div>{values && (
-        <Table
-          values={values}
-          onClickCell={onClickCell}
-        />
-      )}</div>
+      <div style={{ marginTop: "1em" }}>
+        {values && (
+          <Table
+            values={values}
+            cellPadding={cellPadding}
+            onClickCell={onClickCell}
+          />
+        )}
+      </div>
     </>
   );
 }

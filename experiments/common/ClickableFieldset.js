@@ -21,8 +21,13 @@ export default function ClickableFieldset({
     setHelpMode(!helpMode);
   };
 
+  const fieldsetStyle = {
+    border: "solid 1px lightgrey",
+    padding: "0.4em",
+  };
+
   return (
-    <fieldset>
+    <fieldset style={fieldsetStyle}>
       <legend>
         <a href="#" onClick={onClick}>{legend}</a>
         {extraLegend && (

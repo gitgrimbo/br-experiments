@@ -92,7 +92,7 @@ function EditableText({
         onClick={onClickText}
         onChange={onChangeValue}
         onKeyDown={onKeyDownValue}
-        size="16"
+        size="15"
       />
       {
         isEditing && (
@@ -125,15 +125,19 @@ function EditableText({
             ))
           }
         </select>
-        {sheet && <SheetsExplorer
-          sheets={sheet.sheets}
-          title={sheet.title}
-          onClickCell={(value) => {
-            setShowModal(false);
-            setValue(value);
-            doSave(value);
-          }}
-        />}
+        {sheet && (
+          <div style={{ marginTop: "1em" }}>
+            <SheetsExplorer
+              sheets={sheet.sheets}
+              cellPadding="0.5em"
+              onClickCell={(value) => {
+                setShowModal(false);
+                setValue(value);
+                doSave(value);
+              }}
+            />
+          </div>
+        )}
         <div>
           <br />
           <button onClick={() => setShowModal(false)}>Close</button>
@@ -180,6 +184,7 @@ export default function DataInput({
   sampleData,
   onChange,
   idFormatter,
+  headingFormatter,
 }) {
   console.log("DataInput.render", JSON.stringify(data, 2, null));
   const [editing, setEditing] = React.useState();
@@ -247,7 +252,13 @@ export default function DataInput({
     }
     const keysWithoutId = Object.keys(data[0]).filter((key) => key !== "id");
     // first cell is for dragging row
-    return ["", "id"].concat(keysWithoutId).map((name, i) => <th key={i}>{name}</th>);
+    return ["", "id"].concat(keysWithoutId)
+      .map((name, i) => (
+        <th key={i}>
+          {headingFormatter ? headingFormatter(name, i) : name}
+        </th>
+      )
+      );
   };
 
   const dataCells = (item, idx) => {
@@ -312,7 +323,13 @@ export default function DataInput({
           {data && data.map((item, idx) => {
             const listItem = isListItem(item.id);
             return (
-              <tr key={idx + "." + lastMoved[idx]} data-idx={idx} data-id={item.id} data-group={listItem && listItem.name} data-group-idx={listItem && listItem.idx}>
+              <tr
+                key={idx + "." + lastMoved[idx]}
+                data-idx={idx}
+                data-id={item.id}
+                data-group={listItem && listItem.name}
+                data-group-idx={listItem && listItem.idx}
+              >
                 {dataCells(item, idx)}
               </tr>
             );

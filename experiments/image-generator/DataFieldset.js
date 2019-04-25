@@ -22,7 +22,9 @@ export default function DataFieldset({
         {data && data.map(({ sheets, title }) => (
           <div style={{ marginTop: "1em" }}>
             <ClickableFieldset legend={title}>
-              <SheetsExplorer sheets={sheets} />
+              <SheetsExplorer
+                sheets={sheets}
+              />
             </ClickableFieldset>
           </div>
         ))}

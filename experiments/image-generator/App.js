@@ -172,7 +172,7 @@ function App(props) {
   let combinedSampleData = [];
   if (state.embeddedSampleData) {
     const spreadsheet = {
-      title: "Embedded Sample Data",
+      title: "Image Embedded Data",
       sheets: Object.keys(state.embeddedSampleData).map((key) => {
         const values = state.embeddedSampleData[key];
         return {
@@ -215,6 +215,7 @@ function App(props) {
               sampleData={combinedSampleData}
               onChange={onChangeData}
               idFormatter={removeDataPrefixFromId}
+              headingFormatter={(name) => (name === "visible") ? "show" : name}
             />
           )
         }
