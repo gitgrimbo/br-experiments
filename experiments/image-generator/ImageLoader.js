@@ -2,8 +2,6 @@ import React from "react";
 
 import AsyncButton from "../common/AsyncButton";
 
-import { setValue } from "./reducer-utils";
-
 // All URL-selecting components must have a url property in their state.
 
 export function ListSource({
@@ -108,7 +106,12 @@ export default function ImageLoader({
 
   const onClickLoad = async (e) => {
     e.preventDefault();
-    const resp = await fetch(url);
+    // https://fetch.spec.whatwg.org/#dom-requestinit-cache
+    const req = new Request(url, {
+      cache: "reload",
+    });
+    console.log(req);
+    const resp = await fetch(req);
     const text = await resp.text();
     const i = text.indexOf("<svg");
     if (i >= 0) {

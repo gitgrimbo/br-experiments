@@ -1,21 +1,24 @@
 import React from "react";
+import AppBar from "@material-ui/core/AppBar";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
+import Toolbar from "@material-ui/core/Toolbar";
 
 import AsyncButton from "../common/AsyncButton";
-import ClickableFieldset from "../common/ClickableFieldset";
 import ErrorBox from "../common/ErrorBox";
-import { GoogleSignInButton } from "../sheets/GoogleSignInButton";
 
 import createPNG from "./createPNG";
-import DataInput from "./DataInput";
 import { makeSource as makeGoogleSheetsDataSource } from "./GoogleSheetsDataLoader";
-import ImageLoaderFieldset from "./ImageLoaderFieldset";
+import LoadImageTab from "./LoadImageTab";
+import LoadDataTab from "./LoadDataTab";
+import SetDataTab from "./SetDataTab";
 import {
   arrayMoveValue,
   arraySetValue,
   setValue,
 } from "./reducer-utils";
 import { updateIFrameWithSVGSource, updateSVG } from "./svg-iframe";
-import DataFieldset from "./DataFieldset";
 
 const reducer = (state, action) => {
   const set = setValue(state);
@@ -75,6 +78,7 @@ const initialState = {
   sampleData: null,
   embeddedSampleData: null,
   imageLoaderFieldset: {},
+  tabIdx: 0,
 };
 
 const svgUrls = [
@@ -83,14 +87,6 @@ const svgUrls = [
   "./test-fixture.svg",
 ];
 
-function SetDataHelp() {
-  return (
-    <>
-      <p>This section provides the ability to set image data.</p>
-      <p>The data can be input manually, or chosen from compatible data loaded above.</p>
-    </>
-  );
-}
 
 function App(props) {
   const {
@@ -144,8 +140,6 @@ function App(props) {
     }
   };
 
-  const removeDataPrefixFromId = (id) => id.replace(/^data\./, "");
-
   const onChangeSVGSource = (svgSource) => {
     dispatch({ type: "setSVGSource", value: svgSource });
     if (iframeRef.current && svgSource) {
@@ -190,44 +184,46 @@ function App(props) {
   }
 
   return (
-    <React.Fragment>
-      If you cannot load images/spreadsheets, try <GoogleSignInButton /> to Google.
-      <h1>Image Generator</h1>
-      <ImageLoaderFieldset
-        urls={svgUrls}
-        state={state.imageLoaderFieldset}
-        setState={makePropReducer("imageLoaderFieldset")}
-        onChangeSVGSource={onChangeSVGSource}
-      />
-      <br />
-      <DataFieldset
-        dataSources={dataSources}
-        data={combinedSampleData}
-        setState={makePropReducer("sampleData")}
-      />
-      <br />
-      <ClickableFieldset legend="3: Set data" help={<SetDataHelp />}>
-        {
-          state.data && (
-            <DataInput
-              key={state.dataTimestamp}
-              data={state.data}
-              sampleData={combinedSampleData}
-              onChange={onChangeData}
-              idFormatter={removeDataPrefixFromId}
-              headingFormatter={(name) => (name === "visible") ? "show" : name}
-            />
-          )
+    <>
+      <CssBaseline />
+      <AppBar position="static">
+        <Toolbar>Image Generator</Toolbar>
+      </AppBar>
+      <Tabs value={state.tabIdx || 0} onChange={(e, value) => dispatch({ type: "setGeneric", valueName: "tabIdx", value })}>
+        <Tab label="Load Image"></Tab>
+        <Tab label="Load Data"></Tab>
+        <Tab label="Set Image Data"></Tab>
+      </Tabs>
+      <div style={{ marginTop: "1em", marginBottom: "1em", padding: "0 0.5em 0.5em 0.5em", borderBottom: "solid 2px lightgrey" }}>
+        {(state.tabIdx === 0) && (
+          <LoadImageTab
+            urls={svgUrls}
+            state={state.imageLoaderFieldset}
+            setState={makePropReducer("imageLoaderFieldset")}
+            onChangeSVGSource={onChangeSVGSource}
+          />
+        )
         }
-        <br />
-        <div>
-          <AsyncButton onClick={onClickUpdateImage}>Update image</AsyncButton>
-        </div>
-      </ClickableFieldset>
+        {(state.tabIdx === 1) && (
+          <LoadDataTab
+            dataSources={dataSources}
+            data={combinedSampleData}
+            setState={makePropReducer("sampleData")}
+          />
+        )
+        }
+        {(state.tabIdx === 2) && (
+          <SetDataTab
+            state={state}
+            sampleData={combinedSampleData}
+            onChangeData={onChangeData}
+            onClickUpdateImage={onClickUpdateImage}
+          />
+        )}
+      </div>
       {
         state.svgSource && (
-          <div>
-            <br />
+          <div style={{ textAlign: "center" }}>
             <AsyncButton onClick={onClickCreatePNG}>Create PNG</AsyncButton>
             {state.createPNGError && <div><ErrorBox title="Error creating PNG" error={state.createPNGError} inline={true} /></div>}
           </div>
@@ -247,7 +243,7 @@ function App(props) {
           <img src={state.pngURL} />
         </div>
       )}
-    </React.Fragment>
+    </>
   );
 }
 

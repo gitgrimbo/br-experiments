@@ -1,20 +1,10 @@
 import React from "react";
 
-import ClickableFieldset from "../common/ClickableFieldset";
-
 import ImageLoader, {
   TextBoxSource,
   ListSource,
   GooglePhotosSource,
 } from "./ImageLoader"
-
-function LoadImageHelp() {
-  return (
-    <>
-      <p>This section provides the ability to load an SVG image from a pre-defined source (this website), from any public URL, or from Google Photos.</p>
-    </>
-  );
-}
 
 export default function ImageLoaderFieldset({
   urls,
@@ -76,13 +66,16 @@ export default function ImageLoaderFieldset({
   console.log("ImageLoaderFieldset", state.mode);
 
   return (
-    <ClickableFieldset legend="1: Load image" help={<LoadImageHelp />}>
+    <>
+      <div>
+        <p>This section provides the ability to load an SVG image from a pre-defined source (this website), from any public URL, or from Google Photos.</p>
+      </div>
       <ImageLoader
         sources={imageLoaderSources}
         state={state}
         setState={setState}
         onChangeImgSource={onChangeSVGSource}
       />
-    </ClickableFieldset>
+    </>
   );
 }

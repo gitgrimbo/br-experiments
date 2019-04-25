@@ -29,18 +29,13 @@ function EditableText({
   initialValue,
   isEditing,
   sampleData,
-  onEdit,
   onSave,
   onCancel,
+  onFocus,
 }) {
   const [value, setValue] = React.useState(initialValue);
   const [sheet, setSheet] = React.useState(null);
   const [showModal, setShowModal] = React.useState(false);
-
-  const doSave = (val) => {
-    console.log("doSave");
-    onSave && onSave(typeof val !== "undefined" ? val : value);
-  };
 
   const doCancel = () => {
     console.log("doCancel");
@@ -56,26 +51,19 @@ function EditableText({
   }, [isEditing]);
 
   const onChangeValue = preventDefault((e) => setValue(e.target.value));
-  const onClickSave = preventDefault(doSave);
+  const onClickSave = preventDefault((e) => onSave && onSave(value));
   const onClickCancel = preventDefault(doCancel);
 
   const onKeyDownValue = (...args) => {
     const [e] = args;
     const handlers = {
-      Enter: doSave,
+      Enter() { onSave && onSave(value) },
       Escape: doCancel,
     };
     const handler = handlers[e.key];
     if (handler) {
       e.preventDefault();
       handler(...args);
-    }
-  };
-
-  const onClickText = (e) => {
-    if (!isEditing) {
-      e.preventDefault();
-      onEdit && onEdit();
     }
   };
 
@@ -89,9 +77,9 @@ function EditableText({
         ref={inputRef}
         type="text"
         value={value || ""}
-        onClick={onClickText}
         onChange={onChangeValue}
         onKeyDown={onKeyDownValue}
+        onFocus={onFocus}
         size="15"
       />
       {
@@ -133,7 +121,7 @@ function EditableText({
               onClickCell={(value) => {
                 setShowModal(false);
                 setValue(value);
-                doSave(value);
+                onSave && onSave(value);
               }}
             />
           </div>
@@ -185,8 +173,10 @@ export default function DataInput({
   onChange,
   idFormatter,
   headingFormatter,
+  propFilter,
 }) {
-  console.log("DataInput.render", JSON.stringify(data, 2, null));
+  //console.log("DataInput.render", JSON.stringify(data, 2, null));
+
   const [editing, setEditing] = React.useState();
   const [lastMoved, updateLastMoved] = useLastMoved(data.length, Date.now());
 
@@ -224,6 +214,7 @@ export default function DataInput({
       ? target.checked
       : target.value;
     const name = target.name;
+    console.log("onChange", idx, name, value);
     onChange({
       type: "item",
       idx,
@@ -246,20 +237,24 @@ export default function DataInput({
     setEditing(null);
   };
 
+  const filteredProps = (props) => props.filter((prop, i) => !propFilter || propFilter(prop, i));
+
   const headingCells = () => {
     if (!data || !data[0]) {
       return null;
     }
-    const keysWithoutId = Object.keys(data[0]).filter((key) => key !== "id");
+    const props = filteredProps(Object.keys(data[0]));
+    const keysWithoutId = props.filter((key) => key !== "id");
     // first cell is for dragging row
     return ["", "id"].concat(keysWithoutId)
       .map((name, i) => (
         <th key={i}>
           {headingFormatter ? headingFormatter(name, i) : name}
         </th>
-      )
-      );
+      ));
   };
+
+  const UP_DOWN_ARROWS = "\u21c5";
 
   const dataCells = (item, idx) => {
     const { id, ...fields } = item;
@@ -273,38 +268,38 @@ export default function DataInput({
               className="draghandle"
               onClick={onClickSortHandle(listItem.name)}
               style={{ color: sortableGroup === listItem.name ? "red" : "" }}
-            >&#x21c5;</td>
+            >{UP_DOWN_ARROWS}</td>
             : <td></td>
         }
         <td>{idFormatter ? idFormatter(id) : id}</td>
         {
-          Object.keys(fields).map((name, i) => {
-            const value = fields[name];
-            return (
-              <td key={i} data-idx={idx}>
-                {
-                  // using key={isEditing + idx} means the component is considered new if it switches from edit mode to non-edit mode
-                  (typeof value === "boolean")
-                    ? <input
-                      type="checkbox"
-                      data-idx={idx}
-                      name={name}
-                      checked={value}
-                      onChange={_onChange}
-                      disabled={!isEditing}
-                    />
-                    : <EditableText
-                      initialValue={value}
-                      sampleData={sampleData}
-                      isEditing={isEditing}
-                      onEdit={() => setEditing(idx)}
-                      onSave={onSave(idx, name)}
-                      onCancel={onCancel}
-                    />
-                }
-              </td>
-            );
-          })
+          filteredProps(Object.keys(fields))
+            .map((name, i) => {
+              const value = fields[name];
+              return (
+                <td key={i} data-idx={idx}>
+                  {
+                    (typeof value === "boolean")
+                      ? <input
+                        type="checkbox"
+                        data-idx={idx}
+                        name={name}
+                        checked={value}
+                        onChange={_onChange}
+                        disabled={!isEditing}
+                      />
+                      : <EditableText
+                        initialValue={value}
+                        sampleData={sampleData}
+                        isEditing={isEditing}
+                        onSave={onSave(idx, name)}
+                        onCancel={onCancel}
+                        onFocus={() => setEditing(idx)}
+                      />
+                  }
+                </td>
+              );
+            })
         }
       </>
     );

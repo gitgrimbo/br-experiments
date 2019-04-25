@@ -1,8 +1,7 @@
 import React from "react";
 
-import ClickableFieldset from "../common/ClickableFieldset";
+import AsyncButton from "../common/AsyncButton";
 import Sheets from "../google/sheets";
-import SheetsExplorer from "../sheets/SheetsExplorer";
 
 function ensureProperty(ob, property) {
   const parts = property.split(".");
@@ -86,7 +85,7 @@ export default function GoogleSheetsDataLoader({
 
   return (
     <>
-      <button onClick={onClickLoadData}>Load</button>
+      <AsyncButton onClick={onClickLoadData}>Load</AsyncButton>
       {" "}
       Sheet id: <input size="24" value={spreadsheetId} onChange={(e) => setSpreadsheetId(e.target.value)} />
       {loadProgress && <div>{loadProgress}</div>}

@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "@material-ui/core/Button";
 
 export default function AsyncButton({
   children,
@@ -8,7 +9,8 @@ export default function AsyncButton({
 }) {
   const [processing, setProcessing] = React.useState(false);
   return (
-    <button
+    <Button
+      variant="contained"
       onClick={async (e) => {
         e.preventDefault();
         try {
@@ -22,6 +24,6 @@ export default function AsyncButton({
       }}
       disabled={processing}
       {...rest}
-    >{processing ? processingMessage : children}</button>
+    >{processing ? processingMessage : children}</Button>
   );
 }
