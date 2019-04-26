@@ -11,8 +11,6 @@ export default function SetDataTab({
   onClickUpdateImage,
 }) {
   const EYE = "👁️";
-  const idFormatter = (id) => id.replace(/^data\./, "");
-  const headingFormatter = (name) => (name === "visible") ? EYE : name;
 
   return (
     <>
@@ -27,9 +25,7 @@ export default function SetDataTab({
             data={state.data}
             sampleData={sampleData}
             onChange={onChangeData}
-            idFormatter={idFormatter}
-            headingFormatter={headingFormatter}
-            propFilter={(propName, propIdx) => propName !== "visible"}
+            simpleValueSupplier={(item) => item.value}
           />
         )
       }

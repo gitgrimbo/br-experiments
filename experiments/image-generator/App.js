@@ -19,6 +19,7 @@ import {
   setValue,
 } from "./reducer-utils";
 import { updateIFrameWithSVGSource, updateSVG } from "./svg-iframe";
+import { Typography } from "@material-ui/core";
 
 const reducer = (state, action) => {
   const set = setValue(state);
@@ -143,7 +144,8 @@ function App(props) {
   const onChangeSVGSource = (svgSource) => {
     dispatch({ type: "setSVGSource", value: svgSource });
     if (iframeRef.current && svgSource) {
-      const { data, sampleData } = updateIFrameWithSVGSource(iframeRef.current, svgSource);
+      const scale = 1;
+      const { data, sampleData } = updateIFrameWithSVGSource(iframeRef.current, svgSource, scale);
       dispatch({ type: "setData", value: data });
       dispatch({ type: "setEmbeddedSampleData", value: sampleData });
     }
@@ -187,7 +189,9 @@ function App(props) {
     <>
       <CssBaseline />
       <AppBar position="static">
-        <Toolbar>Image Generator</Toolbar>
+        <Toolbar>
+          <Typography variant="h6" color="inherit">Image Generator</Typography>
+        </Toolbar>
       </AppBar>
       <Tabs value={state.tabIdx || 0} onChange={(e, value) => dispatch({ type: "setGeneric", valueName: "tabIdx", value })}>
         <Tab label="Load Image"></Tab>

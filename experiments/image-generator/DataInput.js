@@ -1,12 +1,13 @@
 import React from "react";
 import Modal from "react-modal";
+import Button from "@material-ui/core/Button";
+import Fab from "@material-ui/core/Fab";
+import TextField from "@material-ui/core/TextField";
+import CancelIcon from "@material-ui/icons/Cancel";
+import DragIndicator from "@material-ui/icons/DragIndicator";
+import EditIcon from "@material-ui/icons/Edit";
 import Sortable from "sortablejs";
 
-import {
-  CROSS_MARK,
-  FILE_CABINET,
-  HEAVY_CHECK_MARK,
-} from "../common/emoji";
 import minMax from "../common/minMax";
 import preventDefault from "../common/preventDefault";
 
@@ -25,40 +26,83 @@ const cssNoSelect = `
   cursor: -webkit-grabbing;
 }`;
 
-function EditableText({
-  initialValue,
-  isEditing,
+function Editor({
+  visible,
   sampleData,
+  onSave,
+  onRequestClose,
+}) {
+  const [sheetIdx, setSheetIdx] = React.useState(0);
+  const sheet = sampleData && sampleData[sheetIdx];
+
+  const buttonIconStyle = {
+    marginLeft: "0.5em",
+  };
+
+  return (
+    <Modal
+      isOpen={visible}
+      onRequestClose={onRequestClose}
+    >
+      <h2>Pick Data</h2>
+      <select
+        value={sheetIdx}
+        onChange={(e) => setSheetIdx(Number(e.target.value))}
+      >
+        {
+          sampleData && sampleData.map(({ title, sheets }, i) => (
+            <option key={i} value={i}>{title}</option>
+          ))
+        }
+      </select>
+      {sheet && (
+        <div style={{ marginTop: "1em" }}>
+          <SheetsExplorer
+            sheets={sheet.sheets}
+            cellPadding="0.5em"
+            onClickCell={(value) => {
+              onSave && onSave(value);
+              onRequestClose();
+            }}
+          />
+        </div>
+      )}
+      <div style={{ marginTop: "1em" }}>
+        <Button variant="contained" onClick={onRequestClose}>
+          Close
+          <CancelIcon style={buttonIconStyle} />
+        </Button>
+      </div>
+    </Modal>
+  );
+}
+
+function EditableText({
+  label,
+  initialValue,
   onSave,
   onCancel,
   onFocus,
 }) {
   const [value, setValue] = React.useState(initialValue);
-  const [sheet, setSheet] = React.useState(null);
-  const [showModal, setShowModal] = React.useState(false);
 
-  const doCancel = () => {
-    console.log("doCancel");
+  const onChangeValue = preventDefault((e) => setValue(e.target.value));
+
+  const save = () => {
+    console.log(value, initialValue);
+    onSave && onSave(value)
+  };
+
+  const cancel = () => {
     setValue(initialValue);
     onCancel && onCancel();
   };
 
-  const inputRef = React.useRef();
-  React.useEffect(() => {
-    if (isEditing) {
-      inputRef.current.focus();
-    }
-  }, [isEditing]);
-
-  const onChangeValue = preventDefault((e) => setValue(e.target.value));
-  const onClickSave = preventDefault((e) => onSave && onSave(value));
-  const onClickCancel = preventDefault(doCancel);
-
   const onKeyDownValue = (...args) => {
     const [e] = args;
     const handlers = {
-      Enter() { onSave && onSave(value) },
-      Escape: doCancel,
+      Enter() { save(); },
+      Escape() { cancel(); },
     };
     const handler = handlers[e.key];
     if (handler) {
@@ -67,71 +111,16 @@ function EditableText({
     }
   };
 
-  const emojiButtonStyle = {
-    padding: "0.5em",
-  };
-
   return (
-    <>
-      <input
-        ref={inputRef}
-        type="text"
-        value={value || ""}
-        onChange={onChangeValue}
-        onKeyDown={onKeyDownValue}
-        onFocus={onFocus}
-        size="15"
-      />
-      {
-        isEditing && (
-          <div style={{ marginTop: "1em" }}>
-            <button style={emojiButtonStyle} onClick={onClickSave}>{HEAVY_CHECK_MARK}</button>
-            {" "}
-            <button style={emojiButtonStyle} onClick={onClickCancel}>{CROSS_MARK}</button>
-            {" "}
-            <button style={emojiButtonStyle} onClick={() => {
-              if (!sheet) {
-                setSheet(sampleData[0]);
-              }
-              setShowModal(true);
-            }}>{FILE_CABINET}</button>
-          </div>
-        )
-      }
-      <Modal
-        isOpen={showModal}
-        onRequestClose={() => setShowModal(false)}
-      >
-        <h2>Pick Data</h2>
-        <select onChange={(e) => {
-          const i = Number(e.target.value);
-          setSheet(sampleData[i]);
-        }}>
-          {
-            isEditing && sampleData && sampleData.map(({ title, sheets }, i) => (
-              <option key={i} value={i}>{title}</option>
-            ))
-          }
-        </select>
-        {sheet && (
-          <div style={{ marginTop: "1em" }}>
-            <SheetsExplorer
-              sheets={sheet.sheets}
-              cellPadding="0.5em"
-              onClickCell={(value) => {
-                setShowModal(false);
-                setValue(value);
-                onSave && onSave(value);
-              }}
-            />
-          </div>
-        )}
-        <div>
-          <br />
-          <button onClick={() => setShowModal(false)}>Close</button>
-        </div>
-      </Modal>
-    </>
+    <TextField
+      label={label}
+      fullWidth
+      value={value || ""}
+      onChange={onChangeValue}
+      onKeyDown={onKeyDownValue}
+      onFocus={onFocus}
+      onBlur={save}
+    />
   );
 }
 
@@ -158,6 +147,10 @@ function useLastMoved(len, initialValue) {
   ];
 }
 
+function Flex({ children, flex = 1 }) {
+  return <div style={{ flex }}>{children}</div>;
+}
+
 /**
  * Displays an editable grid of data.
  *
@@ -170,14 +163,14 @@ function useLastMoved(len, initialValue) {
 export default function DataInput({
   data,
   sampleData,
+  simpleValueSupplier,
   onChange,
-  idFormatter,
-  headingFormatter,
-  propFilter,
 }) {
   //console.log("DataInput.render", JSON.stringify(data, 2, null));
 
-  const [editing, setEditing] = React.useState();
+  const [showEditor, setShowEditor] = React.useState(null);
+  const [lastSaved, setLastSaved] = React.useState(0);
+
   const [lastMoved, updateLastMoved] = useLastMoved(data.length, Date.now());
 
   const [sortableGroup, setSortableGroup] = React.useState(null);
@@ -224,113 +217,98 @@ export default function DataInput({
   };
 
   const onSave = (idx, name) => (value) => {
+    console.log("onSave", idx, name, value);
+    setLastSaved(Date.now());
     onChange({
       type: "item",
       idx,
       name,
       value,
     });
-    setEditing(null);
-  };
-
-  const onCancel = () => {
-    setEditing(null);
-  };
-
-  const filteredProps = (props) => props.filter((prop, i) => !propFilter || propFilter(prop, i));
-
-  const headingCells = () => {
-    if (!data || !data[0]) {
-      return null;
-    }
-    const props = filteredProps(Object.keys(data[0]));
-    const keysWithoutId = props.filter((key) => key !== "id");
-    // first cell is for dragging row
-    return ["", "id"].concat(keysWithoutId)
-      .map((name, i) => (
-        <th key={i}>
-          {headingFormatter ? headingFormatter(name, i) : name}
-        </th>
-      ));
-  };
-
-  const UP_DOWN_ARROWS = "\u21c5";
-
-  const dataCells = (item, idx) => {
-    const { id, ...fields } = item;
-    const isEditing = (editing === idx);
-    const listItem = isListItem(id);
-    return (
-      <>
-        {
-          listItem
-            ? <td
-              className="draghandle"
-              onClick={onClickSortHandle(listItem.name)}
-              style={{ color: sortableGroup === listItem.name ? "red" : "" }}
-            >{UP_DOWN_ARROWS}</td>
-            : <td></td>
-        }
-        <td>{idFormatter ? idFormatter(id) : id}</td>
-        {
-          filteredProps(Object.keys(fields))
-            .map((name, i) => {
-              const value = fields[name];
-              return (
-                <td key={i} data-idx={idx}>
-                  {
-                    (typeof value === "boolean")
-                      ? <input
-                        type="checkbox"
-                        data-idx={idx}
-                        name={name}
-                        checked={value}
-                        onChange={_onChange}
-                        disabled={!isEditing}
-                      />
-                      : <EditableText
-                        initialValue={value}
-                        sampleData={sampleData}
-                        isEditing={isEditing}
-                        onSave={onSave(idx, name)}
-                        onCancel={onCancel}
-                        onFocus={() => setEditing(idx)}
-                      />
-                  }
-                </td>
-              );
-            })
-        }
-      </>
-    );
   };
 
   return (
     <>
       <style>{cssNoSelect}</style>
-      <table>
-        <thead>
-          <tr>
-            {headingCells()}
-          </tr>
-        </thead>
-        <tbody ref={sortableRef}>
-          {data && data.map((item, idx) => {
-            const listItem = isListItem(item.id);
-            return (
-              <tr
-                key={idx + "." + lastMoved[idx]}
-                data-idx={idx}
-                data-id={item.id}
-                data-group={listItem && listItem.name}
-                data-group-idx={listItem && listItem.idx}
-              >
-                {dataCells(item, idx)}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <ul
+        ref={sortableRef}
+        key={lastSaved}
+        style={{ listStyleType: "none", margin: 0, padding: 0 }}
+      >
+        {data && data.map((item, idx) => {
+          const { id, ...fields } = item;
+          const listItem = isListItem(id);
+          const name = "value";
+          const value = simpleValueSupplier ? simpleValueSupplier(item) : null;
+          return (
+            <li
+              key={idx + "." + lastMoved[idx]}
+              data-idx={idx}
+              data-id={item.id}
+              data-group={listItem && listItem.name}
+              data-group-idx={listItem && listItem.idx}
+              style={{ padding: "0.2em" }}
+            >
+              <div style={{ display: "flex" }}>
+                {
+                  listItem
+                    ? (
+                      <div
+                        style={{
+                          padding: "0.5em",
+                        }}
+                      >
+                        <DragIndicator
+                          className="draghandle"
+                          onClick={onClickSortHandle(listItem.name)}
+                          style={{
+                            color: sortableGroup === listItem.name ? "red" : "",
+                          }}
+                        />
+                      </div>
+                    )
+                    : null
+                }
+                {
+                  (typeof value === "undefined")
+                    ? <Flex><Button variant="contained" style={{ width: "100%" }}>{id}</Button></Flex>
+                    : (typeof value === "boolean")
+                      ? <Flex>
+                        <input
+                          type="checkbox"
+                          data-idx={idx}
+                          name={name}
+                          checked={value}
+                          onChange={_onChange}
+                        />
+                      </Flex>
+                      : <>
+                        <Flex>
+                          <EditableText
+                            label={id}
+                            initialValue={value}
+                            sampleData={sampleData}
+                            onSave={onSave(idx, name)}
+                          />
+                        </Flex>
+                        <Flex flex="0">
+                          <Fab aria-label="Edit" size="small" onClick={() => setShowEditor(idx)}>
+                            <EditIcon />
+                          </Fab>
+                        </Flex>
+                      </>
+                }
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+      <Editor
+        visible={typeof showEditor === "number"}
+        onRequestClose={() => setShowEditor(null)}
+        onSave={onSave(showEditor, "value")}
+        sampleData={sampleData}
+      />
     </>
   );
 }

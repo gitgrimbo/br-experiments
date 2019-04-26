@@ -1,6 +1,6 @@
 import SVG from "./svg";
 
-export function updateIFrameWithSVGSource(iframe, svgSource) {
+export function updateIFrameWithSVGSource(iframe, svgSource, scale = 1) {
   const doc = iframe.contentDocument;
 
   doc.firstElementChild.innerHTML = `
@@ -15,8 +15,10 @@ ${svgSource}
 
   const svg = doc.querySelector("svg");
   const { width, height, dataIds, sampleData } = SVG.parseSVG(svg);
-  iframe.width = width;
-  iframe.height = height;
+  iframe.width = width * scale;
+  iframe.height = height * scale;
+  svg.style.width = width * scale;
+  svg.style.height = height * scale;
 
   const data = dataIds.map((id) => {
     const el = svg.getElementById(id);
