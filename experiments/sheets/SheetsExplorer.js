@@ -1,5 +1,6 @@
 import React from "react";
 
+import preventDefault from "../common/preventDefault";
 import uuid from "../common/uuid";
 
 function Table({
@@ -54,30 +55,26 @@ export default function SheetsExplorer({
 }) {
   console.log("SheetsExplorer", title, sheets);
 
-  const [values, setValues] = React.useState(null);
+  const [sheetIdx, setSheetIdx] = React.useState(0);
 
-  const onClickSheetTitle = async (e) => {
-    e.preventDefault();
-    const idx = e.target.getAttribute("data-idx");
-    const sheet = sheets[idx];
-    setValues(sheet.values);
-  };
+  const onChangeSheetIdx = preventDefault((e) => setSheetIdx(Number(e.target.value)));
+
+  const sheet = sheets && sheets[sheetIdx];
 
   return (
     <>
       {title && <h3>{title}</h3>}
-      <div>{
-        sheets.map((sheet, i) => (
-          <React.Fragment key={i}>
-            {i > 0 ? " / " : null}
-            <a href="#" data-idx={i} onClick={onClickSheetTitle}>{sheet.properties.title}</a>
-          </React.Fragment>
-        ))
-      }</div>
+      <div>
+        <select value={sheetIdx} onChange={onChangeSheetIdx}>{
+          sheets.map((sheet, i) => (
+            <option key={i} value={i}>{sheet.properties.title}</option>
+          ))
+        }</select>
+      </div>
       <div style={{ marginTop: "1em" }}>
-        {values && (
+        {sheet && sheet.values &&  (
           <Table
-            values={values}
+            values={sheet.values}
             cellPadding={cellPadding}
             onClickCell={onClickCell}
           />
