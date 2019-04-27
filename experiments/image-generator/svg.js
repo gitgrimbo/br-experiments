@@ -28,8 +28,11 @@ function parseSVG(svg) {
 function getElementValue(el) {
   switch (el.tagName.toLowerCase()) {
     case "image": {
+      console.log(el);
       const href = el.getAttribute("xlink:href");
+      console.log(href);
       const isDataUrl = href.startsWith("data:image/");
+      console.log(isDataUrl);
       return isDataUrl ? null : href;
     }
     default: return el.textContent;

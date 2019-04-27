@@ -83,11 +83,11 @@ const initialState = {
 };
 
 const svgUrls = [
-  "./starting-lineup.svg",
-  "./box-score.svg",
-  "./test-fixture.svg",
+  "./svgs/starting-lineup.svg",
+  "./svgs/starting-lineup-with-opposition.svg",
+  "./svgs/box-score.svg",
+  "./svgs/test-fixture.svg",
 ];
-
 
 function App(props) {
   const {
