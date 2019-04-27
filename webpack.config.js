@@ -6,6 +6,7 @@ const webpack = require("webpack");
 const entry = [
   "banner",
   "calendar",
+  "google-picker",
   "image-generator",
   "roster-badge",
   "schedule",
