@@ -1,6 +1,8 @@
 const path = require("path");
 const webpack = require("webpack");
 
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+
 // the following folders are not web functions, and so should not be put in the entry object
 // "roster", "stats", "twitter"
 const entry = [
@@ -51,7 +53,14 @@ module.exports = {
     hotOnly: true,
     https: true,
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new BundleAnalyzerPlugin({
+      openAnalyzer: false,
+      analyzerMode: "static",
+      generateStatsFile: true,
+    }),
+  ],
   optimization: {
     splitChunks: {
       cacheGroups: {

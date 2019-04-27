@@ -8,7 +8,7 @@
     "predeploy:webpack": "npx webpack -p --config .clone/webpack.config.js",
     "predeploy:copy-dist": "copyfiles --verbose --up 1 .clone/dist/**/* dist",
     "predeploy:copy-experiments": "copyfiles --verbose --up 1 .clone/experiments/**/* dist",
-    "predeploy:copy-parent-html": "node bin/move-file-cli.js .clone/experiments/index.parent.html dist/index.html",
+    "predeploy:copy-parent-html": "node bin/move-file-cli.js dist/experiments/index.parent.html dist/index.html",
     "predeploy:dist": "run-s predeploy:webpack predeploy:copy-dist predeploy:copy-experiments predeploy:copy-parent-html",
     "predeploy": "run-s predeploy:clean predeploy:clone predeploy:webpack predeploy:copy-dist predeploy:copy-experiments predeploy:copy-parent-html",
     "deploy": "gh-pages -d dist",
@@ -32,6 +32,7 @@
     "sharp": "^0.22.1",
     "superagent": "^5.0.3",
     "webpack": "^4.30.0",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.1",
     "webpack-dev-server": "^3.3.1"
   },
