@@ -50,7 +50,7 @@ function Editor({
         onChange={(e) => setSheetIdx(Number(e.target.value))}
       >
         {
-          sampleData && sampleData.map(({ title, sheets }, i) => (
+          sampleData && sampleData.map(({ title }, i) => (
             <option key={i} value={i}>{title}</option>
           ))
         }
@@ -82,14 +82,16 @@ function EditableText({
   initialValue,
   onSave,
   onCancel,
-  onFocus,
 }) {
   const [value, setValue] = React.useState(initialValue);
 
-  const onChangeValue = preventDefault((e) => setValue(e.target.value));
+  const onChangeValue = preventDefault((e) => {
+    console.log("EditableText.onChangeValue", "e.target.value", e.target.value);
+    setValue(e.target.value)
+  });
 
   const save = () => {
-    console.log(value, initialValue);
+    console.log("EditableText.save", "value", value, "initialValue", initialValue);
     onSave && onSave(value)
   };
 
@@ -118,7 +120,6 @@ function EditableText({
       value={value || ""}
       onChange={onChangeValue}
       onKeyDown={onKeyDownValue}
-      onFocus={onFocus}
       onBlur={save}
     />
   );
@@ -169,8 +170,6 @@ export default function DataInput({
   //console.log("DataInput.render", JSON.stringify(data, 2, null));
 
   const [showEditor, setShowEditor] = React.useState(null);
-  const [lastSaved, setLastSaved] = React.useState(0);
-
   const [lastMoved, updateLastMoved] = useLastMoved(data.length, Date.now());
 
   const [sortableGroup, setSortableGroup] = React.useState(null);
@@ -207,7 +206,7 @@ export default function DataInput({
       ? target.checked
       : target.value;
     const name = target.name;
-    console.log("onChange", idx, name, value);
+    console.log("DataInput.onChange", idx, name, value);
     onChange({
       type: "item",
       idx,
@@ -217,8 +216,7 @@ export default function DataInput({
   };
 
   const onSave = (idx, name) => (value) => {
-    console.log("onSave", idx, name, value);
-    setLastSaved(Date.now());
+    console.log("DataInput.onSave", idx, name, value);
     onChange({
       type: "item",
       idx,
@@ -232,7 +230,6 @@ export default function DataInput({
       <style>{cssNoSelect}</style>
       <ul
         ref={sortableRef}
-        key={lastSaved}
         style={{ listStyleType: "none", margin: 0, padding: 0 }}
       >
         {data && data.map((item, idx) => {

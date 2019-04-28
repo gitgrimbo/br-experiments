@@ -54,7 +54,10 @@ const reducer = (state, action) => {
     }
     case "setDataValue": {
       const { dataIdx, name, value } = action.value;
-      return set("data", arraySetValue(state.data, dataIdx, name, value));
+      const old = state.data[dataIdx][name];
+      return (old !== value)
+        ? set("data", arraySetValue(state.data, dataIdx, name, value))
+        : state;
     }
     case "moveData": {
       const { oldIndex, newIndex } = action.value;
