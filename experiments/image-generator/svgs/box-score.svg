@@ -263,7 +263,7 @@ font-family: 'Roboto';
        x2="719.43597"
        y2="160.84006" />
     <text
-       id="sample.data">{"data.player.position":["C","P","1B","2B","3B","SS","LF","CF","RF"],"data.player.name":["Rich Green","Stephen Broughton","Jose Picornell","Miguel Juárez","Paul Cassidy","Jon ‘AK’ Kelly","Nick Wills","Jim Ellis","Jon Gardner","Scott Lingrell","Sean Harrison","Paul Grime","Craig Moulds","Jack Lockwood","Dominic Norburn","Sean Briscoe","Ryan Kendall","Sam Parkin Smith","John Briscoe","Chris Pender","Jesus ‘Jose’ Toriz-Garcia","Nick Cockcroft","Frazer Longford","Matt Risby","Damien Kilkenny","Kirsty Jones","Connor Brosnan","Jay Stearns","Steve Wood","Kohei Moriyama","Andrew Browse","Dave Whitaker","Marco Foglia","Heather Mckinty","Iwan Struggles","Michael Wraith","Alex Miles","Majid Hussain","Jack Hukin","Tom Chappell","Robert Naylor","Mark Norburn","Luke Brown","Rob Perry","Robbie Alletson","Jordan Wynn","Andy Adebogun","Zak Berisford","Lee Siggs","Nestor Martinez","Martin Hingley","Ryan Smith","Megan Wynne","Ellie Page","Phil Baines","Jonny Allison","Alan Bowers"]}</text>
+       id="sample.data">{&quot;data.player.position&quot;:[&quot;C&quot;,&quot;P&quot;,&quot;1B&quot;,&quot;2B&quot;,&quot;3B&quot;,&quot;SS&quot;,&quot;LF&quot;,&quot;CF&quot;,&quot;RF&quot;],&quot;data.player.name&quot;:[&quot;Rich Green&quot;,&quot;Stephen Broughton&quot;,&quot;Jose Picornell&quot;,&quot;Miguel Juárez&quot;,&quot;Paul Cassidy&quot;,&quot;Jon ‘AK’ Kelly&quot;,&quot;Nick Wills&quot;,&quot;Jim Ellis&quot;,&quot;Jon Gardner&quot;,&quot;Scott Lingrell&quot;,&quot;Sean Harrison&quot;,&quot;Paul Grime&quot;,&quot;Craig Moulds&quot;,&quot;Jack Lockwood&quot;,&quot;Dominic Norburn&quot;,&quot;Sean Briscoe&quot;,&quot;Ryan Kendall&quot;,&quot;Sam Parkin Smith&quot;,&quot;John Briscoe&quot;,&quot;Chris Pender&quot;,&quot;Jesus ‘Jose’ Toriz-Garcia&quot;,&quot;Nick Cockcroft&quot;,&quot;Frazer Longford&quot;,&quot;Matt Risby&quot;,&quot;Damien Kilkenny&quot;,&quot;Kirsty Jones&quot;,&quot;Connor Brosnan&quot;,&quot;Jay Stearns&quot;,&quot;Steve Wood&quot;,&quot;Kohei Moriyama&quot;,&quot;Andrew Browse&quot;,&quot;Dave Whitaker&quot;,&quot;Marco Foglia&quot;,&quot;Heather Mckinty&quot;,&quot;Iwan Struggles&quot;,&quot;Michael Wraith&quot;,&quot;Alex Miles&quot;,&quot;Majid Hussain&quot;,&quot;Jack Hukin&quot;,&quot;Tom Chappell&quot;,&quot;Robert Naylor&quot;,&quot;Mark Norburn&quot;,&quot;Luke Brown&quot;,&quot;Rob Perry&quot;,&quot;Robbie Alletson&quot;,&quot;Jordan Wynn&quot;,&quot;Andy Adebogun&quot;,&quot;Zak Berisford&quot;,&quot;Lee Siggs&quot;,&quot;Nestor Martinez&quot;,&quot;Martin Hingley&quot;,&quot;Ryan Smith&quot;,&quot;Megan Wynne&quot;,&quot;Ellie Page&quot;,&quot;Phil Baines&quot;,&quot;Jonny Allison&quot;,&quot;Alan Bowers&quot;]}</text>
     <linearGradient
        inkscape:collect="always"
        xlink:href="#darker_bladerunners_blue"
@@ -597,76 +597,6 @@ font-family: 'Roboto';
     <linearGradient
        inkscape:collect="always"
        xlink:href="#white"
-       id="linearGradient20126"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.53529019,0,0,0.53529021,265.25348,604.78843)"
-       x1="241.98576"
-       y1="160.84006"
-       x2="719.43597"
-       y2="160.84006" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#white"
-       id="linearGradient20130"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.53529019,0,0,0.53529021,220.52168,604.78842)"
-       x1="241.98576"
-       y1="160.84006"
-       x2="719.43597"
-       y2="160.84006" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#white"
-       id="linearGradient20134"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.53529019,0,0,0.53529021,175.78987,604.78842)"
-       x1="241.98576"
-       y1="160.84006"
-       x2="719.43597"
-       y2="160.84006" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#white"
-       id="linearGradient20138"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.53529019,0,0,0.53529021,131.05809,604.78845)"
-       x1="241.98576"
-       y1="160.84006"
-       x2="719.43597"
-       y2="160.84006" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#white"
-       id="linearGradient20142"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.53529019,0,0,0.53529021,86.326286,604.78843)"
-       x1="241.98576"
-       y1="160.84006"
-       x2="719.43597"
-       y2="160.84006" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#white"
-       id="linearGradient20146"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.53529019,0,0,0.53529021,41.594497,604.78844)"
-       x1="241.98576"
-       y1="160.84006"
-       x2="719.43597"
-       y2="160.84006" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#white"
-       id="linearGradient20150"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.53529019,0,0,0.53529021,-0.45339316,604.78842)"
-       x1="241.98576"
-       y1="160.84006"
-       x2="719.43597"
-       y2="160.84006" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#white"
        id="linearGradient10247"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0.53529019,0,0,0.53529021,-69.844806,660.72479)"
@@ -694,6 +624,76 @@ font-family: 'Roboto';
        y1="160.84006"
        x2="719.43597"
        y2="160.84006" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#white"
+       id="linearGradient5560"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.53529019,0,0,0.53529021,275.9891,604.78843)"
+       x1="241.98576"
+       y1="160.84006"
+       x2="719.43597"
+       y2="160.84006" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#white"
+       id="linearGradient5564"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.53529019,0,0,0.53529021,231.2573,604.78842)"
+       x1="241.98576"
+       y1="160.84006"
+       x2="719.43597"
+       y2="160.84006" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#white"
+       id="linearGradient5568"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.53529019,0,0,0.53529021,186.52549,604.78842)"
+       x1="241.98576"
+       y1="160.84006"
+       x2="719.43597"
+       y2="160.84006" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#white"
+       id="linearGradient5572"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.53529019,0,0,0.53529021,141.79371,604.78845)"
+       x1="241.98576"
+       y1="160.84006"
+       x2="719.43597"
+       y2="160.84006" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#white"
+       id="linearGradient5576"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.53529019,0,0,0.53529021,97.061918,604.78843)"
+       x1="241.98576"
+       y1="160.84006"
+       x2="719.43597"
+       y2="160.84006" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#white"
+       id="linearGradient5580"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.53529019,0,0,0.53529021,52.330129,604.78844)"
+       x1="241.98576"
+       y1="160.84006"
+       x2="719.43597"
+       y2="160.84006" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#white"
+       id="linearGradient5584"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.53529019,0,0,0.53529021,10.282237,604.78842)"
+       x1="241.98576"
+       y1="160.84006"
+       x2="719.43597"
+       y2="160.84006" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -703,8 +703,8 @@ font-family: 'Roboto';
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="165.62825"
-     inkscape:cy="321.10345"
+     inkscape:cx="299.53238"
+     inkscape:cy="306.99931"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -821,95 +821,95 @@ font-family: 'Roboto';
          style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Roboto;text-align:center;text-anchor:middle;fill:url(#linearGradient12743);fill-opacity:1;stroke-width:0.70923644">R  H  E</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient20150);fill-opacity:1;stroke:none;stroke-width:0.70923644"
-       x="127.20912"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient5584);fill-opacity:1;stroke:none;stroke-width:0.70923644"
+       x="137.94478"
        y="701.21136"
        id="text7360"
        transform="scale(1.1177732,0.89463587)"
        inkscape:label="text starting line up"><tspan
          sodipodi:role="line"
          id="tspan8841-1-2"
-         x="127.20912"
+         x="137.94478"
          y="701.21136"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient20150);fill-opacity:1;stroke-width:0.70923644">1</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient5584);fill-opacity:1;stroke-width:0.70923644">1</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient20146);fill-opacity:1;stroke:none;stroke-width:0.70923644"
-       x="169.257"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient5580);fill-opacity:1;stroke:none;stroke-width:0.70923644"
+       x="179.99266"
        y="701.21136"
        id="text7362"
        transform="scale(1.1177732,0.89463587)"
        inkscape:label="text starting line up"><tspan
          sodipodi:role="line"
          id="tspan8841-1-2-2"
-         x="169.257"
+         x="179.99266"
          y="701.21136"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient20146);fill-opacity:1;stroke-width:0.70923644">2</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient5580);fill-opacity:1;stroke-width:0.70923644">2</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient20142);fill-opacity:1;stroke:none;stroke-width:0.70923644"
-       x="213.9888"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient5576);fill-opacity:1;stroke:none;stroke-width:0.70923644"
+       x="224.72446"
        y="701.21136"
        id="text7364"
        transform="scale(1.1177732,0.89463587)"
        inkscape:label="text starting line up"><tspan
          sodipodi:role="line"
          id="tspan8841-1-2-8"
-         x="213.9888"
+         x="224.72446"
          y="701.21136"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient20142);fill-opacity:1;stroke-width:0.70923644">3</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient5576);fill-opacity:1;stroke-width:0.70923644">3</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient20138);fill-opacity:1;stroke:none;stroke-width:0.70923644"
-       x="258.72058"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient5572);fill-opacity:1;stroke:none;stroke-width:0.70923644"
+       x="269.45624"
        y="701.21136"
        id="text7366"
        transform="scale(1.1177732,0.89463587)"
        inkscape:label="text starting line up"><tspan
          sodipodi:role="line"
          id="tspan8841-1-2-6"
-         x="258.72058"
+         x="269.45624"
          y="701.21136"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient20138);fill-opacity:1;stroke-width:0.70923644">4</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient5572);fill-opacity:1;stroke-width:0.70923644">4</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient20134);fill-opacity:1;stroke:none;stroke-width:0.70923644"
-       x="303.45236"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient5568);fill-opacity:1;stroke:none;stroke-width:0.70923644"
+       x="314.18802"
        y="701.21136"
        id="text7368"
        transform="scale(1.1177732,0.89463587)"
        inkscape:label="text starting line up"><tspan
          sodipodi:role="line"
          id="tspan8841-1-2-9"
-         x="303.45236"
+         x="314.18802"
          y="701.21136"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient20134);fill-opacity:1;stroke-width:0.70923644">5</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient5568);fill-opacity:1;stroke-width:0.70923644">5</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient20130);fill-opacity:1;stroke:none;stroke-width:0.70923644"
-       x="348.18417"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient5564);fill-opacity:1;stroke:none;stroke-width:0.70923644"
+       x="358.91983"
        y="701.21136"
        id="text7370"
        transform="scale(1.1177732,0.89463587)"
        inkscape:label="text starting line up"><tspan
          sodipodi:role="line"
          id="tspan8841-1-2-3"
-         x="348.18417"
+         x="358.91983"
          y="701.21136"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient20130);fill-opacity:1;stroke-width:0.70923644">6</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient5564);fill-opacity:1;stroke-width:0.70923644">6</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient20126);fill-opacity:1;stroke:none;stroke-width:0.70923644"
-       x="392.91595"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient5560);fill-opacity:1;stroke:none;stroke-width:0.70923644"
+       x="403.65161"
        y="701.21136"
        id="text7372"
        transform="scale(1.1177732,0.89463587)"
        inkscape:label="text starting line up"><tspan
          sodipodi:role="line"
          id="tspan8841-1-2-60"
-         x="392.91595"
+         x="403.65161"
          y="701.21136"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient20126);fill-opacity:1;stroke-width:0.70923644">7</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient5560);fill-opacity:1;stroke-width:0.70923644">7</tspan></text>
     <rect
        style="opacity:1;fill:url(#linearGradient9339-7);fill-opacity:1;stroke:url(#linearGradient9048-68);stroke-width:1.02068555;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect8657-0-6-5"
@@ -962,7 +962,7 @@ font-family: 'Roboto';
          id="tspan8841-1-2-85"
          x="136.15552"
          y="758.15839"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20038);fill-opacity:1;stroke-width:0.70923644">11</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20038);fill-opacity:1;stroke-width:0.70923644">1</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20034);fill-opacity:1;stroke:none;stroke-width:0.70923644"
@@ -975,7 +975,7 @@ font-family: 'Roboto';
          id="tspan8841-1-2-2-1"
          x="178.2034"
          y="758.15839"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20034);fill-opacity:1;stroke-width:0.70923644">12</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20034);fill-opacity:1;stroke-width:0.70923644">2</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20030);fill-opacity:1;stroke:none;stroke-width:0.70923644"
@@ -988,7 +988,7 @@ font-family: 'Roboto';
          id="tspan8841-1-2-8-8"
          x="222.93521"
          y="758.15839"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20030);fill-opacity:1;stroke-width:0.70923644">13</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20030);fill-opacity:1;stroke-width:0.70923644">3</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20026);fill-opacity:1;stroke:none;stroke-width:0.70923644"
@@ -1001,7 +1001,7 @@ font-family: 'Roboto';
          id="tspan8841-1-2-6-5"
          x="267.66699"
          y="758.15839"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20026);fill-opacity:1;stroke-width:0.70923644">14</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20026);fill-opacity:1;stroke-width:0.70923644">4</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20022);fill-opacity:1;stroke:none;stroke-width:0.70923644"
@@ -1014,7 +1014,7 @@ font-family: 'Roboto';
          id="tspan8841-1-2-9-1"
          x="312.39877"
          y="758.15839"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20022);fill-opacity:1;stroke-width:0.70923644">15</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20022);fill-opacity:1;stroke-width:0.70923644">5</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20018);fill-opacity:1;stroke:none;stroke-width:0.70923644"
@@ -1027,7 +1027,7 @@ font-family: 'Roboto';
          id="tspan8841-1-2-3-7"
          x="357.13058"
          y="758.15839"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20018);fill-opacity:1;stroke-width:0.70923644">16</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20018);fill-opacity:1;stroke-width:0.70923644">6</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20014);fill-opacity:1;stroke:none;stroke-width:0.70923644"
@@ -1040,7 +1040,7 @@ font-family: 'Roboto';
          id="tspan8841-1-2-60-8"
          x="401.86234"
          y="758.15839"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20014);fill-opacity:1;stroke-width:0.70923644">17</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient20014);fill-opacity:1;stroke-width:0.70923644">7</tspan></text>
     <rect
        style="opacity:1;fill:url(#linearGradient9339-1);fill-opacity:1;stroke:url(#linearGradient9048-7);stroke-width:1.02068555;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect8657-0-6-2"
@@ -1184,7 +1184,7 @@ font-family: 'Roboto';
          id="data.team1.hits"
          x="493.43158"
          y="758.15839"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient19978);fill-opacity:1;stroke-width:0.70923644">10</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient19978);fill-opacity:1;stroke-width:0.70923644">8</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient19974);fill-opacity:1;stroke:none;stroke-width:0.70923644"
