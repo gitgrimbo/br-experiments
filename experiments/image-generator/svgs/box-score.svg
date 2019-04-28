@@ -617,16 +617,6 @@ font-family: 'Roboto';
     <linearGradient
        inkscape:collect="always"
        xlink:href="#white"
-       id="linearGradient10255"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.80880257,0,0,0.80880261,51.985764,261.06844)"
-       x1="241.98576"
-       y1="160.84006"
-       x2="719.43597"
-       y2="160.84006" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#white"
        id="linearGradient5560"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0.53529019,0,0,0.53529021,275.9891,604.78843)"
@@ -694,6 +684,16 @@ font-family: 'Roboto';
        y1="160.84006"
        x2="719.43597"
        y2="160.84006" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#white"
+       id="linearGradient5912"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.80880257,0,0,0.80880261,257.45328,261.06844)"
+       x1="241.98576"
+       y1="160.84006"
+       x2="719.43597"
+       y2="160.84006" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -757,17 +757,17 @@ font-family: 'Roboto';
        inkscape:label="rect starting line up bg" />
     <text
        xml:space="preserve"
-       style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:50.66666794px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient10255);fill-opacity:1;stroke:none;stroke-width:1.07162857"
-       x="244.87888"
+       style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:50.66666794px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient5912);fill-opacity:1;stroke:none;stroke-width:1.07162857"
+       x="450.34653"
        y="406.75977"
-       id="text8843"
+       id="data.heading"
        transform="scale(0.7397764,1.3517598)"
        inkscape:label="text starting line up"><tspan
          sodipodi:role="line"
          id="tspan8841"
-         x="244.87888"
+         x="450.34653"
          y="406.75977"
-         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:50.66666794px;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient10255);fill-opacity:1;stroke-width:1.07162857">GAMEDAY SCORE</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:50.66666794px;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:url(#linearGradient5912);fill-opacity:1;stroke-width:1.07162857">GAMEDAY SCORE</tspan></text>
     <rect
        style="opacity:1;fill:none;fill-opacity:1;stroke:url(#linearGradient8675);stroke-width:3.1631422;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect8657"
