@@ -30,15 +30,34 @@
       gapi.load('picker', onPickerApiLoad);
     }
 
+    function setError(str) {
+      const el = document.getElementById("error");
+      const span = el.querySelector("span");
+      if (!str) {
+        span.innerHTML = "";
+        el.style.display = "none";
+      } else {
+        span.innerHTML = str;
+        el.style.display = "";
+      }
+    }
+
     function onAuthApiLoad() {
+      setError(null);
       var authBtn = document.getElementById('auth');
       authBtn.disabled = false;
-      authBtn.addEventListener('click', function() {
-        gapi.auth2.init({ client_id: clientId }).then(function(googleAuth) {
-          googleAuth.signIn({ scope: scope }).then(function(result) {
-            handleAuthResult(result.getAuthResponse());
-          })
-        })
+      authBtn.addEventListener('click', async function() {
+        try {
+          const googleAuth = await gapi.auth2.init({ client_id: clientId });
+          const result = await googleAuth.signIn({ scope: scope });
+          handleAuthResult(null, result.getAuthResponse());
+        } catch (err) {
+          const msg = (typeof err === "string")
+            ? err
+            : (err.message || err.error || String(err));
+          setError(msg);
+          handleAuthResult(err);
+        }
       });
     }
 
@@ -47,7 +66,8 @@
       createPicker();
     }
 
-    function handleAuthResult(authResult) {
+    function handleAuthResult(err, authResult) {
+      console.log("handleAuthResult", err, authResult);
       if (authResult && !authResult.error) {
         oauthToken = authResult.access_token;
         createPicker();
@@ -72,6 +92,7 @@
 
     // A simple callback implementation.
     function pickerCallback(data) {
+      console.log("pickerCallback", data);
       let url = "";
       let result = "";
       if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
@@ -86,7 +107,11 @@
 </head>
 
 <body>
+  <p>Slightly modified version of Google Picker's hello world example (<a href="https://developers.google.com/picker/docs/">docs</a>).</p>
+
   <button type="button" id="auth" disabled>Authenticate / Pick Document</button>
+
+  <p id="error" style="display:none; border:solid 1px red;">Error: <span></span></p>
 
   <p>
     Document URL: <a id="url" href="#"></a>
