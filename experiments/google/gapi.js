@@ -2,15 +2,19 @@ function googToPromise(goog) {
   return new Promise((resolve, reject) => goog.then(resolve, reject));
 }
 
-async function gapiLoadClientAuth2() {
+async function gapiLoad(libraries) {
   return new Promise((resolve, reject) => {
-    gapi.load("client:auth2", {
+    gapi.load(libraries, {
       callback: resolve,
       onerror: reject,
       timeout: reject,
       ontimeout: reject,
     });
   });
+}
+
+async function gapiLoadClientAuth2() {
+  return gapiLoad("client:auth2");
 }
 
 async function initGoogleClient({
@@ -50,6 +54,7 @@ async function initGoogleClient({
 }
 
 export {
+  gapiLoad,
   googToPromise,
   initGoogleClient,
 };
