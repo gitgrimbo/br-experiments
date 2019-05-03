@@ -4,9 +4,11 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 
 import AsyncButton from "../common/AsyncButton";
 import ErrorBox from "../common/ErrorBox";
+import HR from "../common/HR";
 
 import createPNG from "./createPNG";
 import { makeSource as makeGoogleSheetsDataSource } from "./GoogleSheetsDataLoader";
@@ -19,7 +21,6 @@ import {
   setValue,
 } from "./reducer-utils";
 import { updateIFrameWithSVGSource, updateSVG } from "./svg-iframe";
-import { Typography } from "@material-ui/core";
 
 const reducer = (state, action) => {
   const set = setValue(state);
@@ -28,13 +29,12 @@ const reducer = (state, action) => {
       const { prop, reducer } = action;
       const oldValue = state[prop];
       const newValue = reducer(oldValue);
-      if (oldValue === newValue) {
-        return state;
-      }
-      return {
-        ...state,
-        [prop]: newValue,
-      };
+      return (oldValue === newValue)
+        ? state
+        : {
+          ...state,
+          [prop]: newValue,
+        };
     }
     case "setGeneric": return set(action.valueName, action.value);
     case "setSVGSource": return set("svgSource", action.value);
@@ -72,8 +72,16 @@ const reducer = (state, action) => {
   }
 };
 
+const svgUrls = [
+  "./svgs/starting-lineup.svg",
+  "./svgs/starting-lineup-with-opposition.svg",
+  "./svgs/box-score.svg",
+  "./svgs/test-fixture.svg",
+  "./svgs/final-score.svg",
+];
+
 const initialState = {
-  url: "./starting-lineup.svg",
+  url: svgUrls[1],
   svgSource: null,
   pngURL: null,
   createPNGError: null,
@@ -85,13 +93,6 @@ const initialState = {
   tabIdx: 0,
 };
 
-const svgUrls = [
-  "./svgs/starting-lineup.svg",
-  "./svgs/starting-lineup-with-opposition.svg",
-  "./svgs/box-score.svg",
-  "./svgs/test-fixture.svg",
-];
-
 function App(props) {
   const {
     apiKey,
@@ -101,7 +102,6 @@ function App(props) {
   const [state, dispatch] = React.useReducer(reducer, initialState);
   const makePropReducer = (prop) => (reducer) => dispatch({ type: "applyReducer", prop, reducer });
 
-  const [signInError, setSignInError] = React.useState(null);
   const iframeRef = React.useRef();
 
   const onChangeData = (e) => {
@@ -201,7 +201,7 @@ function App(props) {
         <Tab label="Load Data"></Tab>
         <Tab label="Set Image Data"></Tab>
       </Tabs>
-      <div style={{ marginTop: "1em", marginBottom: "1em", padding: "0 0.5em 0.5em 0.5em", borderBottom: "solid 2px lightgrey" }}>
+      <div style={{ marginTop: "1em", marginBottom: "1em", padding: "0 0.5em 0.5em 0.5em" }}>
         {(state.tabIdx === 0) && (
           <LoadImageTab
             urls={svgUrls}
@@ -228,6 +228,7 @@ function App(props) {
           />
         )}
       </div>
+      <HR />
       {
         state.svgSource && (
           <div style={{ textAlign: "center" }}>

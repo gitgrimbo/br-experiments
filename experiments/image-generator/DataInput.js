@@ -1,9 +1,7 @@
 import React from "react";
-import Modal from "react-modal";
 import Button from "@material-ui/core/Button";
 import Fab from "@material-ui/core/Fab";
 import TextField from "@material-ui/core/TextField";
-import CancelIcon from "@material-ui/icons/Cancel";
 import DragIndicator from "@material-ui/icons/DragIndicator";
 import EditIcon from "@material-ui/icons/Edit";
 import Sortable from "sortablejs";
@@ -12,7 +10,7 @@ import minMax from "../common/minMax";
 import preventDefault from "../common/preventDefault";
 
 import isListItem from "./isListItem";
-import SheetsExplorer from "../sheets/SheetsExplorer";
+import DataPicker from "./DataPicker";
 
 const cssNoSelect = `
 .draghandle {
@@ -25,57 +23,6 @@ const cssNoSelect = `
   cursor: move;
   cursor: -webkit-grabbing;
 }`;
-
-function Editor({
-  visible,
-  sampleData,
-  onSave,
-  onRequestClose,
-}) {
-  const [sheetIdx, setSheetIdx] = React.useState(0);
-  const sheet = sampleData && sampleData[sheetIdx];
-
-  const buttonIconStyle = {
-    marginLeft: "0.5em",
-  };
-
-  return (
-    <Modal
-      isOpen={visible}
-      onRequestClose={onRequestClose}
-    >
-      <h2>Pick Data</h2>
-      <select
-        value={sheetIdx}
-        onChange={(e) => setSheetIdx(Number(e.target.value))}
-      >
-        {
-          sampleData && sampleData.map(({ title }, i) => (
-            <option key={i} value={i}>{title}</option>
-          ))
-        }
-      </select>
-      {sheet && (
-        <div style={{ marginTop: "1em" }}>
-          <SheetsExplorer
-            sheets={sheet.sheets}
-            cellPadding="0.5em"
-            onClickCell={(value) => {
-              onSave && onSave(value);
-              onRequestClose();
-            }}
-          />
-        </div>
-      )}
-      <div style={{ marginTop: "1em" }}>
-        <Button variant="contained" onClick={onRequestClose}>
-          Close
-          <CancelIcon style={buttonIconStyle} />
-        </Button>
-      </div>
-    </Modal>
-  );
-}
 
 function EditableText({
   label,
@@ -217,6 +164,7 @@ export default function DataInput({
 
   const onSave = (idx, name) => (value) => {
     console.log("DataInput.onSave", idx, name, value);
+    setShowEditor(null);
     onChange({
       type: "item",
       idx,
@@ -300,11 +248,14 @@ export default function DataInput({
           );
         })}
       </ul>
-      <Editor
+      {console.log(data, showEditor, data && data[showEditor])}
+      <DataPicker
         visible={typeof showEditor === "number"}
         onRequestClose={() => setShowEditor(null)}
         onSave={onSave(showEditor, "value")}
         sampleData={sampleData}
+        clientId={"459216665265-rg4ujqcjinpgo3dlgqaori593ufgr8vr.apps.googleusercontent.com"}
+        apiKey={"AIzaSyDfg7q3EAFMU4Z1yNRT_hceC5qLWYob40k"}
       />
     </>
   );

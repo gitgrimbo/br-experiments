@@ -43,7 +43,6 @@
     "move-file": "^1.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-modal": "^3.8.1",
     "sortablejs": "^1.9.0"
   },
   "repository": {
