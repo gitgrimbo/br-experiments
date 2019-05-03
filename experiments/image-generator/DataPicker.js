@@ -44,14 +44,18 @@ function pick({
     function createPicker() {
       console.log("createPicker", pickerApiLoaded, oauthToken);
       if (pickerApiLoaded && oauthToken) {
-        const picker = new google.picker.PickerBuilder().
-          addView(google.picker.ViewId.PHOTOS).
-          addView(google.picker.ViewId.SPREADSHEETS).
-          addView(google.picker.ViewId.DOCS_IMAGES).
-          setOAuthToken(oauthToken).
-          setDeveloperKey(apiKey).
-          setCallback(pickerCallback).
-          build();
+        // get viewport size
+        const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        const picker = new google.picker.PickerBuilder()
+          .addView(google.picker.ViewId.PHOTOS)
+          .addView(google.picker.ViewId.SPREADSHEETS)
+          .addView(google.picker.ViewId.DOCS_IMAGES)
+          .setOAuthToken(oauthToken)
+          .setDeveloperKey(apiKey)
+          .setCallback(pickerCallback)
+          .setSize(vw * 0.9, vh * 0.9)
+          .build();
         picker.setVisible(true);
       }
     }
