@@ -30,7 +30,12 @@ module.exports = async (req, res) => {
   res.set("Access-Control-Allow-Methods", "OPTIONS, GET, POST");
 
   const origin = req.headers.origin;
-  if (["https://local.sheffieldbladerunners.co.uk", "https://gitgrimbo.github.io"].indexOf(origin) < 0) {
+  const allowedOrigins = [
+    "https://local.sheffieldbladerunners.co.uk",
+    "https://gitgrimbo.github.io",
+    "https://local.paulgri.me",
+  ];
+  if (allowedOrigins.indexOf(origin) < 0) {
     res.status(500).send("Unauthorised use");
     return;
   }
