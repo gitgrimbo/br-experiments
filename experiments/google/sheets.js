@@ -1,7 +1,4 @@
-import {
-  googToPromise,
-  initGoogleClient,
-} from "./gapi";
+import { initGoogleClient } from "./gapi";
 
 function initGoogleSheets({
   apiKey,

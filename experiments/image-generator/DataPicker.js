@@ -10,108 +10,9 @@ import CancelIcon from "@material-ui/icons/Cancel";
 
 import Center from "../common/Center";
 import HR from "../common/HR";
+import * as picker from "../google/picker";
 import SheetsExplorer from "../sheets/SheetsExplorer";
-import { gapiLoad } from "../google/gapi";
 import ErrorBox from "../common/ErrorBox";
-
-
-function pick({
-  clientId,
-  apiKey,
-  onPickerLoaded,
-}) {
-  return new Promise(async (resolve, reject) => {
-    const scope = [
-      "https://www.googleapis.com/auth/photos",
-      "https://www.googleapis.com/auth/drive.file",
-    ].join(" ");
-
-    let pickerApiLoaded = false;
-    let oauthToken;
-
-    function pickerCallback(response) {
-      console.log("pickerCallback", response);
-      if (response.action === "loaded") {
-        onPickerLoaded && onPickerLoaded(response);
-      } else {
-        resolve(response);
-      }
-    }
-
-    // Create and render a Picker object for picking:
-    // - user Photos.
-    // - user Spreadsheets.
-    function createPicker() {
-      console.log("createPicker", pickerApiLoaded, oauthToken);
-      if (pickerApiLoaded && oauthToken) {
-        // get viewport size
-        const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-        const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-        const picker = new google.picker.PickerBuilder()
-          .addView(google.picker.ViewId.PHOTOS)
-          .addView(google.picker.ViewId.SPREADSHEETS)
-          .addView(google.picker.ViewId.DOCS_IMAGES)
-          .setOAuthToken(oauthToken)
-          .setDeveloperKey(apiKey)
-          .setCallback(pickerCallback)
-          .setSize(vw * 0.9, vh * 0.9)
-          .build();
-        picker.setVisible(true);
-      }
-    }
-
-    async function loadAuth2API() {
-      function getAuthInstance() {
-        if (typeof gapi !== "undefined" && typeof gapi.auth2 !== "undefined") {
-          return gapi.auth2.getAuthInstance();
-        }
-        return null;
-      }
-
-      const authInstance = getAuthInstance();
-      const isSignedIn = authInstance && authInstance.isSignedIn.get();
-      if (isSignedIn) {
-        if (!oauthToken) {
-          oauthToken = authInstance.currentUser.get().getAuthResponse().access_token;
-        }
-        return;
-      }
-
-      await gapiLoad("auth2");
-      const googleAuth = await gapi.auth2.init({ client_id: clientId });
-      console.log("loadAuth2API", googleAuth);
-      const result = await googleAuth.signIn({ scope: scope });
-      console.log("loadAuth2API", result);
-      const authResponse = result.getAuthResponse();
-      if (authResponse && !authResponse.error) {
-        oauthToken = authResponse.access_token;
-      }
-    }
-
-    async function loadPickerAPI() {
-      await gapiLoad("picker");
-      pickerApiLoaded = true;
-    }
-
-    if (typeof gapi !== "object" || gapi === null) {
-      reject(new Error("gapi not loaded"));
-      return;
-    }
-
-    try {
-      const auth2Promise = loadAuth2API();
-      const pickerPromise = loadPickerAPI();
-      await Promise.all([auth2Promise, pickerPromise]);
-      console.log("apis loaded");
-      console.log("creating picker");
-      createPicker();
-    } catch (err) {
-      console.error("Error selecting Google document");
-      console.error(err);
-      reject(err);
-    }
-  });
-}
 
 
 function SheetValuePicker({
@@ -153,35 +54,18 @@ function GoogleDocPicker({
 }) {
   const [error, setError] = React.useState(null);
 
-  function extractPicasaUrl(doc) {
-    // https://stackoverflow.com/a/47315488/319878
-    if (!doc.thumbnails) {
-      return null;
-    }
-    const [th] = doc.thumbnails;
-    if (!th) {
-      return null;
-    }
-    const parts = th.url.split("/");
-    parts[parts.length - 2] = "s0";
-    return parts.join("/");
-  }
-
   const onClickGoogleDoc = async (e) => {
     e.preventDefault();
     setError(null);
     try {
-      const picked = await pick({
+      const picked = await picker.pick({
         clientId,
         apiKey,
       });
       console.log("onClickGoogleDoc", picked);
       if (picked.action === "picked") {
         const [doc] = picked.docs;
-        let url = doc.url;
-        if (doc.serviceId === "picasa") {
-          url = extractPicasaUrl(doc);
-        }
+        const url = picker.extractPublicImageUrl(doc) || doc.url;
         onSave && onSave(url);
       } else {
         const err = (picked.action === "cancel")
