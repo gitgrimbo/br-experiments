@@ -78,6 +78,7 @@ const svgUrls = [
   "./svgs/box-score.svg",
   "./svgs/test-fixture.svg",
   "./svgs/final-score.svg",
+  "./svgs/upcoming.svg",
 ];
 
 const initialState = {
