@@ -138,6 +138,12 @@ function extractPublicImageUrl(doc) {
     }
     return extractDocsPhotoUrl(doc);
   }
+  if (doc.serviceId === "web" && doc.type === "photo") {
+    // TODO - not sure how else to deal with this, other than picking the last thumbnail.
+    // See sample data below.
+    const lastThumbnail = doc.thumbnails[doc.thumbnails.length - 1];
+    return lastThumbnail.url;
+  }
   return null;
 }
 
