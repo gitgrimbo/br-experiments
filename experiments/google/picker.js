@@ -270,4 +270,47 @@ Shape of a [serviceId=picasa, type=photo] object
   }
  ]
 }
+
+---------------------------------------------
+Shape of a [serviceId=web, type=photo] object
+---------------------------------------------
+
+- Note that one thumbnail is a Google-generated thumbnail, and one is the real image.
+- Note that the doc.url is the URL of the page where the image was found.
+
+{
+ "action": "picked",
+ "viewToken": [
+  "image-search",
+  null,
+  {
+   "license": "crwm",
+   "query": "baseball"
+  }
+ ],
+ "docs": [
+  {
+   "id": "bcc2b4959e8ce55790d9257d86916eac",
+   "serviceId": "web",
+   "mimeType": "image/jpeg",
+   "name": "Air Force baseball alumni share memories &gt; United States Air Force ...",
+   "description": "Air Force baseball alumni share memories &gt; United States Air Force ...",
+   "type": "photo",
+   "iconUrl": "https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png",
+   "url": "https://www.usafa.af.mil/USAFANews/Article/428854/air-force-baseball-alumni-share-memories/",
+   "thumbnails": [
+    {
+     "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_5TcHEaFB2PKebt0EBUFZx1k_3iQOvfLHbLTmGm87M7Wz8mg39rp7YWM",
+     "width": 150,
+     "height": 125
+    },
+    {
+     "url": "https://media.defense.gov/2010/Oct/01/2000320190/-1/-1/0/100925-F-3580W-230.JPG",
+     "width": 2400,
+     "height": 1995
+    }
+   ]
+  }
+ ]
+}
 */
