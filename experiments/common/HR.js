@@ -1,7 +1,7 @@
 import React from "react";
 import { withTheme } from "@material-ui/core";
 
-export default withTheme()(function HR({ theme }) {
+export default withTheme(function HR({ theme }) {
   const { primary } = theme.palette;
   return <hr
     style={{
