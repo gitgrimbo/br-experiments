@@ -16,7 +16,7 @@ const entry = [
 ].reduce((entry, name) => {
   entry[name] = [
     "babel-polyfill",
-    `./experiments/${name}/index.js`,
+    path.resolve(__dirname, `./experiments/${name}/index.js`),
   ];
   return entry;
 }, {});
@@ -30,7 +30,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
         loader: "babel-loader",
-        options: { presets: ["@babel/env"] },
+        options: { presets: ["@babel/preset-env", "@babel/preset-react"] },
       },
     ],
   },
