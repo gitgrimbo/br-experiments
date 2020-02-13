@@ -1,6 +1,6 @@
-const convertImageEndpointLocal = "http://localhost:8010/bladerunners/us-central1/convertImage";
+const convertImageEndpointLocal = "http://localhost:9902/";
 const convertImageEndpointProd = "https://us-central1-bladerunners.cloudfunctions.net/convertImage";
-const screenshotEndpointLocal = "http://localhost:8010/bladerunners/us-central1/screenshot";
+const screenshotEndpointLocal = "http://localhost:9901/";
 const screenshotEndpointProd = "https://us-central1-bladerunners.cloudfunctions.net/screenshot";
 
 export default async function createPNG(svgSource) {
