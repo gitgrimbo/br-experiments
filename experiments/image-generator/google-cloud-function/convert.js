@@ -18,6 +18,7 @@ const os = require("os");
 const path = require("path");
 
 const getUploads = require("./getUploads");
+const { isOriginAllowed } = require("./allowed-origins");
 
 async function convertImagePost(req, res) {
   const sendFile = async (srcfile, destfile) => {
@@ -60,12 +61,7 @@ module.exports = async (req, res) => {
   res.set("Access-Control-Allow-Methods", "OPTIONS, GET, POST");
 
   const origin = req.headers.origin;
-  const allowedOrigins = [
-    "https://local.sheffieldbladerunners.co.uk",
-    "https://gitgrimbo.github.io",
-    "https://local.paulgri.me",
-  ];
-  if (allowedOrigins.indexOf(origin) < 0) {
+  if (origin && !isOriginAllowed(origin)) {
     res.status(500).send("Unauthorised use");
     return;
   }

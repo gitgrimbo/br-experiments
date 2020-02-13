@@ -15,6 +15,7 @@ const path = require("path");
 const puppeteer = require("puppeteer");
 
 const getUploads = require("./getUploads");
+const { isOriginAllowed } = require("./allowed-origins");
 
 async function getBrowserPage() {
   // Launch headless Chrome. Turn off sandbox so Chrome can run under root.
@@ -30,12 +31,7 @@ module.exports = async (req, res) => {
   res.set("Access-Control-Allow-Methods", "OPTIONS, GET, POST");
 
   const origin = req.headers.origin;
-  const allowedOrigins = [
-    "https://local.sheffieldbladerunners.co.uk",
-    "https://gitgrimbo.github.io",
-    "https://local.paulgri.me",
-  ];
-  if (allowedOrigins.indexOf(origin) < 0) {
+  if (origin && !isOriginAllowed(origin)) {
     res.status(500).send("Unauthorised use");
     return;
   }
