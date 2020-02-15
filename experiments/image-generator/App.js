@@ -79,6 +79,9 @@ const svgUrls = [
   "./svgs/test-fixture.svg",
   "./svgs/final-score.svg",
   "./svgs/upcoming.svg",
+  "./svgs/font-test.svg",
+  "../img/ty/Bladerunners original badge.svg",
+  "../img/ty/Bladerunners original logo.svg",
 ];
 
 const initialState = {
