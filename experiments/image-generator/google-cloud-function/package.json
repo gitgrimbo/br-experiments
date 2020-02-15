@@ -15,8 +15,8 @@
     "node": ">=8"
   },
   "scripts": {
-    "deploy:convertImage": "gcloud functions deploy convertImage --runtime nodejs8 --trigger-http",
-    "deploy:screenshot": "gcloud functions deploy screenshot --runtime nodejs8 --trigger-http --memory 1024MB",
+    "deploy:convertImage": "gcloud functions deploy convertImage --project=bladerunners --runtime nodejs10 --trigger-http",
+    "deploy:screenshot": "gcloud functions deploy screenshot --project=bladerunners --runtime nodejs10 --trigger-http --memory 1024MB",
     "deploy": "run-s deploy:*",
     "logs": "functions logs read",
     "test": "mocha test/*.test.js --timeout=20000",
