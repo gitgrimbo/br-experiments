@@ -1,8 +1,10 @@
 import React from "react";
 
 import AsyncButton from "../common/AsyncButton";
+import HelpPanel from "../common/HelpPanel";
 
 import DataInput from "./DataInput";
+import helpHtml from "./SetDataTab.help.html";
 
 export default function SetDataTab({
   state,
@@ -14,10 +16,7 @@ export default function SetDataTab({
 
   return (
     <>
-      <div>
-        <p>This section provides the ability to set image data.</p>
-        <p>The data can be input manually, or chosen from compatible data loaded above.</p>
-      </div>
+      <HelpPanel html={helpHtml} />
       {
         state.data && (
           <DataInput

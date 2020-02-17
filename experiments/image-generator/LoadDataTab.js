@@ -1,7 +1,9 @@
 import React from "react";
 
 import ClickableFieldset from "../common/ClickableFieldset";
+import HelpPanel from "../common/HelpPanel";
 import SheetsExplorer from "../sheets/SheetsExplorer";
+import helpHtml from "./LoadDataTab.help.html";
 
 export default function DataFieldset({
   data,
@@ -9,10 +11,7 @@ export default function DataFieldset({
 }) {
   return (
     <>
-      <div>
-        <p>This section provides the ability to load data from external sources, such as Google Sheets.</p>
-        <p>The loaded data can then be used to set values within the SVG image, see below.</p>
-      </div>
+      <HelpPanel html={helpHtml} />
       {data && data.map(({ sheets, title }, i) => (
         <div key={`data-${i}`} style={{ marginTop: "1em" }}>
           <ClickableFieldset legend={title}>

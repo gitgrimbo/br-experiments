@@ -1024,8 +1024,10 @@ font-family: 'Roboto';
        y1="160.84006"
        x2="719.43597"
        y2="160.84006" />
-    <text
-       id="sample.data">{"data.player.position":["C","P","1B","2B","3B","SS","LF","CF","RF"],"data.player.name":["Rich Green","Stephen Broughton","Jose Picornell","Miguel Juárez","Paul Cassidy","Jon ‘AK’ Kelly","Nick Wills","Jim Ellis","Jon Gardner","Scott Lingrell","Sean Harrison","Paul Grime","Craig Moulds","Jack Lockwood","Dominic Norburn","Sean Briscoe","Ryan Kendall","Sam Parkin Smith","John Briscoe","Chris Pender","Jesus ‘Jose’ Toriz-Garcia","Nick Cockcroft","Frazer Longford","Matt Risby","Damien Kilkenny","Kirsty Jones","Connor Brosnan","Jay Stearns","Steve Wood","Kohei Moriyama","Andrew Browse","Dave Whitaker","Marco Foglia","Heather Mckinty","Iwan Struggles","Michael Wraith","Alex Miles","Majid Hussain","Jack Hukin","Tom Chappell","Robert Naylor","Mark Norburn","Luke Brown","Rob Perry","Robbie Alletson","Jordan Wynn","Andy Adebogun","Zak Berisford","Lee Siggs","Nestor Martinez","Martin Hingley","Ryan Smith","Megan Wynne","Ellie Page","Phil Baines","Jonny Allison","Alan Bowers"]}</text>
+    <text id="sample.data">{
+      "data.player.position":["C","P","1B","2B","3B","SS","LF","CF","RF"],
+      "data.player.name":["Rich Green","Stephen Broughton","Jose Picornell","Miguel Juárez","Paul Cassidy","Jon ‘AK’ Kelly","Nick Wills","Jim Ellis","Jon Gardner","Scott Lingrell","Sean Harrison","Paul Grime","Craig Moulds","Jack Lockwood","Dominic Norburn","Sean Briscoe","Ryan Kendall","Sam Parkin Smith","John Briscoe","Chris Pender","Jesus ‘Jose’ Toriz-Garcia","Nick Cockcroft","Frazer Longford","Matt Risby","Damien Kilkenny","Kirsty Jones","Connor Brosnan","Jay Stearns","Steve Wood","Kohei Moriyama","Andrew Browse","Dave Whitaker","Marco Foglia","Heather Mckinty","Iwan Struggles","Michael Wraith","Alex Miles","Majid Hussain","Jack Hukin","Tom Chappell","Robert Naylor","Mark Norburn","Luke Brown","Rob Perry","Robbie Alletson","Jordan Wynn","Andy Adebogun","Zak Berisford","Lee Siggs","Nestor Martinez","Martin Hingley","Ryan Smith","Megan Wynne","Ellie Page","Phil Baines","Jonny Allison","Alan Bowers"]
+    }</text>
     <linearGradient
        inkscape:collect="always"
        xlink:href="#white"

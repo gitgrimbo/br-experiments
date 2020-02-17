@@ -1,10 +1,13 @@
 import React from "react";
 
+import HelpPanel from "../common/HelpPanel";
+
 import ImageLoader, {
   TextBoxSource,
   ListSource,
   GooglePhotosSource,
 } from "./ImageLoader"
+import helpHtml from "./LoadImageTab.help.html";
 
 export default function ImageLoaderFieldset({
   urls,
@@ -67,9 +70,7 @@ export default function ImageLoaderFieldset({
 
   return (
     <>
-      <div>
-        <p>This section provides the ability to load an SVG image from a pre-defined source (this website), from any public URL, or from Google Photos.</p>
-      </div>
+      <HelpPanel html={helpHtml} />
       <ImageLoader
         sources={imageLoaderSources}
         state={state}
