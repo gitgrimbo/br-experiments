@@ -1,6 +1,10 @@
 import React from "react";
+
 import AppBar from "@material-ui/core/AppBar";
+import Checkbox from '@material-ui/core/Checkbox';
 import CssBaseline from "@material-ui/core/CssBaseline";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -9,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import AsyncButton from "../common/AsyncButton";
 import ErrorBox from "../common/ErrorBox";
 import HR from "../common/HR";
+import useWindowDimensions from "../common/useWindowDimensions";
 
 import createPNG from "./createPNG";
 import { makeSource as makeGoogleSheetsDataSource } from "./GoogleSheetsDataLoader";
@@ -20,7 +25,7 @@ import {
   arraySetValue,
   setValue,
 } from "./reducer-utils";
-import { updateIFrameWithSVGSource, updateSVG } from "./svg-iframe";
+import { updateIFrameWithSVGSource, updateSVG, scaleSVG } from "./svg-iframe";
 
 const reducer = (state, action) => {
   const set = setValue(state);
@@ -40,6 +45,8 @@ const reducer = (state, action) => {
     case "setSVGSource": return set("svgSource", action.value);
     case "setCreatePNGError": return set("createPNGError", action.value);
     case "setPNGURL": return set("pngURL", action.value);
+    case "setShouldScaleSVG": return set("shouldScaleSVG", action.value);
+    case "setSVGSize": return set("svgSize", action.value);
     case "setData": {
       const state2 = set("data", action.value);
       return {
@@ -53,8 +60,10 @@ const reducer = (state, action) => {
       return set("data", data);
     }
     case "setDataValue": {
+      console.log("setDataValue", action);
       const { dataIdx, name, value } = action.value;
       const old = state.data[dataIdx][name];
+      console.log("setDataValue", old, value);
       return (old !== value)
         ? set("data", arraySetValue(state.data, dataIdx, name, value))
         : state;
@@ -95,6 +104,7 @@ const initialState = {
   embeddedSampleData: null,
   imageLoaderFieldset: {},
   tabIdx: 0,
+  shouldScaleSVG: true,
 };
 
 function App(props) {
@@ -103,8 +113,16 @@ function App(props) {
     clientId,
     spreadsheetId,
   } = props;
+  const windowDimensions = useWindowDimensions();
   const [state, dispatch] = React.useReducer(reducer, initialState);
   const makePropReducer = (prop) => (reducer) => dispatch({ type: "applyReducer", prop, reducer });
+
+  React.useEffect(() => {
+    if (iframeRef.current && state.svgSource) {
+      const reset = !state.shouldScaleSVG;
+      scaleSVG(iframeRef.current, windowDimensions, reset);
+    }
+  }, [state.shouldScaleSVG]);
 
   const iframeRef = React.useRef();
 
@@ -151,8 +169,8 @@ function App(props) {
   const onChangeSVGSource = (svgSource) => {
     dispatch({ type: "setSVGSource", value: svgSource });
     if (iframeRef.current && svgSource) {
-      const scale = 1;
-      const { data, sampleData } = updateIFrameWithSVGSource(iframeRef.current, svgSource, scale);
+      const { data, sampleData, width, height } = updateIFrameWithSVGSource(iframeRef.current, svgSource, state.shouldScaleSVG, windowDimensions);
+      dispatch({ type: "setSVGSize", value: { width, height } });
       dispatch({ type: "setData", value: data });
       dispatch({ type: "setEmbeddedSampleData", value: sampleData });
     }
@@ -244,17 +262,33 @@ function App(props) {
       {state.svgSource && (
         <div>
           <h2>Source Image</h2>
-          <div style={{ width: "100%", overflow: "auto" }}>
+          <FormGroup row>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={!state.shouldScaleSVG}
+                  onChange={(e) => dispatch({ type: "setShouldScaleSVG", value: !e.target.checked })}
+                  value="true"
+                  color="primary"
+                />
+              }
+              label="Show SVG normal size"
+            />
+          </FormGroup>
+          <div id="wrap" style={{ width: "100%", overflow: "auto" }}>
             <iframe ref={iframeRef}></iframe>
           </div>
         </div>
-      )}
-      {state.pngURL && (
-        <div>
-          <h2>PNG Image</h2>
-          <img src={state.pngURL} />
-        </div>
-      )}
+      )
+      }
+      {
+        state.pngURL && (
+          <div>
+            <h2>PNG Image</h2>
+            <img src={state.pngURL} />
+          </div>
+        )
+      }
     </>
   );
 }

@@ -119,12 +119,12 @@ function DataPicker({
 
   const sources = [
     {
-      label: "Google Picker",
-      component: GoogleDocPicker,
-    },
-    {
       label: "Data",
       component: SheetValuePicker,
+    },
+    {
+      label: "Google Picker",
+      component: GoogleDocPicker,
     },
   ];
   const source = sources[tabIdx];
