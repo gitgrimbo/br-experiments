@@ -1,7 +1,10 @@
 const path = require("path");
 const webpack = require("webpack");
 
+const { DefinePlugin, HotModuleReplacementPlugin } = webpack;
+
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const gitrev = require('git-rev-sync');
 
 // the following folders are not web functions, and so should not be put in the entry object
 // "roster", "stats", "twitter"
@@ -58,7 +61,13 @@ module.exports = {
     https: true,
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    new DefinePlugin({
+      "GIT_SHORT": JSON.stringify(gitrev.short()),
+      "GIT_LONG": JSON.stringify(gitrev.long()),
+      "GIT_DATE": JSON.stringify(gitrev.date()),
+      "GIT_BRANCH": JSON.stringify(gitrev.branch()),
+    }),
+    new HotModuleReplacementPlugin(),
     new BundleAnalyzerPlugin({
       openAnalyzer: false,
       analyzerMode: "static",

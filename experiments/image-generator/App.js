@@ -1,6 +1,7 @@
 import React from "react";
 
 import AppBar from "@material-ui/core/AppBar";
+import Box from "@material-ui/core/Box";
 import Checkbox from '@material-ui/core/Checkbox';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -11,6 +12,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
 import AsyncButton from "../common/AsyncButton";
+import defines from "../common/defines";
 import ErrorBox from "../common/ErrorBox";
 import HR from "../common/HR";
 import useWindowDimensions from "../common/useWindowDimensions";
@@ -289,6 +291,7 @@ function App(props) {
           </div>
         )
       }
+      <div>version: {defines.GIT_SHORT} {defines.GIT_DATE}</div>
     </>
   );
 }

@@ -25,6 +25,7 @@
     "babel-polyfill": "^6.26.0",
     "copyfiles": "^2.2.0",
     "gh-pages": "^2.2.0",
+    "git-rev-sync": "^2.0.0",
     "glob": "^7.1.6",
     "html-loader": "^0.5.5",
     "make-dir-cli": "^2.0.0",
