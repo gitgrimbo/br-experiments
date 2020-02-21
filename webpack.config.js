@@ -30,10 +30,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /(node_modules|bower_components)/,
         loader: "babel-loader",
-        options: { presets: ["@babel/preset-env", "@babel/preset-react"] },
+        options: {
+          presets: ["@babel/preset-env", "@babel/preset-typescript", "@babel/preset-react"],
+        },
       },
       {
         test: /\.html$/i,
@@ -41,12 +43,13 @@ module.exports = {
       },
     ],
   },
-  resolve: { extensions: ["*", ".js", ".jsx"] },
+  resolve: { extensions: ["*", ".ts", ".tsx", ".js", ".jsx"] },
   output: {
     path: path.resolve(__dirname, "dist/"),
     publicPath: "/br-experiments/dist/",
     filename: "[name].js",
   },
+  devtool: "source-map",
   devServer: {
     contentBase: path.join(__dirname, "/"),
     // use all hosts so that local DNS works with webpack dev server

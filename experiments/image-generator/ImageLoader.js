@@ -49,7 +49,11 @@ export function ListSource({
   );
 }
 
-export function GooglePhotosSource() {
+export function GooglePhotosSource({
+  initialState,
+  onUrlSelected,
+  onChangeState,
+}) {
   return (
     <div>
       Google Photos URL:{" "}
@@ -101,7 +105,7 @@ export default function ImageLoader({
 
   if (!mode) {
     setMode(Object.keys(sources)[0]);
-    return "No loader source selected";
+    return <div>"No loader source selected"</div>;
   }
 
   const onClickLoad = async (e) => {

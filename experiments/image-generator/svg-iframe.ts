@@ -1,16 +1,30 @@
 import SVG from "./svg";
 
-export function scaleSVG(iframe, windowDimensions, reset = false) {
+interface IWindowDimensions {
+  width: number;
+  height: number;
+}
+
+export function scaleSVG(
+  iframe: HTMLIFrameElement,
+  windowDimensions: IWindowDimensions,
+  reset = false,
+) {
   const doc = iframe.contentDocument;
   const svg = doc.querySelector("svg");
   const { width } = SVG.parseSVG(svg);
   // try and make the SVG scale to the width of the window
-  const scale = reset ? 1 : windowDimensions.width / width;
+  const scale = Math.min(1, reset ? 1 : windowDimensions.width / width);
   svg.style.transform = `scale(${scale})`;
   svg.style.transformOrigin = "0 0";
 }
 
-export function updateIFrameWithSVGSource(iframe, svgSource, shouldScale = true, windowDimensions) {
+export function updateIFrameWithSVGSource(
+  iframe: HTMLIFrameElement,
+  svgSource: string,
+  shouldScale = true,
+  windowDimensions: IWindowDimensions,
+) {
   const doc = iframe.contentDocument;
 
   doc.firstElementChild.innerHTML = `
@@ -28,8 +42,8 @@ ${svgSource}
   const svg = doc.querySelector("svg");
   const { width, height, dataIds, sampleData } = SVG.parseSVG(svg);
   const ratio = width / height;
-  iframe.width = windowDimensions.width;
-  iframe.height = windowDimensions.width * ratio;
+  iframe.width = String(windowDimensions.width);
+  iframe.height = String(windowDimensions.width * ratio);
   svg.style.width = width;
   svg.style.height = height;
 
@@ -56,7 +70,7 @@ ${svgSource}
   };
 }
 
-export function updateSVG(svg, data) {
+export function updateSVG(svg: SVGElement, data: any[]) {
   data.forEach(({ id, value, visible }, idx) => {
     if (value !== null) {
       SVG.setValue(svg, id, value);

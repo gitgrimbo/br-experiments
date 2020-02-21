@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import HelpPanel from "../common/HelpPanel";
 
@@ -7,14 +7,23 @@ import ImageLoader, {
   ListSource,
   GooglePhotosSource,
 } from "./ImageLoader"
-import helpHtml from "./LoadImageTab.help.html";
 
-export default function ImageLoaderFieldset({
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const helpHtml = require("./LoadImageTab.help.html");
+
+export interface ImageLoaderFieldsetProps {
+  urls: string[];
+  state: object;
+  setState: Function;
+  onChangeSVGSource: Function;
+}
+
+const LoadImageTab: React.FunctionComponent<ImageLoaderFieldsetProps> = ({
   urls,
   state,
   setState,
   onChangeSVGSource,
-}) {
+}: ImageLoaderFieldsetProps) => {
   console.log("ImageLoaderFieldset", state);
 
   const onLoadImageUrlSelected = (url) => {
@@ -80,3 +89,5 @@ export default function ImageLoaderFieldset({
     </>
   );
 }
+
+export default LoadImageTab;

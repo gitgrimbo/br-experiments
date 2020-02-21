@@ -1,4 +1,4 @@
-function parseSampleData(svg) {
+function parseSampleData(svg: SVGElement) {
   const el = svg.querySelector("#sample\\.data");
   if (!el) {
     return null;
@@ -10,7 +10,7 @@ function parseSampleData(svg) {
   }
 }
 
-function parseSVG(svg) {
+function parseSVG(svg: SVGElement) {
   const width = svg.getAttribute("width");
   const height = svg.getAttribute("height");
   const dataIds = Array.from(svg.querySelectorAll("[id]"))
@@ -25,7 +25,7 @@ function parseSVG(svg) {
   };
 }
 
-function getElementValue(el) {
+function getElementValue(el: HTMLElement) {
   switch (el.tagName.toLowerCase()) {
     case "image": {
       // console.log(el);
@@ -39,7 +39,7 @@ function getElementValue(el) {
   }
 };
 
-function setValue(doc, id, value) {
+function setValue(doc: HTMLDocument, id: string, value) {
   const el = doc.getElementById(id);
   const tagName = el.tagName.toLowerCase();
   if (tagName === "image") {
@@ -48,13 +48,14 @@ function setValue(doc, id, value) {
   return setText(doc, id, value);
 }
 
-function setText(doc, id, value) {
+function setText(doc: HTMLDocument, id: string, value) {
   const el = doc.getElementById(id);
   const span = el.querySelector("tspan");
   (span || el).textContent = value;
 }
 
-function setVisible(doc, id, value) {
+function setVisible(doc: HTMLDocument, id: string, value) {
+  id.foo();
   const el = doc.getElementById(id);
   if (el) {
     el.style.display = value ? "" : "none";

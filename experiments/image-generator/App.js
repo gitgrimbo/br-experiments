@@ -1,7 +1,6 @@
 import React from "react";
 
 import AppBar from "@material-ui/core/AppBar";
-import Box from "@material-ui/core/Box";
 import Checkbox from '@material-ui/core/Checkbox';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControlLabel from '@material-ui/core/FormControlLabel';

@@ -1,13 +1,19 @@
-import React from "react";
+import * as React from "react";
 
 import preventDefault from "../common/preventDefault";
 import uuid from "../common/uuid";
 
-function Table({
+export interface TableProps {
+  values: object[][];
+  cellPadding: string;
+  onClickCell: Function;
+}
+
+export const Table: React.FunctionComponent<TableProps> = ({
   values,
   cellPadding = "0",
   onClickCell,
-}) {
+}: TableProps) => {
   const onClick = (e) => {
     const { target } = e;
     if (target.tagName === "TD") {
@@ -47,12 +53,19 @@ table.${className} tr, table.${className} td {
   );
 }
 
-export default function SheetsExplorer({
+export interface SheetsExplorerProps {
+  title: string;
+  sheets: object[];
+  cellPadding: string;
+  onClickCell: string;
+}
+
+const SheetsExplorer: React.FC<SheetsExplorerProps> = ({
   title,
   sheets,
   cellPadding,
   onClickCell,
-}) {
+}: SheetsExplorerProps) => {
   console.log("SheetsExplorer", title, sheets);
 
   const [sheetIdx, setSheetIdx] = React.useState(0);
@@ -72,7 +85,7 @@ export default function SheetsExplorer({
         }</select>
       </div>
       <div style={{ marginTop: "1em" }}>
-        {sheet && sheet.values &&  (
+        {sheet && sheet.values && (
           <Table
             values={sheet.values}
             cellPadding={cellPadding}
@@ -83,3 +96,5 @@ export default function SheetsExplorer({
     </>
   );
 }
+
+export default SheetsExplorer;

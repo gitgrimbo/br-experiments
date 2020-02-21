@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "jsx": "react",
+        "TODO-noImplicitAny": true,
+        "outDir": "./built-ts",
+        "target": "es5"
+    },
+    "exclude": [
+        "./experiments/image-generator/google-cloud-function/**/*"
+    ],
+    "include": [
+        "./experiments/**/*"
+    ]
+}
