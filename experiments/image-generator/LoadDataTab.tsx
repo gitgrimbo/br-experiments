@@ -1,14 +1,22 @@
-import React from "react";
+import * as React from "react";
 
 import ClickableFieldset from "../common/ClickableFieldset";
 import HelpPanel from "../common/HelpPanel";
 import SheetsExplorer from "../sheets/SheetsExplorer";
-import helpHtml from "./LoadDataTab.help.html";
 
-export default function DataFieldset({
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const helpHtml = require("./LoadDataTab.help.html");
+
+// TODO better types
+export interface LoadDataTabProps {
+  data: object[];
+  dataSources: object[];
+}
+
+const LoadDataTab: React.FC<LoadDataTabProps> = ({
   data,
   dataSources,
-}) {
+}: LoadDataTabProps) => {
   return (
     <>
       <HelpPanel html={helpHtml} />
@@ -27,3 +35,5 @@ export default function DataFieldset({
     </>
   );
 }
+
+export default LoadDataTab;

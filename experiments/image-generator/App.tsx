@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import AppBar from "@material-ui/core/AppBar";
 import Checkbox from '@material-ui/core/Checkbox';
@@ -21,66 +21,8 @@ import { makeSource as makeGoogleSheetsDataSource } from "./GoogleSheetsDataLoad
 import LoadImageTab from "./LoadImageTab";
 import LoadDataTab from "./LoadDataTab";
 import SetDataTab from "./SetDataTab";
-import {
-  arrayMoveValue,
-  arraySetValue,
-  setValue,
-} from "./reducer-utils";
-import { updateIFrameWithSVGSource, updateSVG, scaleSVG } from "./svg-iframe";
-
-const reducer = (state, action) => {
-  const set = setValue(state);
-  switch (action.type) {
-    case "applyReducer": {
-      const { prop, reducer } = action;
-      const oldValue = state[prop];
-      const newValue = reducer(oldValue);
-      return (oldValue === newValue)
-        ? state
-        : {
-          ...state,
-          [prop]: newValue,
-        };
-    }
-    case "setGeneric": return set(action.valueName, action.value);
-    case "setSVGSource": return set("svgSource", action.value);
-    case "setCreatePNGError": return set("createPNGError", action.value);
-    case "setPNGURL": return set("pngURL", action.value);
-    case "setShouldScaleSVG": return set("shouldScaleSVG", action.value);
-    case "setSVGSize": return set("svgSize", action.value);
-    case "setData": {
-      const state2 = set("data", action.value);
-      return {
-        ...state2,
-        dataTimestamp: Date.now(),
-      };
-    };
-    case "setEmbeddedSampleData": return set("embeddedSampleData", action.value);
-    case "initialiseData": {
-      const data = action.value.ids.map((id) => ({ id, value: "" }));
-      return set("data", data);
-    }
-    case "setDataValue": {
-      console.log("setDataValue", action);
-      const { dataIdx, name, value } = action.value;
-      const old = state.data[dataIdx][name];
-      console.log("setDataValue", old, value);
-      return (old !== value)
-        ? set("data", arraySetValue(state.data, dataIdx, name, value))
-        : state;
-    }
-    case "moveData": {
-      const { oldIndex, newIndex } = action.value;
-      return set("data", arrayMoveValue(state.data, oldIndex, newIndex));
-    }
-    case "setImageLoaderFieldset": {
-      console.log("setImageLoaderFieldset", action.value);
-      return set("imageLoaderFieldset", action.value);
-    };
-    default:
-      return state;
-  }
-};
+import { updateIFrameWithSVGSource, updateSVG, scaleSVGWithinIFrame } from "./svg-iframe";
+import reducer from "./reducer";
 
 const svgUrls = [
   "./svgs/starting-lineup.svg",
@@ -108,7 +50,13 @@ const initialState = {
   shouldScaleSVG: true,
 };
 
-function App(props) {
+export interface AppProps {
+  apiKey: string;
+  clientId: string;
+  spreadsheetId: string;
+}
+
+const App: React.FC<AppProps> = (props: AppProps) => {
   const {
     apiKey,
     clientId,
@@ -117,15 +65,15 @@ function App(props) {
   const windowDimensions = useWindowDimensions();
   const [state, dispatch] = React.useReducer(reducer, initialState);
   const makePropReducer = (prop) => (reducer) => dispatch({ type: "applyReducer", prop, reducer });
+  const iframeRef = React.useRef<HTMLIFrameElement>();
+
+  const svgFromIFrame = (iframe) => iframe.contentDocument.querySelector("svg");
 
   React.useEffect(() => {
-    if (iframeRef.current && state.svgSource) {
-      const reset = !state.shouldScaleSVG;
-      scaleSVG(iframeRef.current, windowDimensions, reset);
+    if (iframeRef && iframeRef.current && state.svgSource) {
+      scaleSVGWithinIFrame(iframeRef.current, svgFromIFrame(iframeRef.current), windowDimensions, state.shouldScaleSVG);
     }
   }, [state.shouldScaleSVG]);
-
-  const iframeRef = React.useRef();
 
   const onChangeData = (e) => {
     console.log("onChangeData", e);
@@ -140,8 +88,9 @@ function App(props) {
   };
 
   const onClickUpdateImage = async (e) => {
-    const svg = iframeRef.current.contentDocument.querySelector("svg");
-    updateSVG(svg, state.data);
+    if (iframeRef && iframeRef.current) {
+      updateSVG(svgFromIFrame(iframeRef.current), state.data);
+    }
   };
 
   const onClickCreatePNG = async (e) => {
@@ -151,7 +100,7 @@ function App(props) {
       if (!iframeRef.current) {
         throw new Error("Can't convert image. No source image loaded.");
       }
-      const svg = iframeRef.current.contentDocument.querySelector("svg");
+      const svg = svgFromIFrame(iframeRef.current);
       if (!svg) {
         throw new Error("Can't convert image. No source SVG.");
       }
@@ -238,7 +187,6 @@ function App(props) {
           <LoadDataTab
             dataSources={dataSources}
             data={combinedSampleData}
-            setState={makePropReducer("sampleData")}
           />
         )
         }
@@ -277,7 +225,7 @@ function App(props) {
             />
           </FormGroup>
           <div id="wrap" style={{ width: "100%", overflow: "auto" }}>
-            <iframe ref={iframeRef}></iframe>
+            <iframe ref={iframeRef} frameBorder="0"></iframe>
           </div>
         </div>
       )
