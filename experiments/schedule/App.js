@@ -89,19 +89,19 @@ const teamInfos = {
     "https://twitter.com/MANCBASEBALL",
   ],
   "Newcastle Nighthawks": [
-    "../img/logos/logo.newcastle-nighthawks.64x64.resized.jpg",
+    "../img/logos/logo.newcastle-nighthawks.64x64.resized.png",
     "https://twitter.com/NCLNighthawks",
   ],
   "Sheffield Bladerunners I": [
-    "../img/logos/logo.bladerunners.64x64.resized.png",
+    "../img/logos/logo.bladerunners.blue.64x64.resized.png",
     "https://twitter.com/BladerunnersBC",
   ],
   "Sheffield Bladerunners II": [
-    "../img/logos/logo.bladerunners.64x64.resized.png",
+    "../img/logos/logo.bladerunners.white.64x64.resized.png",
     "https://twitter.com/BladerunnersBC",
   ],
   "Wolverhampton Wolves": [
-    "../img/logos/logo.wolverhampton.64x64.resized.jpg",
+    "../img/logos/logo.wolverhampton.64x64.resized.png",
     "https://www.facebook.com/wolvesballclub/",
   ],
   "Worcester Sorcerers": [
