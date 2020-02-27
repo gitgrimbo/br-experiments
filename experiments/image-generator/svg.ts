@@ -1,5 +1,3 @@
-import Dimensions from "./Dimensions";
-
 export function parseSampleData(svg: SVGElement): object | null {
   const el = svg.querySelector("#sample\\.data");
   if (!el) {
@@ -12,37 +10,30 @@ export function parseSampleData(svg: SVGElement): object | null {
   }
 }
 
-export function getSVGAttributeSize(svg: SVGElement): Dimensions {
-  const intAttr = (name: string): number => {
-    const attr = svg.getAttribute(name);
-    const n = parseInt(attr);
-    if (isNaN(n)) {
-      throw new Error(`svg "${name}" attribute is not a number: ${attr}`);
-    }
-    return n;
-  };
+export function getSVGAttributeSize(svg: SVGElement): {
+  width: string;
+  height: string;
+} {
   return {
-    width: intAttr("width"),
-    height: intAttr("height"),
+    width: svg.getAttribute("width"),
+    height: svg.getAttribute("height"),
   };
 }
 
 export interface ParseSVGResult {
-  width: number;
-  height: number;
+  svgBoundingClientRect: DOMRect;
   dataIds: string[];
   sampleData: object | null;
 }
 
 export function parseSVG(svg: SVGElement): ParseSVGResult {
-  const rect = svg.getBoundingClientRect();
+  const svgBoundingClientRect = svg.getBoundingClientRect();
   const dataIds = Array.from(svg.querySelectorAll("[id]"))
     .map((el) => el.id)
     .filter((id) => id.match(/^data\./));
   const sampleData = parseSampleData(svg);
   return {
-    width: rect.width,
-    height: rect.height,
+    svgBoundingClientRect,
     dataIds,
     sampleData,
   };

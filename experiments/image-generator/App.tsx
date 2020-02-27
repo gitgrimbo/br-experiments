@@ -34,9 +34,11 @@ const svgUrls = [
   "./svgs/upcoming-I.svg",
   "./svgs/upcoming-II.svg",
   "./svgs/upcoming-III.svg",
-  "./svgs/font-test.svg",
   "../img/ty/Bladerunners original badge.svg",
   "../img/ty/Bladerunners original logo.svg",
+  "./svgs/font-test.svg",
+  "./svgs/tall-test.svg",
+  "./svgs/wide-test.svg",
 ];
 
 const initialState = {

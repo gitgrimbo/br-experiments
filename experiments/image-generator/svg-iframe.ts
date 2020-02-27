@@ -37,12 +37,17 @@ export function scaleSVGWithinIFrame(
   shouldScale = false,
 ): void {
   const { width, height } = SVG.getSVGAttributeSize(svg);
+  console.log("getSVGAttributeSize", width, height);
 
-  svg.style.width = width + "px";
-  svg.style.height = height + "px";
+  svg.style.width = width;
+  svg.style.height = height;
+
+  const svgRect = svg.getBoundingClientRect();
+
+  console.log("svgRect", svgRect);
 
   // try and make the SVG scale to the width of the window
-  const scale = Math.min(1, shouldScale ? windowDimensions.width / width : 1);
+  const scale = Math.min(1, shouldScale ? windowDimensions.width / svgRect.width : 1);
 
   svg.style.transform = `scale(${scale})`;
   svg.style.transformOrigin = "0 0";
@@ -63,8 +68,7 @@ export interface DataItem {
 }
 
 export interface UpdateIFrameWithSVGSourceResult {
-  width: number;
-  height: number;
+  svgBoundingClientRect: DOMRect;
   dataIds: string[];
   data: DataItem[];
   sampleData: object | null;
@@ -91,12 +95,12 @@ ${svgSource}
 `;
 
   const svg = doc.querySelector("svg");
-  const { width, height, dataIds, sampleData } = SVG.parseSVG(svg);
-  const ratio = width / height;
+  const { svgBoundingClientRect, dataIds, sampleData } = SVG.parseSVG(svg);
+  const ratio = svgBoundingClientRect.width / svgBoundingClientRect.height;
 
-  const iframeWidth = Math.min(windowDimensions.width, width);
+  const iframeWidth = Math.min(windowDimensions.width, svgBoundingClientRect.width);
   iframe.width = String(iframeWidth);
-  iframe.height = String(iframeWidth * ratio);
+  iframe.height = String(iframeWidth / ratio);
 
   scaleSVGWithinIFrame(iframe, svg, windowDimensions, shouldScale);
 
@@ -111,8 +115,7 @@ ${svgSource}
   });
 
   return {
-    width,
-    height,
+    svgBoundingClientRect,
     dataIds,
     data,
     sampleData,
