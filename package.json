@@ -19,14 +19,14 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.4",
-    "@babel/preset-env": "^7.8.4",
+    "@babel/core": "^7.8.6",
+    "@babel/preset-env": "^7.8.6",
     "@babel/preset-react": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
-    "@types/react": "^16.9.21",
+    "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
-    "@typescript-eslint/eslint-plugin": "^2.20.0",
-    "@typescript-eslint/parser": "^2.20.0",
+    "@typescript-eslint/eslint-plugin": "^2.21.0",
+    "@typescript-eslint/parser": "^2.21.0",
     "babel-loader": "^8.0.6",
     "babel-polyfill": "^6.26.0",
     "copyfiles": "^2.2.0",
@@ -50,11 +50,11 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
-    "@material-ui/core": "^4.9.3",
+    "@material-ui/core": "^4.9.4",
     "@material-ui/icons": "^4.9.1",
-    "@material-ui/lab": "^4.0.0-alpha.43",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "@material-ui/lab": "^4.0.0-alpha.44",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
   },
   "repository": {
     "type": "git",
