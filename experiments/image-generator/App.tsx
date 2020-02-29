@@ -7,13 +7,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 
-import AsyncButton from "../common/AsyncButton";
 import defines from "../common/defines";
 import ErrorBox from "../common/ErrorBox";
 import HR from "../common/HR";
+import { ToolbarWithVersion } from "../common/ToolbarWithText";
 import useWindowDimensions from "../common/useWindowDimensions";
 
 import createPNG from "./createPNG";
@@ -169,9 +167,7 @@ const App: React.FC<AppProps> = (props: AppProps) => {
     <>
       <CssBaseline />
       <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" color="inherit">Image Generator</Typography>
-        </Toolbar>
+        <ToolbarWithVersion title="Image Generator" gitShort={defines.GIT_SHORT} gitDate={defines.GIT_DATE} />
       </AppBar>
       <Tabs value={state.tabIdx || 0} onChange={(e, value) => dispatch({ type: "setGeneric", valueName: "tabIdx", value })}>
         <Tab label="Load Image"></Tab>
@@ -243,7 +239,6 @@ const App: React.FC<AppProps> = (props: AppProps) => {
           </div>
         )
       }
-      <div>version: {defines.GIT_SHORT} {defines.GIT_DATE}</div>
     </>
   );
 }
