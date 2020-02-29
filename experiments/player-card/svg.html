@@ -1,0 +1,58 @@
+<!doctype html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="../favicon.png" />
+<link href="../main.css" type="text/css" rel="stylesheet">
+
+<style>
+  .player-card {
+    font-family: Impact;
+    font-variant: small-caps;
+    color: white;
+  }
+
+  .player-card .player-name {
+    font-size: 40px;
+  }
+
+  .player-card .team-name {
+    font-size: 20px;
+  }
+
+  .player-card .position-name {
+    font-size: 20px;
+  }
+
+  .player-card table.stats {
+    font-family: Tahoma;
+    font-size: 10px;
+    font-weight: bold;
+    color: black;
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+  }
+
+  .player-card table.stats tr,
+  .player-card table.stats td {
+    border: 4px solid gray;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+</style>
+
+<!-- body tag needed for browser-sync -->
+
+<body>
+
+Player Card Experiments
+
+<div class="player-card-container" data-player-card-type="svg"></div>
+
+</body>
+
+<script src="../main.js"></script>
+<script src="../../dist/vendors.js"></script>
+<script src="../../dist/player-card.js"></script>

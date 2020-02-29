@@ -4,7 +4,7 @@ const webpack = require("webpack");
 const { DefinePlugin, HotModuleReplacementPlugin } = webpack;
 
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const gitrev = require('git-rev-sync');
+const gitrev = require("git-rev-sync");
 
 // the following folders are not web functions, and so should not be put in the entry object
 // "roster", "stats", "twitter"
@@ -14,6 +14,7 @@ const entry = [
   "google-picker",
   "image-generator",
   "roster-badge",
+  "player-card",
   "schedule",
   "sheets",
 ].reduce((entry, name) => {
