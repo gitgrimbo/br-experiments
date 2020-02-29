@@ -10,13 +10,13 @@ const players = [
   },
   {
     name: "Jack Lockwood",
-    number: "1",
+    number: "13",
     position: "Pitcher",
     playerUrl: "jack-l.png",
   },
   {
     name: "AK Kelly",
-    number: "4",
+    number: "5",
     position: "3rd Base",
     playerUrl: "ak.png",
   },

@@ -55,7 +55,7 @@
      id="defs2">
     <symbol
        id="symbol5754">
-      <rect
+      <rect id="rect1"
          ry="40"
          y="30"
          x="20"
@@ -79,14 +79,8 @@
     </symbol>
     <clipPath
        clipPathUnits="userSpaceOnUse"
-       id="clipPath5786">
-      <use
-         xlink:href="#symbol5754"
-         id="use5788"
-         x="0"
-         y="0"
-         width="100%"
-         height="100%" />
+       id="player-image-clip">
+      <use xlink:href="#rect1" />
     </clipPath>
   </defs>
   <rect
@@ -107,7 +101,7 @@
      preserveAspectRatio="none"
      height="550"
      width="360"
-     clip-path="url(#clipPath5786)" />
+     clip-path="url(#player-image-clip)" />
   <use
      id="use6022"
      xlink:href="#symbol6005"
@@ -171,7 +165,7 @@
      y="462"
      x="16"
      id="image6505"
-     xlink:href="file:///D:/dev/git_repos/bladerunners/br-experiments/experiments/img/BladerunnersBaseballLogoRound.png"
+     xlink:href="../img/BladerunnersBaseballLogoRound.png"
      preserveAspectRatio="none"
      height="120"
      width="120" />
