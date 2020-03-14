@@ -15,6 +15,7 @@ const entry = [
   "image-generator",
   "roster-badge",
   "player-card",
+  "profile-pics",
   "schedule",
   "sheets",
 ].reduce((entry, name) => {
