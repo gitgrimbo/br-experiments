@@ -8,6 +8,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 
+import AsyncButton from "../common/AsyncButton";
 import defines from "../common/defines";
 import ErrorBox from "../common/ErrorBox";
 import HR from "../common/HR";
@@ -37,6 +38,7 @@ const svgUrls = [
   "./svgs/font-test.svg",
   "./svgs/tall-test.svg",
   "./svgs/wide-test.svg",
+  "../profile-pics/dom.extracted.diamond.svg",
 ];
 
 const initialState = {
@@ -67,7 +69,7 @@ const App: React.FC<AppProps> = (props: AppProps) => {
   } = props;
   const windowDimensions = useWindowDimensions();
   const [state, dispatch] = React.useReducer(reducer, initialState);
-  const makePropReducer = (prop) => (reducer) => dispatch({ type: "applyReducer", prop, reducer });
+  const makePropReducer = (prop: string) => (reducer: (state) => any) => dispatch({ type: "applyReducer", prop, reducer });
   const iframeRef = React.useRef<HTMLIFrameElement>();
 
   const svgFromIFrame = (iframe) => iframe.contentDocument.querySelector("svg");
@@ -119,11 +121,10 @@ const App: React.FC<AppProps> = (props: AppProps) => {
     }
   };
 
-  const onChangeSVGSource = (svgSource) => {
+  const onChangeSVGSource = (svgSource, svgUrl) => {
     dispatch({ type: "setSVGSource", value: svgSource });
     if (iframeRef.current && svgSource) {
-      const { data, sampleData, width, height } = updateIFrameWithSVGSource(iframeRef.current, svgSource, state.shouldScaleSVG, windowDimensions);
-      dispatch({ type: "setSVGSize", value: { width, height } });
+      const { data, sampleData } = updateIFrameWithSVGSource(iframeRef.current, svgSource, state.shouldScaleSVG, windowDimensions, svgUrl);
       dispatch({ type: "setData", value: data });
       dispatch({ type: "setEmbeddedSampleData", value: sampleData });
     }

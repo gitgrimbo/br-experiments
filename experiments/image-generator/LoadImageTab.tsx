@@ -2,29 +2,30 @@ import * as React from "react";
 
 import HelpPanel from "../common/HelpPanel";
 
-import ImageLoader, {
+import ImageLoader from "./ImageLoader";
+import {
   TextBoxSource,
   ListSource,
   GooglePhotosSource,
-} from "./ImageLoader"
+} from "./ImageLoaderSources"
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const helpHtml = require("./LoadImageTab.help.html");
 
-export interface ImageLoaderFieldsetProps {
+export interface LoadImageTabProps {
   urls: string[];
-  state: object;
-  setState: Function;
-  onChangeSVGSource: Function;
+  state;
+  setState: (callback: (state) => any) => void;
+  onChangeSVGSource: (svgSource: string, svgUrl: string) => void;
 }
 
-const LoadImageTab: React.FunctionComponent<ImageLoaderFieldsetProps> = ({
+function LoadImageTab({
   urls,
   state,
   setState,
   onChangeSVGSource,
-}: ImageLoaderFieldsetProps) => {
-  console.log("ImageLoaderFieldset", state);
+}: LoadImageTabProps): React.ReactElement | null {
+  console.log("LoadImageTab", state);
 
   const onLoadImageUrlSelected = (url) => {
     console.log("onUrlSelected", url);
@@ -74,8 +75,6 @@ const LoadImageTab: React.FunctionComponent<ImageLoaderFieldsetProps> = ({
       },
     },
   };
-
-  console.log("ImageLoaderFieldset", state.mode);
 
   return (
     <>

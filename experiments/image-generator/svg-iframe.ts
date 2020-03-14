@@ -28,7 +28,7 @@ function getScrollBarWidth(): number {
   document.body.removeChild(outer);
 
   return (w1 - w2);
-};
+}
 
 export function scaleSVGWithinIFrame(
   iframe: HTMLIFrameElement,
@@ -79,6 +79,7 @@ export function updateIFrameWithSVGSource(
   svgSource: string,
   shouldScale = true,
   windowDimensions: Dimensions,
+  svgUrlStr: string,
 ): UpdateIFrameWithSVGSourceResult {
   const doc = iframe.contentDocument;
 
@@ -95,6 +96,7 @@ ${svgSource}
 `;
 
   const svg = doc.querySelector("svg");
+  SVG.makeRelativeImageLinksAbsolute(svgUrlStr, svg);
   const { svgBoundingClientRect, dataIds, sampleData } = SVG.parseSVG(svg);
   const ratio = svgBoundingClientRect.width / svgBoundingClientRect.height;
 

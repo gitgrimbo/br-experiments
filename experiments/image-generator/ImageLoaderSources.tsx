@@ -1,15 +1,20 @@
-import React from "react";
-
-import AsyncButton from "../common/AsyncButton";
+import * as React from "react";
 
 // All URL-selecting components must have a url property in their state.
+
+export interface ListSourceProps {
+  initialState;
+  urls: string[];
+  onUrlSelected: (string) => void;
+  onChangeState: (state) => void;
+}
 
 export function ListSource({
   initialState,
   urls,
   onUrlSelected,
   onChangeState,
-}) {
+}: ListSourceProps): React.ReactElement | null {
   const url = initialState && initialState.url;
 
   console.log("ListSource", url);
@@ -49,11 +54,17 @@ export function ListSource({
   );
 }
 
+export interface GooglePhotosSourceProps {
+  initialState;
+  onUrlSelected: (string) => void;
+  onChangeState: (state) => void;
+}
+
 export function GooglePhotosSource({
   initialState,
   onUrlSelected,
   onChangeState,
-}) {
+}: GooglePhotosSourceProps): React.ReactElement | null {
   return (
     <div>
       Google Photos URL:{" "}
@@ -62,11 +73,17 @@ export function GooglePhotosSource({
   );
 }
 
+export interface TextBoxSourceProps {
+  initialState;
+  onUrlSelected: (string) => void;
+  onChangeState: (state) => void;
+}
+
 export function TextBoxSource({
   initialState,
   onUrlSelected,
   onChangeState,
-}) {
+}: TextBoxSourceProps): React.ReactElement | null {
   const url = initialState && initialState.url;
 
   console.log("TextBoxSource", url);
@@ -90,67 +107,3 @@ export function TextBoxSource({
   );
 }
 
-export default function ImageLoader({
-  sources,
-  state,
-  setState,
-  onChangeImgSource,
-}) {
-  const { mode, url } = state || {};
-
-  const setMode = (mode) => setState((state) => ({
-    ...state,
-    mode,
-  }));
-
-  if (!mode) {
-    setMode(Object.keys(sources)[0]);
-    return <div>"No loader source selected"</div>;
-  }
-
-  const onClickLoad = async (e) => {
-    e.preventDefault();
-    // https://fetch.spec.whatwg.org/#dom-requestinit-cache
-    const req = new Request(url, {
-      cache: "reload",
-    });
-    console.log(req);
-    const resp = await fetch(req);
-    const text = await resp.text();
-    const i = text.indexOf("<svg");
-    if (i >= 0) {
-      const imgSource = text.substring(i);
-      onChangeImgSource && onChangeImgSource(imgSource);
-    }
-  };
-
-  const _onChangeMode = (e) => {
-    e.preventDefault();
-    setMode(e.target.value);
-  };
-
-  let component;
-  const source = sources[mode];
-  if (source) {
-    component = source.component();
-  }
-  console.log(mode, source, component);
-
-  return (
-    <>
-      <div>
-        Image source: <select onChange={_onChangeMode}>{
-          Object.entries(sources)
-            .map(
-              ([key, { title }]) => <option key={key} value={key}>{title()}</option>
-            )
-        }</select>
-      </div>
-      <br />
-      {component}
-      <div style={{ marginTop: "1em" }}>
-        <AsyncButton onClick={onClickLoad}>Load</AsyncButton>
-      </div>
-    </>
-  );
-}

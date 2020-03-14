@@ -39,6 +39,26 @@ export function parseSVG(svg: SVGElement): ParseSVGResult {
   };
 }
 
+export function makeRelativeImageLinksAbsolute(svgUrlStr: string, svg: SVGElement): void {
+  const svgUrl = new URL(svgUrlStr);
+
+  const images = svg.querySelectorAll("image");
+  images.forEach((image) => {
+    const xlinkNS = "http://www.w3.org/1999/xlink";
+    const href = image.getAttributeNS(xlinkNS, "href");
+    if (href === null) {
+      return;
+    }
+    const isAbsolute = href.trim().match(/^https?:\/\//);
+    if (isAbsolute) {
+      return;
+    }
+    const url = new URL(href.trim(), svgUrl);
+    console.log(href, url);
+    image.setAttributeNS(xlinkNS, "href", url.toString());
+  });
+}
+
 export function getElementValue(el: Element) {
   switch (el.tagName.toLowerCase()) {
     case "image": {

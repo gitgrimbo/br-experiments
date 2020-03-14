@@ -1,0 +1,224 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" viewBox="0 0 1589 1003" version="1.1" width="1589" height="1003"><defs id="defs2"><style>
+ text,  tspan {
+  font-family: Tahoma;
+}
+ .player-name {
+  text-anchor: middle;
+}
+</style></defs><g><image xlink:href="diamond.jpg" width="100%" height="100%" preserveAspectRatio="none"></image><image xlink:href="../img/ty/Bladerunners-original-badge.svg" x="30" y="750" height="220"></image><image xlink:href="../img/ty/Bladerunners-original-logo.svg" x="1090" y="760" height="230"></image><g transform="translate(550, 740)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="250" height="250" viewBox="0 0 100 100"><style>
+.box {
+  fill: #013298;
+  stroke: white;
+  stroke-width: 1px;
+}
+.player-name, .player-position, .player-number {
+  fill: white;
+  font-size: 11px;
+  font-weight: bold;
+  text-anchor: middle;
+}
+.player-position {
+  font-size: 12px;
+}
+.player-number {
+  font-size: 12px;
+}
+.border {
+  display: none;
+  fill: none;
+  stroke: black;
+  stroke-width: 1px;
+}
+        </style><g><rect x="36" y="0" width="64" height="70" class="border"></rect><image xlink:href="faces/IMG_5101.png" x="36" y="0" width="64" height="70" preserveAspectRatio="xMidYMid meet"></image></g><g data-desc="group for player number and position" transform="translate(18, 25)"><ellipse class="box" rx="16" ry="16"></ellipse><text class="player-number" y="5">#91</text><g transform="translate(3, 23)"><ellipse class="box" rx="13" ry="13"></ellipse><text class="player-position" y="4">C</text></g></g><g data-desc="group for player name" transform="translate(0, 72)"><rect class="box" x="1" y="0" width="98" height="27" rx="5" ry="5"></rect><g transform="translate(50, 11)"><text class="player-name">Nathan</text><text class="player-name" y="12">Morrow-Murtagh</text></g></g><rect x="0" y="0" width="100%" height="100%" class="border"></rect></svg></g><g transform="translate(800, 510)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="250" height="250" viewBox="0 0 100 100"><style>
+.box {
+  fill: #013298;
+  stroke: white;
+  stroke-width: 1px;
+}
+.player-name, .player-position, .player-number {
+  fill: white;
+  font-size: 11px;
+  font-weight: bold;
+  text-anchor: middle;
+}
+.player-position {
+  font-size: 12px;
+}
+.player-number {
+  font-size: 12px;
+}
+.border {
+  display: none;
+  fill: none;
+  stroke: black;
+  stroke-width: 1px;
+}
+        </style><g><rect x="36" y="0" width="64" height="70" class="border"></rect><image xlink:href="faces/jesus-toriz-garcia.png" x="36" y="0" width="64" height="70" preserveAspectRatio="xMidYMid meet"></image></g><g data-desc="group for player number and position" transform="translate(18, 25)"><ellipse class="box" rx="16" ry="16"></ellipse><text class="player-number" y="5">#79</text><g transform="translate(3, 23)"><ellipse class="box" rx="13" ry="13"></ellipse><text class="player-position" y="4">P</text></g></g><g data-desc="group for player name" transform="translate(0, 72)"><rect class="box" x="1" y="0" width="98" height="27" rx="5" ry="5"></rect><g transform="translate(50, 11)"><text class="player-name">Jesus</text><text class="player-name" y="12">Toriz-Garcia</text></g></g><rect x="0" y="0" width="100%" height="100%" class="border"></rect></svg></g><g transform="translate(1300, 330)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="250" height="250" viewBox="0 0 100 100"><style>
+.box {
+  fill: #013298;
+  stroke: white;
+  stroke-width: 1px;
+}
+.player-name, .player-position, .player-number {
+  fill: white;
+  font-size: 11px;
+  font-weight: bold;
+  text-anchor: middle;
+}
+.player-position {
+  font-size: 12px;
+}
+.player-number {
+  font-size: 12px;
+}
+.border {
+  display: none;
+  fill: none;
+  stroke: black;
+  stroke-width: 1px;
+}
+        </style><g><rect x="36" y="0" width="64" height="70" class="border"></rect><image xlink:href="faces/IMG_5074.png" x="36" y="0" width="64" height="70" preserveAspectRatio="xMidYMid meet"></image></g><g data-desc="group for player number and position" transform="translate(18, 25)"><ellipse class="box" rx="16" ry="16"></ellipse><text class="player-number" y="5">#55</text><g transform="translate(3, 23)"><ellipse class="box" rx="13" ry="13"></ellipse><text class="player-position" y="4">1B</text></g></g><g data-desc="group for player name" transform="translate(0, 72)"><rect class="box" x="1" y="0" width="98" height="27" rx="5" ry="5"></rect><g transform="translate(50, 11)"><text class="player-name">Sam</text><text class="player-name" y="12">Parkin-Smith</text></g></g><rect x="0" y="0" width="100%" height="100%" class="border"></rect></svg></g><g transform="translate(940, 250)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="250" height="250" viewBox="0 0 100 100"><style>
+.box {
+  fill: #013298;
+  stroke: white;
+  stroke-width: 1px;
+}
+.player-name, .player-position, .player-number {
+  fill: white;
+  font-size: 11px;
+  font-weight: bold;
+  text-anchor: middle;
+}
+.player-position {
+  font-size: 12px;
+}
+.player-number {
+  font-size: 12px;
+}
+.border {
+  display: none;
+  fill: none;
+  stroke: black;
+  stroke-width: 1px;
+}
+        </style><g><rect x="36" y="0" width="64" height="70" class="border"></rect><image xlink:href="faces/IMG_5092.png" x="36" y="0" width="64" height="70" preserveAspectRatio="xMidYMid meet"></image></g><g data-desc="group for player number and position" transform="translate(18, 25)"><ellipse class="box" rx="16" ry="16"></ellipse><text class="player-number" y="5">#21</text><g transform="translate(3, 23)"><ellipse class="box" rx="13" ry="13"></ellipse><text class="player-position" y="4">2B</text></g></g><g data-desc="group for player name" transform="translate(0, 72)"><rect class="box" x="1" y="0" width="98" height="27" rx="5" ry="5"></rect><g transform="translate(50, 11)"><text class="player-name">Beatrijs</text><text class="player-name" y="12">De Tant</text></g></g><rect x="0" y="0" width="100%" height="100%" class="border"></rect></svg></g><g transform="translate(50, 370)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="250" height="250" viewBox="0 0 100 100"><style>
+.box {
+  fill: #013298;
+  stroke: white;
+  stroke-width: 1px;
+}
+.player-name, .player-position, .player-number {
+  fill: white;
+  font-size: 11px;
+  font-weight: bold;
+  text-anchor: middle;
+}
+.player-position {
+  font-size: 12px;
+}
+.player-number {
+  font-size: 12px;
+}
+.border {
+  display: none;
+  fill: none;
+  stroke: black;
+  stroke-width: 1px;
+}
+        </style><g><rect x="36" y="0" width="64" height="70" class="border"></rect><image xlink:href="faces/IMG_5105.png" x="36" y="0" width="64" height="70" preserveAspectRatio="xMidYMid meet"></image></g><g data-desc="group for player number and position" transform="translate(18, 25)"><ellipse class="box" rx="16" ry="16"></ellipse><text class="player-number" y="5">#3</text><g transform="translate(3, 23)"><ellipse class="box" rx="13" ry="13"></ellipse><text class="player-position" y="4">3B</text></g></g><g data-desc="group for player name" transform="translate(0, 72)"><rect class="box" x="1" y="0" width="98" height="27" rx="5" ry="5"></rect><g transform="translate(50, 11)"><text class="player-name">Nestor</text><text class="player-name" y="12">Martinez</text></g></g><rect x="0" y="0" width="100%" height="100%" class="border"></rect></svg></g><g transform="translate(420, 280)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="250" height="250" viewBox="0 0 100 100"><style>
+.box {
+  fill: #013298;
+  stroke: white;
+  stroke-width: 1px;
+}
+.player-name, .player-position, .player-number {
+  fill: white;
+  font-size: 11px;
+  font-weight: bold;
+  text-anchor: middle;
+}
+.player-position {
+  font-size: 12px;
+}
+.player-number {
+  font-size: 12px;
+}
+.border {
+  display: none;
+  fill: none;
+  stroke: black;
+  stroke-width: 1px;
+}
+        </style><g><rect x="36" y="0" width="64" height="70" class="border"></rect><image xlink:href="faces/damien-kilkenny.png" x="36" y="0" width="64" height="70" preserveAspectRatio="xMidYMid meet"></image></g><g data-desc="group for player number and position" transform="translate(18, 25)"><ellipse class="box" rx="16" ry="16"></ellipse><text class="player-number" y="5">#57</text><g transform="translate(3, 23)"><ellipse class="box" rx="13" ry="13"></ellipse><text class="player-position" y="4">SS</text></g></g><g data-desc="group for player name" transform="translate(0, 72)"><rect class="box" x="1" y="0" width="98" height="27" rx="5" ry="5"></rect><g transform="translate(50, 11)"><text class="player-name">Damien</text><text class="player-name" y="12">Kilkenny</text></g></g><rect x="0" y="0" width="100%" height="100%" class="border"></rect></svg></g><g transform="translate(150, 90)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="250" height="250" viewBox="0 0 100 100"><style>
+.box {
+  fill: #013298;
+  stroke: white;
+  stroke-width: 1px;
+}
+.player-name, .player-position, .player-number {
+  fill: white;
+  font-size: 11px;
+  font-weight: bold;
+  text-anchor: middle;
+}
+.player-position {
+  font-size: 12px;
+}
+.player-number {
+  font-size: 12px;
+}
+.border {
+  display: none;
+  fill: none;
+  stroke: black;
+  stroke-width: 1px;
+}
+        </style><g><rect x="36" y="0" width="64" height="70" class="border"></rect><image xlink:href="faces/IMG_5122.png" x="36" y="0" width="64" height="70" preserveAspectRatio="xMidYMid meet"></image></g><g data-desc="group for player number and position" transform="translate(18, 25)"><ellipse class="box" rx="16" ry="16"></ellipse><text class="player-number" y="5">#5</text><g transform="translate(3, 23)"><ellipse class="box" rx="13" ry="13"></ellipse><text class="player-position" y="4">LF</text></g></g><g data-desc="group for player name" transform="translate(0, 72)"><rect class="box" x="1" y="0" width="98" height="27" rx="5" ry="5"></rect><g transform="translate(50, 11)"><text class="player-name">Martin</text><text class="player-name" y="12">Hingley</text></g></g><rect x="0" y="0" width="100%" height="100%" class="border"></rect></svg></g><g transform="translate(680, 40)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="250" height="250" viewBox="0 0 100 100"><style>
+.box {
+  fill: #013298;
+  stroke: white;
+  stroke-width: 1px;
+}
+.player-name, .player-position, .player-number {
+  fill: white;
+  font-size: 11px;
+  font-weight: bold;
+  text-anchor: middle;
+}
+.player-position {
+  font-size: 12px;
+}
+.player-number {
+  font-size: 12px;
+}
+.border {
+  display: none;
+  fill: none;
+  stroke: black;
+  stroke-width: 1px;
+}
+        </style><g><rect x="36" y="0" width="64" height="70" class="border"></rect><image xlink:href="https://lh3.googleusercontent.com/miTFS2jw3nqfvfp3tIS1SShJ2V9IKoldKGaChqnYGQsu2mVx4TaMnEgcSc3LFgUt-LHDKin2Qr9VpvvsceNZ_omV-Z03pnKf18L5M38T5ngnsPAJ4CZZPJuTu4X15e8LtGqQDmblmvYiRWGHBQq1R2ti0-GXHZOkv-JehPipL5rFulILaFiHiuNGToh1OGCb9WwdqOc7q3aOgSI40gWqKQMQf2_8MXyKKeALO7DTk4o9LL10jESUXLOwewPxHuvZXfovl1Icai3kiphg6zOfmKRuxJj3lRQoqu06VPR_Cb4UUbYInS4IJVAGTHspRnpvC-TO5GHZ-wcFuZ5UuSfMalhxLooPn6W_NToplNA4hIgiyi7Wjtk-NIGY3FixXS9CJMTlc3E2-pYEH1MONTMiZH3dnVe5kX1P2P9wCleOF4jXO_ajj2fYg7MZUyDhsuQxMoBFFVJbpiPrG4PC34URjn5imfx3oj33nJ3JNiYyVBNRI6Qro_ZdrKZj242PTXpnpJWSCpWLDLtw3KhGxZ-1VI8KZigb2KBSab46IlnUvQlHEAPyDKR-jCMcsdDmW5T2AynXBY3yj_vjhCxpopi7odJ4hpEsJB_MQhLh9cEP1bGG_xERmsJgGYoDHtmhjABGkLPlC28VXuSX1KE9vM25wiQUfliS4-og3Om0GOSQfxf0Iexonn_j_n7uLYICL0L3oj193lruklH4MIHGZOqKwDufIeTpE4jrQzLj1b9r8Na2P5sW=w782-h1067-no" x="36" y="0" width="64" height="70" preserveAspectRatio="xMidYMid meet"></image></g><g data-desc="group for player number and position" transform="translate(18, 25)"><ellipse class="box" rx="16" ry="16"></ellipse><text class="player-number" y="5">#93</text><g transform="translate(3, 23)"><ellipse class="box" rx="13" ry="13"></ellipse><text class="player-position" y="4">CF</text></g></g><g data-desc="group for player name" transform="translate(0, 72)"><rect class="box" x="1" y="0" width="98" height="27" rx="5" ry="5"></rect><g transform="translate(50, 11)"><text class="player-name">Sean</text><text class="player-name" y="12">Harrison</text></g></g><rect x="0" y="0" width="100%" height="100%" class="border"></rect></svg></g><g transform="translate(1200, 70)"><svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="250" height="250" viewBox="0 0 100 100"><style>
+.box {
+  fill: #013298;
+  stroke: white;
+  stroke-width: 1px;
+}
+.player-name, .player-position, .player-number {
+  fill: white;
+  font-size: 11px;
+  font-weight: bold;
+  text-anchor: middle;
+}
+.player-position {
+  font-size: 12px;
+}
+.player-number {
+  font-size: 12px;
+}
+.border {
+  display: none;
+  fill: none;
+  stroke: black;
+  stroke-width: 1px;
+}
+        </style><g><rect x="36" y="0" width="64" height="70" class="border"></rect><image xlink:href="faces/IMG_5070.png" x="36" y="0" width="64" height="70" preserveAspectRatio="xMidYMid meet"></image></g><g data-desc="group for player number and position" transform="translate(18, 25)"><ellipse class="box" rx="16" ry="16"></ellipse><text class="player-number" y="5">#73</text><g transform="translate(3, 23)"><ellipse class="box" rx="13" ry="13"></ellipse><text class="player-position" y="4">RF</text></g></g><g data-desc="group for player name" transform="translate(0, 72)"><rect class="box" x="1" y="0" width="98" height="27" rx="5" ry="5"></rect><g transform="translate(50, 11)"><text class="player-name">Majid</text><text class="player-name" y="12">Hussain</text></g></g><rect x="0" y="0" width="100%" height="100%" class="border"></rect></svg></g></g></svg>
