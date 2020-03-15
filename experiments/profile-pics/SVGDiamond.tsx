@@ -50,7 +50,7 @@ const SVGPlayerBox: React.FC<SVGPlayerBoxProps & React.SVGAttributes<SVGSVGEleme
 }
 .player-name, .player-position, .player-number {
   fill: white;
-  font-size: 11px;
+  font-size: 11.4px;
   font-weight: bold;
   text-anchor: middle;
 }
@@ -167,12 +167,10 @@ function SVGDiamond(originalProps: SVGDiamondProps & React.HTMLAttributes<SVGEle
       viewBox={`0 0 ${width} ${height}`}
       version="1.1"
     >
-      <defs
-        id="defs2">
-        <style>{
-          `
+      <defs>
+        <style>{`
 ${cssId} text, ${cssId} tspan {
-  font-family: Tahoma;
+  font-family: Arial;
 }
 ${cssId} .player-name {
   text-anchor: middle;
