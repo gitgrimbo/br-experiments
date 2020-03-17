@@ -166,6 +166,7 @@ function SVGDiamond(originalProps: SVGDiamondProps & React.HTMLAttributes<SVGEle
       {...props}
       viewBox={`0 0 ${width} ${height}`}
       version="1.1"
+      data-type="diamond"
     >
       <defs>
         <style>{`
