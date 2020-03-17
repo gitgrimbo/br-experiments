@@ -25,7 +25,7 @@ const anims = [
 export default function App() {
   const [currentAnim, setCurrentAnim] = React.useState(null);
   const [fill, setFill] = React.useState(false);
-  const [animReRender, setAnimReRender] = React.useState(+new Date());
+  const [reRenderToken, setReRenderToken] = React.useState(+new Date());
   const animationRef = React.useRef<HTMLElement>();
   const svg = animationRef.current && animationRef.current.querySelector("svg");
 
@@ -46,7 +46,7 @@ export default function App() {
 
   const onChangeFillBackground = (e) => setFill(e.target.checked);
 
-  const onClickRun = (e) => setAnimReRender(+new Date());
+  const onClickRun = (e) => setReRenderToken(+new Date());
 
   return (
     <div id="app">
@@ -81,7 +81,7 @@ export default function App() {
         <div>
           <h3>{currentAnim.title} <button onClick={onClickRun}>Run</button></h3>
           <div>{currentAnim.description}</div>
-          <currentAnim.component key={animReRender} id="anim" />
+          <currentAnim.component id="anim" reRenderToken={reRenderToken} />
         </div>
       )}
     </div>
