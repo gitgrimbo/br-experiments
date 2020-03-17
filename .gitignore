@@ -1,6 +1,7 @@
 .*/
 built-ts/
 dist/
+temp/
 node_modules/
 **/*creds*.json
 **/*credentials*.json
