@@ -9,6 +9,7 @@ const gitrev = require("git-rev-sync");
 // the following folders are not web functions, and so should not be put in the entry object
 // "roster", "stats", "twitter"
 const entry = [
+  "animations",
   "banner",
   "calendar",
   "google-picker",
