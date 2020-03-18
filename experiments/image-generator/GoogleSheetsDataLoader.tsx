@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import AsyncButton from "../common/AsyncButton";
 import Sheets from "../google/sheets";
@@ -87,7 +87,7 @@ export default function GoogleSheetsDataLoader({
     <>
       <AsyncButton onClick={onClickLoadData}>Load</AsyncButton>
       {" "}
-      Sheet id: <input size="24" value={spreadsheetId} onChange={(e) => setSpreadsheetId(e.target.value)} />
+      Sheet id: <input size={24} value={spreadsheetId} onChange={(e) => setSpreadsheetId(e.target.value)} />
       {loadProgress && <div>{loadProgress}</div>}
       {loadError && <div>{String(loadError)}</div>}
     </>
