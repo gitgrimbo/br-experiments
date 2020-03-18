@@ -3,7 +3,7 @@ import * as React from "react";
 import AsyncButton from "../common/AsyncButton";
 import Sheets from "../google/sheets";
 
-function ensureProperty(ob, property) {
+function ensureProperty(ob, property): boolean {
   const parts = property.split(".");
   let curProp = "";
   for (const p of parts) {
@@ -17,7 +17,7 @@ function ensureProperty(ob, property) {
   return true;
 }
 
-async function getValuesFromSheet(spreadsheetId, title, cellRange = "A1:Z500") {
+async function getValuesFromSheet(spreadsheetId, title, cellRange = "A1:Z500"): Promise<any[][]> {
   // A1:Z100 used just to try and get all values
   const range = `${title}!${cellRange}`;
   const response = await gapi.client.sheets.spreadsheets.values.get({

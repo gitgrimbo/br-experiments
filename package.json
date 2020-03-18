@@ -24,6 +24,8 @@
     "@babel/preset-react": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
     "@types/gapi": "0.0.39",
+    "@types/gapi.auth2": "0.0.51",
+    "@types/gapi.client.calendar": "^3.0.1",
     "@types/gapi.client.sheets": "^4.0.3",
     "@types/node-fetch": "^2.5.5",
     "@types/puppeteer": "^2.0.1",
