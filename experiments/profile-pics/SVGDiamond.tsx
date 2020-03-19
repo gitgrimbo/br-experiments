@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const SVG: React.FC<any> = (originalProps) => {
+function SVG(originalProps): React.ReactElement | null {
   const { children, ...props } = originalProps;
   const namespaces = {
     "xmlns": "http://www.w3.org/2000/svg",
@@ -33,10 +33,10 @@ interface SVGPlayerBoxProps {
   player: SVGPlayerBoxPlayer;
 }
 
-const SVGPlayerBox: React.FC<SVGPlayerBoxProps & React.SVGAttributes<SVGSVGElement>> = (originalProps) => {
+function SVGPlayerBox(originalProps: SVGPlayerBoxProps & React.SVGAttributes<SVGSVGElement>): React.ReactElement | null {
   const { player, ...props } = originalProps;
-  const { name, position, number } = player;
-  const [first, ...other] = (name || "").split(/\s/);
+  const { name = "", position, number = "" } = player;
+  const [first, ...other] = name.split(/\s/);
   return (
     <SVG
       {...props}
@@ -89,7 +89,7 @@ const SVGPlayerBox: React.FC<SVGPlayerBoxProps & React.SVGAttributes<SVGSVGEleme
           className="box"
           rx="16" ry="16"
         />
-        {position && <text className="player-number" y="5">{"#" + number}</text>}
+        {position && <text className="player-number" y="4">{"#" + number}</text>}
         <g
           transform="translate(3, 23)"
         >
@@ -128,6 +128,7 @@ const SVGPlayerBox: React.FC<SVGPlayerBoxProps & React.SVGAttributes<SVGSVGEleme
 
 export interface SVGDiamondPlayer {
   name: string;
+  number: string;
   faceImagePath: string;
 }
 
@@ -156,7 +157,7 @@ function SVGDiamond(originalProps: SVGDiamondProps & React.HTMLAttributes<SVGEle
   ].map(([position, translation], positionIdx) => ({
     position,
     translation,
-    player: players[positionIdx],
+    player: players[positionIdx] || null,
   }));
 
   const width = 1589;
@@ -206,7 +207,6 @@ ${cssId} .player-name {
                 player={{
                   ...player,
                   position,
-                  number: String(Math.trunc(Math.random() * 100)),
                 }}
                 width="250" height="250"
               />

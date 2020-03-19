@@ -2,7 +2,7 @@ import * as React from "react";
 import SVGInject from "@iconfu/svg-inject";
 
 import createSVG from "./create-svg";
-import { loadProfiles, Profile } from "./load-profiles";
+import { loadProfiles, Profile } from "./local-profiles";
 
 function scaleSVG(svg, newWidth) {
   const bbox = svg.getBoundingClientRect();
@@ -43,7 +43,9 @@ function svgProfileIdxForId(id): number {
   return parseInt(parts[parts.length - 1]);
 }
 
-interface AppProps { }
+interface AppProps {
+  // nothing
+}
 
 interface SVGStateItem {
   profile: Profile;
@@ -71,7 +73,7 @@ const App: React.FC<AppProps> = (props: AppProps) => {
     return state;
   }
 
-  const [svgState, setSVGState] = React.useState();
+  const [svgState, setSVGState] = React.useState<SVGStateItem[]>(null);
 
   // Separate state to keep track of last loaded SVG.
   // State is separate to avoid overwriting svgState with stale values from the load callback.
@@ -79,11 +81,12 @@ const App: React.FC<AppProps> = (props: AppProps) => {
 
   // Set the global SVG load handler as the first effect.
   React.useEffect(() => {
-    window.onProfileSVGLoad = (svgElement) => {
+    const win = window as any;
+    win.onProfileSVGLoad = (svgElement) => {
       console.log("svg loaded", svgElement.id);
       setSVGLoadedId(svgElement.id);
     };
-    console.log(window.onProfileSVGLoad);
+    console.log(win.onProfileSVGLoad);
   }, []);
 
   React.useEffect(() => {
@@ -188,13 +191,12 @@ const App: React.FC<AppProps> = (props: AppProps) => {
             const { playerName, width, height } = profile;
             return (
               <div key={playerName} style={{ display: "inline-block" }}>
-                <ignore-img src={imageBaseName + ".svg"} onLoad={onLoadImage} />
                 <div dangerouslySetInnerHTML={{
                   __html: createSVG({
                     id: svgProfileIdForIdx(profileIdx),
                     svgName: imageBaseName,
-                    width: parseInt(width, 10),
-                    height: parseInt(height, 10),
+                    width,
+                    height,
                     //bitmapPath:,
                   })
                 }}></div>

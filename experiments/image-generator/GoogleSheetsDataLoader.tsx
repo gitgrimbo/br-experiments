@@ -1,66 +1,21 @@
 import * as React from "react";
 
 import AsyncButton from "../common/AsyncButton";
-import Sheets from "../google/sheets";
+import { loadSpreadsheet, LoadedSpreadsheet } from "../google/sheets";
 
-function ensureProperty(ob, property): boolean {
-  const parts = property.split(".");
-  let curProp = "";
-  for (const p of parts) {
-    if (typeof ob[p] === "undefined") {
-      throw new Error(`${curProp} not loaded`);
-    }
-    console.log(p, ob[p]);
-    curProp += (curProp ? "." : "") + p;
-    ob = ob[p];
-  }
-  return true;
+interface GoogleSheetsDataLoaderProps {
+  inititialSpreadsheetId: string;
+  apiKey: string;
+  clientId: string;
+  onSpreadsheetLoaded: (LoadedSpreadsheet) => void;
 }
-
-async function getValuesFromSheet(spreadsheetId, title, cellRange = "A1:Z500"): Promise<any[][]> {
-  // A1:Z100 used just to try and get all values
-  const range = `${title}!${cellRange}`;
-  const response = await gapi.client.sheets.spreadsheets.values.get({
-    spreadsheetId,
-    range,
-  });
-  console.log(response);
-  return response.result.values;
-}
-
-async function loadSpreadsheet(apiKey, clientId, spreadsheetId, onProgress) {
-  onProgress && onProgress("Loading Google Sheets API");
-  await Sheets.initGoogleSheets({
-    apiKey,
-    clientId,
-  });
-  ensureProperty(window, "gapi.client.sheets.spreadsheets");
-  onProgress && onProgress("Loading sheet");
-  const response = await gapi.client.sheets.spreadsheets.get({
-    spreadsheetId,
-  });
-  console.log(response);
-  const sheets = await Promise.all(
-    response.result.sheets.map(async (sheet) => ({
-      properties: sheet.properties,
-      values: await getValuesFromSheet(spreadsheetId, sheet.properties.title),
-    }))
-  );
-  return {
-    title: response.result.properties.title,
-    spreadsheetId: response.result.spreadsheetId,
-    spreadsheetUrl: response.result.spreadsheetUrl,
-    raw: response.result,
-    sheets,
-  };
-};
 
 export default function GoogleSheetsDataLoader({
   inititialSpreadsheetId,
   apiKey,
   clientId,
   onSpreadsheetLoaded,
-}) {
+}: GoogleSheetsDataLoaderProps): React.ReactElement | null {
   console.log("GoogleSheetsDataLoader", clientId, apiKey, inititialSpreadsheetId);
 
   const [spreadsheetId, setSpreadsheetId] = React.useState(inititialSpreadsheetId);
@@ -94,12 +49,17 @@ export default function GoogleSheetsDataLoader({
   );
 }
 
+export interface DataSource {
+  title: () => string;
+  component: () => React.ReactElement;
+}
+
 export function makeSource({
   inititialSpreadsheetId,
   apiKey,
   clientId,
   onSpreadsheetLoaded,
-}) {
+}): DataSource {
   return {
     title() {
       return "Google Sheets";
@@ -112,5 +72,5 @@ export function makeSource({
         onSpreadsheetLoaded={onSpreadsheetLoaded}
       />;
     },
-  };
+  } as DataSource;
 }

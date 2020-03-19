@@ -1,22 +1,24 @@
 export interface Profile {
   profilePicName: string;
   playerName: string;
-  width: number;
-  height: number;
+  number: string;
+  faceUrl?: string;
+  faceH100Url?: string;
 }
 
-export async function loadProfiles(): Promise<Profile[]> {
-  const response = await fetch("photos/info.txt");
+export async function loadProfiles(url = "photos/info.txt"): Promise<Profile[]> {
+  const response = await fetch(url);
   const text = await response.text();
   const lines = text.split(/[\n\r]/);
+  const randomNumber = () => String(Math.trunc(Math.random() * 100));
   const profiles = lines
     .filter((line) => !!line)
     .map((line) => line.split(","))
     .map(([profilePicName, playerName, width, height]) => ({
       profilePicName,
       playerName,
-      width: parseInt(width, 10),
-      height: parseInt(height, 10),
+      // numbers are not stored in info.txt (yet?)
+      number: randomNumber(),
     } as Profile))
   return profiles;
 }

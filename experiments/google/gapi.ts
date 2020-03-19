@@ -5,13 +5,26 @@ function googToPromise<T>(goog): Promise<T> {
 }
 
 async function gapiLoad(libraries): Promise<void> {
-  const gapiTimeout = 5 * 1000;
-  await waitFor(gapiTimeout, 100, () => typeof gapi !== "undefined");
+  const gapiPresentTimeout = 5 * 1000;
+  const gapiLoadLibrariesTimeout = 5 * 1000;
+  const usualGAPIScriptUrl = "https://apis.google.com/js/api.js";
+
+  try {
+    await waitFor(gapiPresentTimeout, 100, () => typeof gapi !== "undefined");
+  } catch (err) {
+    let msg = `Timed out after ${gapiPresentTimeout}ms waiting for "gapi" global to be present.`;
+    const script = document.querySelector(`script[src='${usualGAPIScriptUrl}']`);
+    if (!script) {
+      msg += `\nUsual gapi script not found (<script src="${usualGAPIScriptUrl}">). Is the script present in the page?`;
+    }
+    throw new Error(msg);
+  }
+
   return new Promise((resolve, reject) => {
     gapi.load(libraries, {
       callback: resolve,
       onerror: reject,
-      timeout: 5 * 1000,
+      timeout: gapiLoadLibrariesTimeout,
       ontimeout: reject,
     });
   });
@@ -27,6 +40,12 @@ async function initGoogleClient({
   discoveryDocs,
   scope,
   onSignInChanged,
+}: {
+  apiKey?: string;
+  clientId?: string;
+  discoveryDocs?: string[];
+  scope?: string;
+  onSignInChanged?: string;
 }): Promise<void> {
   console.log("initClient");
   try {
