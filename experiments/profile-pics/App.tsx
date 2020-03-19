@@ -195,8 +195,8 @@ const App: React.FC<AppProps> = (props: AppProps) => {
                   __html: createSVG({
                     id: svgProfileIdForIdx(profileIdx),
                     svgName: imageBaseName,
-                    width,
-                    height,
+                    width: parseInt(width, 10),
+                    height: parseInt(height, 10),
                     //bitmapPath:,
                   })
                 }}></div>
