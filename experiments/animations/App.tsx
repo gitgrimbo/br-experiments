@@ -1,13 +1,29 @@
 import * as React from "react";
 
-import Logo1Animation from "./Logo1Animation";
 import Badge1Animation from "./Badge1Animation";
+import Logo1Animation from "./Logo1Animation";
+import Logo2Animation from "./Logo2Animation";
+import LogoFadeScaleAnimation from "./LogoFadeScaleAnimation";
 
 const logo1 = {
   parent: null,
   title: "Draw letters 1",
-  description: "Draw Bladerunner logo letters then fade in the 'swish'.",
+  description: "Fade-in and stroke Bladerunner logo letters, then fade in the 'swish'.",
   component: Logo1Animation,
+};
+
+const logo2 = {
+  parent: null,
+  title: "Draw letters 2",
+  description: "Fade-in white Bladerunner logo letters on black background, then fade in the 'swish'.",
+  component: Logo2Animation,
+};
+
+const logoFadeScaleAnimation = {
+  parent: null,
+  title: "Whole logo fade-in/scale-up",
+  description: "Fade-in and scale-up whole logo.",
+  component: LogoFadeScaleAnimation,
 };
 
 const badge1 = {
@@ -19,6 +35,8 @@ const badge1 = {
 
 const anims = [
   logo1,
+  logo2,
+  logoFadeScaleAnimation,
   badge1,
 ];
 
@@ -26,11 +44,11 @@ export default function App() {
   const [currentAnim, setCurrentAnim] = React.useState(null);
   const [fill, setFill] = React.useState(false);
   const [reRenderToken, setReRenderToken] = React.useState(+new Date());
-  const animationRef = React.useRef<HTMLElement>();
+  const animationRef = React.useRef<HTMLDivElement>();
   const svg = animationRef.current && animationRef.current.querySelector("svg");
 
   React.useEffect(() => {
-    console.log("effect", animationRef.current, fill, currentAnim);
+    console.log("effect", animationRef.current, fill, svg, currentAnim);
     if (svg) {
       svg.classList[fill ? "add" : "remove"]("fill-background");
     }
@@ -64,22 +82,24 @@ export default function App() {
       </style>
       <h2>Animations</h2>
       <div>
-        <label>Animation:
-          {" "}
-          <select onChange={onChangeAnimation}>
-            {[{ title: "" }].concat(anims).map(
-              ({ title }, i) => <option key={i} value={i}>{title}</option>
-            )}
-          </select>
-        </label>
-        {" "}
-        <label>Fill SVG background:
+        <div>
+          <label>Animation:&nbsp;
+            <select onChange={onChangeAnimation}>
+              {[{ title: "" }].concat(anims).map(
+                ({ title }, i) => <option key={i} value={i}>{title}</option>
+              )}
+            </select>
+          </label>
+        </div>
+        <div>
+          <label>Fill SVG background:
           <input type="checkbox" onChange={onChangeFillBackground} checked={fill} />
-        </label>
+          </label>
+        </div>
       </div>
       {currentAnim && (
-        <div>
-          <h3>{currentAnim.title} <button onClick={onClickRun}>Run</button></h3>
+        <div ref={animationRef}>
+          <h3><button onClick={onClickRun}>Run</button> {currentAnim.title}</h3>
           <div>{currentAnim.description}</div>
           <currentAnim.component id="anim" reRenderToken={reRenderToken} />
         </div>

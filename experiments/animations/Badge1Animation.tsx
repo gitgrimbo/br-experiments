@@ -19,7 +19,7 @@ export default function Badge1Animation({
     svgHolderRef,
   });
 
-  function updateSVG(svg) {
+  function updateSVG(svg: SVGElement) {
     //console.log("updateSVG", svg);
 
     const animElements = [];
@@ -51,7 +51,7 @@ export default function Badge1Animation({
     });
 
     const scaleDuration = parseFloat(state.scaleDuration);
-    const bLogo = svg.querySelector("#b-logo-inner") as SVGElement;
+    const bLogo = svg.querySelector("#b-logo-inner");
     ((el) => {
       const className = `${id}_bLogo`;
       const animationName = `${id}_bLogo`;

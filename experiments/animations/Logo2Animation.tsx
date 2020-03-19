@@ -2,14 +2,13 @@ import * as React from "react";
 
 import useSVG from "./useSVG";
 import { setStateOnChange } from "./state-utils";
-import fadeInAndStroke from "./fade-in-and-stroke";
 import fadeIn from "./fade-in";
 import { fadeInSwish } from "./swish";
 
-export default function Logo1Animation({
+export default function Logo2Animation({
   id,
   reRenderToken,
-}) {
+}): React.ReactElement | null {
   const [state, setState] = React.useState({
     letterDuration: "0.2",
     swishFadeDuration: "1",
@@ -35,22 +34,12 @@ export default function Logo1Animation({
     // for css animations, "forwards" fill-mode uses the CSS from the "to" of the animation.
     // i.e. does not reset the CSS back to before the animation.
 
-    // draw each black letter one-by-one,
-    // by animating their stroke and opacity
-    const {
-      css: fadeInAndStrokeCss,
-      animElements: fadeInAndStrokeAnimElements,
-      offset,
-    } = fadeInAndStroke(Array.from(svg.querySelectorAll("#Bladerunners-text-black path")), `${id}_black_letters`, letterDuration);
-
-    styleElement.innerHTML += "\n" + fadeInAndStrokeCss;
-    animElements.push(...fadeInAndStrokeAnimElements);
-
     // Can't 'stroke draw' the white 'letters' because they are fills and not strokes.
     // So we fade them in.
     const {
       css: fadeInWhiteLettersCss,
       animElements: fadeInWhiteLettersAnimElements,
+      offset,
     } = fadeIn(Array.from(svg.querySelectorAll("#Bladerunners-text-white path")), `${id}_white_letters`, letterDuration);
 
     styleElement.innerHTML += "\n" + fadeInWhiteLettersCss;
